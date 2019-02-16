@@ -1,21 +1,29 @@
-def data_to_protein(protein=None):
+def card_protein(chembl=None, card=None):
 
-    chembl_id = protein.card['ChEMBL']
+    if card is None:
+        from sabueso.fields.protein import _protein_dict
+        tmp_card = _protein_dict.copy()
+        tmp_card['ChEMBL'].append(chembl)
+        del(_protein_dict)
+    else:
+        tmp_card = card.copy()
 
-    from chembl_webresource_client.new_client import client
+    chembl_id=tmp_card['ChEMBL'][0]
+
+    from chembl_webresource_client.new_client import new_client as client
     result = client.target.filter(target_chembl_id__in=chembl_id)[0]
 
     # Name
-    protein.card['Name'].append(result['pref_name'])
+    tmp_card['Name'].append(result['pref_name'])
 
     # Type
-    protein.card['Type'].append(result['target_type'])
+    tmp_card['Type'].append(result['target_type'])
 
     # Organism
-    protein.card['Organism'].append(result['organism'])
+    tmp_card['Organism Scientific'].append(result['organism'])
 
     # ChEMBL
-    protein.card['ChEMBL'].append(result['target_chembl_id'])
+    tmp_card['ChEMBL'].append(result['target_chembl_id'])
 
     ##### components?
     if len(result['target_components'])>1:
@@ -28,23 +36,24 @@ def data_to_protein(protein=None):
 
     # PDB
         if src_db == 'PDBe':
-            protein.card['PDB'].append(id_db)
+            tmp_card['PDB'].append(id_db)
 
     # UniProt
         elif src_db == 'UniProt':
-            protein.card['UniProt'].append(id_db)
+            tmp_card['UniProt'].append(id_db)
 
     # IntAct
         elif src_db == 'IntAct':
-            protein.card['IntAct'].append(id_db)
+            tmp_card['IntAct'].append(id_db)
 
     # InterPro
         elif src_db == 'InterPro':
-            protein.card['InterPro'].append(id_db)
+            tmp_card['InterPro'].append(id_db)
 
     # Pfam
         elif src_db == 'Pfam':
-            protein.card['Pfam'].append(id_db)
+            tmp_card['Pfam'].append(id_db)
 
     del(result,client)
 
+    return tmp_card
