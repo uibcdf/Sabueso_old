@@ -21,8 +21,178 @@ def _get_organism_scientific(uniprot=None):
     del(url,request,response,xml_result,dict_result)
     return tmp_name
 
+def _get_FASTA(uniprot=None):
 
-def card_protein(uniprot=None, card=None, with_interactions=True):
+    url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot+'.fasta'
+    request_fasta = _urllib.request.Request(url_fasta)
+    request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
+    response_fasta = _urllib.request.urlopen(request_fasta)
+    fasta_result = response_fasta.read().decode('utf-8')
+
+    del(url_fasta,request_fasta,response_fasta)
+
+    return fasta_result
+
+def _get_GFF(uniprot=None):
+
+    url_gff = 'http://www.uniprot.org/uniprot/'+uniprot+'.gff'
+    request_gff = _urllib.request.Request(url_gff)
+    request_gff.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
+    response_gff = _urllib.request.urlopen(request_gff)
+    gff_result = response_gff.read().decode('utf-8')
+
+    del(url_gff,request_gff,response_gff)
+
+    return gff_result
+
+def _parse_GFF(GFF):
+
+    tmp_lines = GFF.split('\n')
+
+    to_chains={}
+    to_domains={}
+    to_regions={}
+    to_motifs={}
+    to_mutagenesis={}
+    to_modified={}
+    to_crosslink={}
+    to_altseq={}
+    to_seqconf={}
+    tmp_num_chains=0
+    tmp_num_domains=0
+    tmp_num_regions=0
+    tmp_num_motifs=0
+    tmp_num_mutagenesis=0
+    tmp_num_modified=0
+    tmp_num_crosslink=0
+    tmp_num_seqconf=0
+    tmp_num_altseq=0
+
+    from sabueso.fields.protein import _domain_dict
+    from sabueso.fields.protein import _chain_dict
+    from sabueso.fields.protein import _region_dict
+    from sabueso.fields.protein import _motif_dict
+    from sabueso.fields.protein import _mutagenesis_dict
+    from sabueso.fields.protein import _modified_res_dict
+    from sabueso.fields.protein import _cross_link_dict
+    from sabueso.fields.protein import _alternative_seq_dict
+    from sabueso.fields.protein import _seq_conflict_dict
+
+    for line in tmp_lines[2:]:
+        fields_line = line.split('\t')
+        if len(fields_line)>1:
+            if fields_line[2]=='Chain':
+                tmp_chain = _chain_dict.copy()
+                tmp_chain['Begin'] = int(fields_line[3])
+                tmp_chain['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_chain['Description'] = ii.replace('Note=','')
+                to_chains[tmp_num_chains]=tmp_chain
+                tmp_num_chains+=1
+                del(tmp_chain,tmp_txt)
+            if fields_line[2]=='Domain':
+                tmp_domain = _domain_dict.copy()
+                tmp_domain['Begin'] = int(fields_line[3])
+                tmp_domain['End'] = int(fields_line[4])
+                tmp_break = fields_line[8].split('|')
+                if tmp_break[-1].startswith('PROSITE'):
+                    tmp_domain['PROSITE-ProRule'] = tmp_break[-1].split('=')[-1]
+                tmp_txt=tmp_break[0].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_domain['Name'] = ii.replace('Note=','')
+                to_domains[tmp_num_domains]=tmp_domain
+                tmp_num_domains+=1
+                del(tmp_domain,tmp_break,tmp_txt)
+            if fields_line[2]=='Region':
+                tmp_region = _region_dict.copy()
+                tmp_region['Begin'] = int(fields_line[3])
+                tmp_region['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_region['Name'] = ii.replace('Note=','')
+                to_regions[tmp_num_regions]=tmp_region
+                tmp_num_regions+=1
+                del(tmp_region,tmp_txt)
+            if fields_line[2]=='Motif':
+                tmp_motif = _motif_dict.copy()
+                tmp_motif['Begin'] = int(fields_line[3])
+                tmp_motif['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_motif['Name'] = ii.replace('Note=','')
+                to_motifs[tmp_num_motifs]=tmp_motif
+                tmp_num_motifs+=1
+                del(tmp_motif,tmp_txt)
+            if fields_line[2]=='Mutagenesis':
+                tmp_mutagenesis = _mutagenesis_dict.copy()
+                tmp_mutagenesis['Begin'] = int(fields_line[3])
+                tmp_mutagenesis['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_mutagenesis['Description'] = ii.replace('Note=','')
+                to_mutagenesis[tmp_num_mutagenesis]=tmp_mutagenesis
+                tmp_num_mutagenesis+=1
+                del(tmp_mutagenesis,tmp_txt)
+            if fields_line[2]=='Modified residue':
+                tmp_modified = _modified_res_dict.copy()
+                tmp_modified['Begin'] = int(fields_line[3])
+                tmp_modified['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_modified['Description'] = ii.replace('Note=','')
+                to_modified[tmp_num_modified]=tmp_modified
+                tmp_num_modified+=1
+                del(tmp_modified,tmp_txt)
+            if fields_line[2]=='Cross-link':
+                tmp_crosslink = _cross_link_dict.copy()
+                tmp_crosslink['Begin'] = int(fields_line[3])
+                tmp_crosslink['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_crosslink['Description'] = ii.replace('Note=','')
+                to_crosslink[tmp_num_crosslink]=tmp_crosslink
+                tmp_num_crosslink+=1
+                del(tmp_crosslink,tmp_txt)
+            if fields_line[2]=='Alternative sequence':
+                tmp_altseq = _alternative_seq_dict.copy()
+                tmp_altseq['Begin'] = int(fields_line[3])
+                tmp_altseq['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_altseq['Description'] = ii.replace('Note=','')
+                to_altseq[tmp_num_altseq]=tmp_altseq
+                tmp_num_altseq+=1
+                del(tmp_altseq,tmp_txt)
+            if fields_line[2]=='Sequence conflict':
+                tmp_seqconf = _seq_conflict_dict.copy()
+                tmp_seqconf['Begin'] = int(fields_line[3])
+                tmp_seqconf['End'] = int(fields_line[4])
+                tmp_txt=fields_line[8].split(';')
+                for ii in tmp_txt:
+                    if ii.startswith('Note='):
+                        tmp_seqconf['Description'] = ii.replace('Note=','')
+                to_seqconf[tmp_num_seqconf]=tmp_seqconf
+                tmp_num_seqconf+=1
+                del(tmp_seqconf,tmp_txt)
+
+    return to_chains,to_domains,to_regions,to_motifs,to_mutagenesis,to_modified,\
+           to_crosslink,to_altseq,to_seqconf
+
+def _get_sequence_from_FASTA(FASTA=None):
+
+    tmp_lines = FASTA.split('\n')
+    return ''.join(tmp_lines[1:])
+
+def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
     if card is None:
         from sabueso.fields.protein import _protein_dict
         tmp_card = _protein_dict.copy()
@@ -85,6 +255,7 @@ def card_protein(uniprot=None, card=None, with_interactions=True):
     # Function
     # Subunit Structure
     # Interactions
+    # Isoforms
     if type(dict_result['comment'])== list:
         for comment in dict_result['comment']:
 
@@ -107,6 +278,29 @@ def card_protein(uniprot=None, card=None, with_interactions=True):
                         tmp_card['Subunit Structure'].append(comment['text']['#text'])
                     except:
                         tmp_card['Subunit Structure'].append(comment['text'])
+
+            if comment['@type']=='alternative products':
+                from sabueso.fields.protein import _isoform_dict
+                if type(comment['isoform'])==list:
+                    for isoform in comment['isoform']:
+                        tmp_isoform = _isoform_dict.copy()
+                        tmp_isoform['Name'] =  isoform['name']
+                        tmp_isoform_indice = int(isoform['name'])
+                        tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
+                        tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
+                        tmp_isoform['UniProt'] = isoform['id']
+                        tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
+                        del(tmp_isoform_indice)
+                else:
+                    isoform = comment['isoform']
+                    tmp_isoform = _isoform_dict.copy()
+                    tmp_isoform['Name'] =  isoform['name']
+                    tmp_isoform_indice = int(isoform['name'])
+                    tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
+                    tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
+                    tmp_isoform['UniProt'] = isoform['id']
+                    tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
+                    del(tmp_isoform_indice)
 
             if with_interactions:
                 if comment['@type']=='interaction':
@@ -145,15 +339,11 @@ def card_protein(uniprot=None, card=None, with_interactions=True):
         tmp_card['UniProt'].append(dict_result['accession'])
 
     # Sequence
-    tmp_card['Sequence'].append(dict_result['sequence']['#text'].replace('\n',''))
+    tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
 
     # FASTA
-    url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.fasta'
-    request_fasta = _urllib.request.Request(url_fasta)
-    request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
-    response_fasta = _urllib.request.urlopen(request_fasta)
-    fasta_result = response_fasta.read().decode('utf-8')
-    tmp_card['FASTA'].append(fasta_result)
+    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot_id)
+
 
     for dbreference in dict_result['dbReference']:
 
@@ -209,11 +399,55 @@ def card_protein(uniprot=None, card=None, with_interactions=True):
         elif dbreference['@type']=='SUPFAM':
             tmp_card['SUPFAM'].append(dbreference['@id'])
 
+    # STRING
+        elif dbreference['@type']=='STRING':
+            tmp_card['STRING'].append(dbreference['@id'])
+
+    # iPTMnet
+        elif dbreference['@type']=='iPTMnet':
+            tmp_card['iPTMnet'].append(dbreference['@id'])
+
+    # PhosphoSitePlus
+        elif dbreference['@type']=='PhosphoSitePlus':
+            tmp_card['PhosphoSitePlus'].append(dbreference['@id'])
+
     # PDBs
         elif dbreference['@type']=='PDB':
-            tmp_card['PDB'].append(dbreference['@id'])
+            from sabueso.fields.pdb import _pdb_dict
+            tmp_pdb = _pdb_dict.copy()
+            tmp_pdb['id']=dbreference['@id']
+            for pdb_field in dbreference['property']:
+                if pdb_field['@type']=='method':
+                    tmp_pdb['Method']=pdb_field['@value']
+                if pdb_field['@type']=='resolution':
+                    tmp_pdb['Resolution']=pdb_field['@value']
+                if pdb_field['@type']=='chains':
+                    tmp_pdb['Chains']=pdb_field['@value']
+            tmp_card['PDB'][tmp_pdb['id']]=tmp_pdb
+            del(tmp_pdb)
 
+    # Structure
+    # Domains
+
+    tmp_gff =_get_GFF(uniprot_id)
+    to_chains,to_domains,to_regions,to_motifs,to_mutagenesis,to_modified,\
+    to_crosslink,to_altseq,to_seqconf = _parse_GFF(tmp_gff)
+
+    tmp_card['Structure']['Chain']=to_chains
+    tmp_card['Structure']['Domain']=to_domains
+    tmp_card['Structure']['Region']=to_regions
+    tmp_card['Structure']['Motif']=to_motifs
+
+    tmp_card['Sequence']['PostTranslational Modifications']['Modified Residues']=to_modified
+    tmp_card['Sequence']['PostTranslational Modifications']['Cross-link']=to_crosslink
+    tmp_card['Sequence']['Sequence Conflict']=to_seqconf
+    tmp_card['Sequence']['Alternative Sequence']=to_altseq
+
+    tmp_card['Experimental Evidences']['Mutagenesis']=to_mutagenesis
+
+    del(to_chains,to_domains,to_regions,to_motifs,to_mutagenesis,to_modified,\
+        to_crosslink,to_altseq,to_seqconf)
     del(url, request, response, xml_result, dict_result)
-    del(url_fasta, request_fasta, response_fasta, fasta_result)
+    del(tmp_gff)
 
     return tmp_card

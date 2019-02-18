@@ -36,7 +36,11 @@ def card_protein(chembl=None, card=None):
 
     # PDB
         if src_db == 'PDBe':
-            tmp_card['PDB'].append(id_db)
+            if id_db not in tmp_card['PDB'].keys():
+                from sabueso.fields.pdb import _pdb_dict
+                tmp_pdb = _pdb_dict.copy()
+                tmp_pdb['id']=id_db
+                tmp_card['PDB'][id_db]=tmp_pdb
 
     # UniProt
         elif src_db == 'UniProt':

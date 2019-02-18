@@ -1,4 +1,99 @@
 
+_ptm_dict ={
+    'Modified Residues': {},
+    'Cross-link': {}
+}
+
+_sequence_dict = {
+    'Canonical': None,
+    'FASTA': None,                 # Db: UniProt
+    'Isoforms': {},              # Db: UniProt
+    'PostTranslational Modifications' : _ptm_dict.copy(),           # Db: UniProt
+    'Sequence Conflict' : {},          # Db: UniProt
+    'Alternative Sequence' : {}           # Db: UniProt
+}
+
+_alternative_seq_dict = {
+    'Begin': None,
+    'End': None,
+    'Description': None
+}
+
+_seq_conflict_dict = {
+    'Begin': None,
+    'End': None,
+    'Description': None
+}
+
+_modified_res_dict = {
+    'Begin': None,
+    'End': None,
+    'Description': None
+}
+
+_cross_link_dict = {
+    'Begin': None,
+    'End': None,
+    'Description': None
+}
+
+_modified_res_dict = {
+    'Begin': None,
+    'End': None,
+    'Description': None
+}
+
+_domain_dict = {
+    'Name': None,
+    'PROSITE-ProRule': None,
+    'Begin': None,
+    'End': None
+}
+
+_region_dict = {
+    'Note': None,
+    'Begin': None,
+    'End': None
+}
+
+_motif_dict = {
+    'Note': None,
+    'Begin': None,
+    'End': None
+}
+
+_chain_dict = {
+    'Index' : None,
+    'Description' : None,
+    'Begin' : None,
+    'End': None
+}
+
+_structure_dict = {
+    'Chain': {},
+    'Secondary': [],
+    'Domain': {},               # Db: UniProt
+    'Region': {},               # Db: UniProt
+    'Motif': {}                 # Db: UniProt
+}
+
+_isoform_dict ={
+    'UniProt': None,
+    'Name': None,
+    'Sequence': None,
+    'FASTA': None
+}
+
+_experimental_evidences_dict={
+    'Mutagenesis':{}
+}
+
+_mutagenesis_dict={
+    'Begin':None,
+    'End':None,
+    'Description':None
+}
+
 _protein_dict   = {
     'Name' : [],                # Db: UniProt, ChEMBL
     'Full Name' : [],           # Db: UniProt
@@ -12,9 +107,9 @@ _protein_dict   = {
     'Subunit Structure' : [],   # Db: Uniprot
     'Interactions' : [],        # Db: Uniprot
     'UniProt' : [],             # Db: UniProt, ChEMBL
-    'Sequence' : [],            # Db: UniProt
-    'FASTA' : [],               # Db: UniProt
-    'Isoforms' : [],            # Db: UniProt
+    'Sequence': _sequence_dict.copy(),
+    'Structure': _structure_dict.copy(),
+    'Experimental Evidences': _experimental_evidences_dict.copy(),
     'ChEMBL' : [],              # Db: UniProt, ChEMBL
     'BioGRID' : [],             # Db: UniProt
     'ProteinModelPortal' : [],  # Db: UniProt
@@ -27,7 +122,11 @@ _protein_dict   = {
     'InterPro' : [],            # Db: UniProt, ChEMBL
     'Pfam' : [],                # Db: UniProt, ChEMBL
     'ProDom' : [],              # Db: UniProt
-    'PDB' : [],                 # Db: UniProt, ChEMBL
+    'PDB' : {},                 # Db: UniProt, ChEMBL
     'SUPFAM' : [],              # Db: UniProt
-    'Mutagenesis' : []
+    'STRING' : [],              # Db: UniProt
+    'iPTMnet' : [],              # Db: UniProt
+    'PhosphoSitePlus' : []              # Db: UniProt
 }
+
+
