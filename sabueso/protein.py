@@ -16,17 +16,24 @@ class Protein():
         self.type = 'Protein'
         self.card = None
 
-        tmp_card = _card_uniprot(uniprot=uniprot)
-        tmp_card = _card_chembl(card=tmp_card)
-        #_remove_duplicates_from_card(tmp_card)
-        self.card = tmp_card
-        del(tmp_card,uniprot)
+        if uniprot is not None:
+            tmp_card = _card_uniprot(uniprot=uniprot)
+            tmp_card = _card_chembl(card=tmp_card)
+            #_remove_duplicates_from_card(tmp_card)
+            self.card = tmp_card
+            del(tmp_card,uniprot)
 
     def make_Notebook(self):
         pass
 
-    def dump(self):
-        pass
+    def dump(self,json_file=None):
 
-    def load(self):
-        pass
+        import json
+
+        json_list = []
+        json_list.append(json.dumps('Protein'))
+        json_list.append(json.dumps(self.card))
+
+        with open(json_file, 'w') as outfile:
+            json.dump(json_list, outfile)
+
