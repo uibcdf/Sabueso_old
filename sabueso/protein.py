@@ -18,8 +18,9 @@ class Protein():
 
         if uniprot is not None:
             tmp_card = _card_uniprot(uniprot=uniprot)
-            tmp_card = _card_chembl(card=tmp_card)
-            #_remove_duplicates_from_card(tmp_card)
+            if len(tmp_card['ChEMBL'])>0:
+                tmp_card = _card_chembl(card=tmp_card)
+                _remove_duplicates_from_card(tmp_card)
             self.card = tmp_card
             del(tmp_card,uniprot)
 

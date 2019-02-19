@@ -10,6 +10,8 @@ def card_protein(chembl=None, card=None):
 
     chembl_id=tmp_card['ChEMBL'][0]
 
+    import gevent.monkey
+    gevent.monkey.patch_all(thread=False, select=False)
     from chembl_webresource_client.new_client import new_client as client
     result = client.target.filter(target_chembl_id__in=chembl_id)[0]
 
