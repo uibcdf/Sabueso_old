@@ -1,12 +1,14 @@
+from copy import deepcopy as _deepcopy
+
 def card_protein(chembl=None, card=None):
 
     if card is None:
         from sabueso.fields.protein import _protein_dict
-        tmp_card = _protein_dict.copy()
+        tmp_card = _deepcopy(_protein_dict)
         tmp_card['ChEMBL'].append(chembl)
         del(_protein_dict)
     else:
-        tmp_card = card.copy()
+        tmp_card = _deepcopy(card)
 
     chembl_id=tmp_card['ChEMBL'][0]
 
@@ -40,7 +42,7 @@ def card_protein(chembl=None, card=None):
         if src_db == 'PDBe':
             if id_db not in tmp_card['PDB'].keys():
                 from sabueso.fields.pdb import _pdb_dict
-                tmp_pdb = _pdb_dict.copy()
+                tmp_pdb = _deepcopy(_pdb_dict)
                 tmp_pdb['id']=id_db
                 tmp_card['PDB'][id_db]=tmp_pdb
 

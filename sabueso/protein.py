@@ -1,12 +1,15 @@
 from .DBs.UniProt import card_protein as _card_uniprot
 from .DBs.ChEMBL import card_protein as _card_chembl
+from sabueso.fields.protein import _protein_dict
 
 def _remove_duplicates_from_card(card):
 
     for key in card.keys():
         if key not in ['Interactions','Sequence','Structure','Experimental Evidences',
                       'PBD']:
-            card[key] = list(set(card[key]))
+            if type(card[key])==list:
+                print(key)
+                card[key] = list(set(card[key]))
 
 
 class Protein():
@@ -20,7 +23,7 @@ class Protein():
             tmp_card = _card_uniprot(uniprot=uniprot)
             if len(tmp_card['ChEMBL'])>0:
                 tmp_card = _card_chembl(card=tmp_card)
-                _remove_duplicates_from_card(tmp_card)
+            #_remove_duplicates_from_card(tmp_card)
             self.card = tmp_card
             del(tmp_card,uniprot)
 
