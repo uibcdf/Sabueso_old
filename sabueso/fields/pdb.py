@@ -3,4 +3,6 @@ _pdb_dict = {
     'Method' : None,
     'Resolution': None,
     'Chains': None,
+    'Entity': None,
+    '': None,
 }
