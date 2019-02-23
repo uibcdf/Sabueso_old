@@ -3,69 +3,74 @@ _pdb_dict = {
     'Id' : None,
     'Method' : None,
     'Resolution': None,
-    'Ligand': {},
-    'Entity': {},
-    'Chain': {},
-    'MMTF Groups': {},
+    'Title': None,
+    'Deposition Date': None,
+    'MMTF': None,
+    'Unit Cell': None,
     'Number Entities': 0,
     'Number Chains': 0,
-    'bioAssemblies': 0,
-    'Title': None,
-    'Description': None,
-    'Deposition Date': None,
-    'Release Date': None,
-    'Last Modification Date': None,
-    'Related PDBs': []
+    'Number Models': 0,
+    'Number bioAssemblies': 0,
+    'Number Groups': 0,
+    'bioAssembly': {},
+    'Group': {},
+    'Chain': {},
+    'Entity': {},
+    'Ligand': {},
+
 }
 
-_mmtf_group_dict = {
-    'Index': None,
-    'Type': None,
-    'Sequence': None,
-    'Secondary Structure DSSP': None,
-    'Secondary Structure ABC': None,
-    'Chain Name': None,
-    'Chain Index': None
+_bioAssemblies_dict = {
+    'Name': None,
+    'Chains': None
+}
+
+_group_dict = {
+    'Id': None,                 # Id from group_id_list MMTF
+    'Name': None,               # groupName from MMTF
+    'Atom Name List': None,     # atomNameList from MMTF
+    'Element List': None,       # elementList from MMTF
+    'Bond Order List': None,    # bondOrderList from MMTF
+    'Bond Atom List': None,     # bondAtomList from MMTF
+    'Formal Charge List': None, # formalChargeList from MMTF
+    'Letter Code': None,        # singleLetterCode from MMTF
+    'Type': None                # chemCompType from MMTF
 }
 
 _chain_dict = {
     'Index': None,
+    'Id': None,
     'Name': None,
+    'Type': None,
+    'UniProt': None,
+    'Entity': None,
+    'PDB_start': None,
+    'PDB_end': None,
+    'UniProt_start': None,
+    'UniProt_end': None,
     'Sequence': None,
-    'Begin': None,
-    'End': None
+    'Secondary Structure DSSP': None,
+    'Secondary Structure ABC': None,
+    'Groups' : None
 }
 
 _entity_dict = {
-    'Type' : None,
-    'Length' : None,
-    'Index' : None,
-    'Begin' : None,
-    'End' : None,
-    'UniProt' : None,
-    'DNA Details' : None,
-    'Name' : [],
-    'Weight' : [],
-    'Short Name' : [],
-    'Alternative Name' : [],
     'Description' : None,
-    'Chain' : [],
-    'Organism' : None,
-    'Organism Scientific' : None,
-    'Secondary Structure DSSP': None,
-    'Secondary Structure ABC': None,
-    'Sequence': None
+    'Type' : None,
+    'Sequence': None,
+    'UniProt': None,
+    'Chains': []
 }
 
 _ligand_dict = {
-    'Residue Name': None,
+    'Name': None,
     'Chemical Id': None,
-    'Weight':None,
+    'Residue Name': None,
     'Name':None,
-    'Formula':None,
-    'InChI':None,
+    'Entity':None,
+    'Chains':None,
+    'ChEMBL':None,
     'InChIKey':None,
-    'Smile':None,
 }
 
 
