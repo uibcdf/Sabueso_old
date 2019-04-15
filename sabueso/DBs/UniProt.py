@@ -2,11 +2,26 @@ import urllib as _urllib
 import xmltodict as _xmltodict
 from copy import deepcopy as _deepcopy
 
+def target_query(string=None, organism=None, max_results=20):
+
+    url = 'http://www.uniprot.org/uniprot/?query='+string+'&format=xml&limit='+str(max_results)+'&sort=score'
+    request = _urllib.request.Request(url)
+    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
+    response = _urllib.request.urlopen(request)
+    xml_result = response.read().decode('utf-8')
+    dict_result = _xmltodict.parse(xml_result)
+
+    list_results=[]
+    for entry in dict_result['uniprot']['entry']:
+        list_results.append(_parse_basic_entry(entry))
+
+    return list_results
+
 def _get_organism_scientific(uniprot=None):
 
     url = 'http://www.uniprot.org/uniprot/'+uniprot+'.xml'
     request = _urllib.request.Request(url)
-    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
+    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response = _urllib.request.urlopen(request)
     xml_result = response.read().decode('utf-8')
     dict_result = _xmltodict.parse(xml_result)
@@ -26,7 +41,7 @@ def _get_FASTA(uniprot=None):
 
     url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot+'.fasta'
     request_fasta = _urllib.request.Request(url_fasta)
-    request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
+    request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response_fasta = _urllib.request.urlopen(request_fasta)
     fasta_result = response_fasta.read().decode('utf-8')
 
@@ -38,7 +53,7 @@ def _get_GFF(uniprot=None):
 
     url_gff = 'http://www.uniprot.org/uniprot/'+uniprot+'.gff'
     request_gff = _urllib.request.Request(url_gff)
-    request_gff.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
+    request_gff.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response_gff = _urllib.request.urlopen(request_gff)
     gff_result = response_gff.read().decode('utf-8')
 
@@ -193,27 +208,16 @@ def _get_sequence_from_FASTA(FASTA=None):
     tmp_lines = FASTA.split('\n')
     return ''.join(tmp_lines[1:])
 
-def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
+def _parse_basic_entry(entry=None, card=None):
+
+    dict_result=entry
+
     if card is None:
         from sabueso.fields.protein import _protein_dict
         tmp_card = _deepcopy(_protein_dict)
         del(_protein_dict)
     else:
-        tmp_card = _deepcopy(card)
-
-    if uniprot is not None:
-        tmp_card['UniProt'].append(uniprot)
-
-    uniprot_id=tmp_card['UniProt'][0]
-
-    url = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.xml'
-
-    request = _urllib.request.Request(url)
-    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/MolInterrogator || prada.gracia@gmail.com')
-    response = _urllib.request.urlopen(request)
-    xml_result = response.read().decode('utf-8')
-    dict_result = _xmltodict.parse(xml_result)
-    dict_result = dict_result['uniprot']['entry']
+        tmp_card = card
 
     # Name
     tmp_card['Name'].append(dict_result['name'])
@@ -263,6 +267,118 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
     # Host
     if 'organismHost' in dict_result.keys():
         tmp_card['Host'].append(dict_result['organismHost']['name'][0]['#text'])
+
+    # Uniprot
+
+    if type(dict_result['accession'])== list:
+        for ii in dict_result['accession']:
+            tmp_card['UniProt'].append(ii)
+    else:
+        tmp_card['UniProt'].append(dict_result['accession'])
+
+    # Sequence
+    tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
+
+
+    for dbreference in dict_result['dbReference']:
+
+    # ChEMBL
+        if dbreference['@type']=='ChEMBL':
+            tmp_card['ChEMBL'].append(dbreference['@id'])
+
+    # BioGRID
+        elif dbreference['@type']=='BioGRID':
+            tmp_card['BioGRID'].append(dbreference['@id'])
+
+    # Protein Model Portal
+        elif dbreference['@type']=='ProteinModelPortal':
+            tmp_card['ProteinModelPortal'].append(dbreference['@id'])
+
+    # Swiss Model
+        elif dbreference['@type']=='SMR':
+            tmp_card['Swiss-Model'].append(dbreference['@id'])
+
+    # DIP
+        elif dbreference['@type']=='DIP':
+            tmp_card['DIP'].append(dbreference['@id'])
+
+    # ELM
+        elif dbreference['@type']=='ELM':
+            tmp_card['ELM'].append(dbreference['@id'])
+
+    # IntAct
+        elif dbreference['@type']=='IntAct':
+            tmp_card['IntAct'].append(dbreference['@id'])
+
+    # MINT
+        elif dbreference['@type']=='MINT':
+            tmp_card['MINT'].append(dbreference['@id'])
+
+    # BindingDB
+        elif dbreference['@type']=='BindingDB':
+            tmp_card['BindingDB'].append(dbreference['@id'])
+
+    # InterPro
+        elif dbreference['@type']=='InterPro':
+            tmp_card['InterPro'].append(dbreference['@id'])
+
+    # Pfam
+        elif dbreference['@type']=='Pfam':
+            tmp_card['Pfam'].append(dbreference['@id'])
+
+    # ProDom
+        elif dbreference['@type']=='ProDom':
+            tmp_card['ProDom'].append(dbreference['@id'])
+
+    # SUPFAM
+        elif dbreference['@type']=='SUPFAM':
+            tmp_card['SUPFAM'].append(dbreference['@id'])
+
+    # STRING
+        elif dbreference['@type']=='STRING':
+            tmp_card['STRING'].append(dbreference['@id'])
+
+    # iPTMnet
+        elif dbreference['@type']=='iPTMnet':
+            tmp_card['iPTMnet'].append(dbreference['@id'])
+
+    # PhosphoSitePlus
+        elif dbreference['@type']=='PhosphoSitePlus':
+            tmp_card['PhosphoSitePlus'].append(dbreference['@id'])
+
+    # PDBs
+        elif dbreference['@type']=='PDB':
+            from sabueso.fields.pdb import _pdb_dict
+            tmp_pdb = _deepcopy(_pdb_dict)
+            tmp_pdb['id']=dbreference['@id']
+            for pdb_field in dbreference['property']:
+                if pdb_field['@type']=='method':
+                    tmp_pdb['Method']=pdb_field['@value']
+                if pdb_field['@type']=='resolution':
+                    tmp_pdb['Resolution']=pdb_field['@value']
+                if pdb_field['@type']=='chains':
+                    tmp_pdb['Chains']=pdb_field['@value']
+            tmp_card['PDB'][tmp_pdb['id']]=tmp_pdb
+            del(tmp_pdb)
+
+    return tmp_card
+
+
+def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
+
+    url = 'http://www.uniprot.org/uniprot/'+uniprot+'.xml'
+
+    request = _urllib.request.Request(url)
+    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
+    response = _urllib.request.urlopen(request)
+    xml_result = response.read().decode('utf-8')
+    dict_result = _xmltodict.parse(xml_result)
+    dict_result = dict_result['uniprot']['entry']
+
+    tmp_card = _parse_basic_xml_entry(dict_result)
+
+    # FASTA
+    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot)
 
     # Function
     # Subunit Structure
@@ -342,102 +458,6 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
             tmp_card['Function'].append(dict_result['comment']['text'])
         if dict_result['comment']['@type']=='subunit':
             tmp_card['Subunit Structure'].append(dict_result['comment']['text'])
-
-    # Uniprot
-
-    if type(dict_result['accession'])== list:
-        for ii in dict_result['accession']:
-            tmp_card['UniProt'].append(ii)
-    else:
-        tmp_card['UniProt'].append(dict_result['accession'])
-
-    # Sequence
-    tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
-
-    # FASTA
-    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot_id)
-
-
-    for dbreference in dict_result['dbReference']:
-
-    # ChEMBL
-        if dbreference['@type']=='ChEMBL':
-            tmp_card['ChEMBL'].append(dbreference['@id'])
-
-    # BioGRID
-        elif dbreference['@type']=='BioGRID':
-            tmp_card['BioGRID'].append(dbreference['@id'])
-
-    # Protein Model Portal
-        elif dbreference['@type']=='ProteinModelPortal':
-            tmp_card['ProteinModelPortal'].append(dbreference['@id'])
-
-    # Swiss Model
-        elif dbreference['@type']=='SMR':
-            tmp_card['Swiss-Model'].append(dbreference['@id'])
-
-    # DIP
-        elif dbreference['@type']=='DIP':
-            tmp_card['DIP'].append(dbreference['@id'])
-
-    # ELM
-        elif dbreference['@type']=='ELM':
-            tmp_card['ELM'].append(dbreference['@id'])
-
-    # IntAct
-        elif dbreference['@type']=='IntAct':
-            tmp_card['IntAct'].append(dbreference['@id'])
-
-    # MINT
-        elif dbreference['@type']=='MINT':
-            tmp_card['MINT'].append(dbreference['@id'])
-
-    # BindingDB
-        elif dbreference['@type']=='BindingDB':
-            tmp_card['BindingDB'].append(dbreference['@id'])
-
-    # InterPro
-        elif dbreference['@type']=='InterPro':
-            tmp_card['InterPro'].append(uniprot_id)
-
-    # Pfam
-        elif dbreference['@type']=='Pfam':
-            tmp_card['Pfam'].append(dbreference['@id'])
-
-    # ProDom
-        elif dbreference['@type']=='ProDom':
-            tmp_card['ProDom'].append(dbreference['@id'])
-
-    # SUPFAM
-        elif dbreference['@type']=='SUPFAM':
-            tmp_card['SUPFAM'].append(dbreference['@id'])
-
-    # STRING
-        elif dbreference['@type']=='STRING':
-            tmp_card['STRING'].append(dbreference['@id'])
-
-    # iPTMnet
-        elif dbreference['@type']=='iPTMnet':
-            tmp_card['iPTMnet'].append(dbreference['@id'])
-
-    # PhosphoSitePlus
-        elif dbreference['@type']=='PhosphoSitePlus':
-            tmp_card['PhosphoSitePlus'].append(dbreference['@id'])
-
-    # PDBs
-        elif dbreference['@type']=='PDB':
-            from sabueso.fields.pdb import _pdb_dict
-            tmp_pdb = _deepcopy(_pdb_dict)
-            tmp_pdb['id']=dbreference['@id']
-            for pdb_field in dbreference['property']:
-                if pdb_field['@type']=='method':
-                    tmp_pdb['Method']=pdb_field['@value']
-                if pdb_field['@type']=='resolution':
-                    tmp_pdb['Resolution']=pdb_field['@value']
-                if pdb_field['@type']=='chains':
-                    tmp_pdb['Chains']=pdb_field['@value']
-            tmp_card['PDB'][tmp_pdb['id']]=tmp_pdb
-            del(tmp_pdb)
 
     # Fix lack of isoforms where number of isoforms == 1:
 

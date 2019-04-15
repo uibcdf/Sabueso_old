@@ -1,5 +1,18 @@
 from copy import deepcopy as _deepcopy
 
+def target_query(string=None, organism=None):
+ 
+   import gevent.monkey
+   gevent.monkey.patch_all(thread=False, select=False)
+   from chembl_webresource_client.new_client import new_client as client
+   result = client.target.filter(target_synonym__icontains=string)
+   list_result=[]
+   for tmp_target in result:
+       if tmp_target['target_type']=='SINGLE PROTEIN':
+           list_result.append(card_protein(tmp_target['target_chembl_id']))
+
+   return list_result
+
 def card_protein(chembl=None, card=None):
 
     if card is None:
