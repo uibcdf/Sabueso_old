@@ -84,21 +84,21 @@ def _parse_GFF(GFF):
     tmp_num_seqconf=0
     tmp_num_altseq=0
 
-    from sabueso.fields.protein import _domain_dict
-    from sabueso.fields.protein import _chain_dict
-    from sabueso.fields.protein import _region_dict
-    from sabueso.fields.protein import _motif_dict
-    from sabueso.fields.protein import _mutagenesis_dict
-    from sabueso.fields.protein import _modified_res_dict
-    from sabueso.fields.protein import _cross_link_dict
-    from sabueso.fields.protein import _alternative_seq_dict
-    from sabueso.fields.protein import _seq_conflict_dict
+    from sabueso.fields.protein import domain_card as _domain_card
+    from sabueso.fields.protein import chain_card as _chain_card
+    from sabueso.fields.protein import region_card as _region_card
+    from sabueso.fields.protein import motif_card as _motif_card
+    from sabueso.fields.protein import mutagenesis_card as _mutagenesis_card
+    from sabueso.fields.protein import modified_res_card as _modified_res_card
+    from sabueso.fields.protein import cross_link_card as _cross_link_card
+    from sabueso.fields.protein import alternative_seq_card as _alternative_seq_card
+    from sabueso.fields.protein import seq_conflict_card as _seq_conflict_card
 
     for line in tmp_lines[2:]:
         fields_line = line.split('\t')
         if len(fields_line)>1:
             if fields_line[2]=='Chain':
-                tmp_chain = _deepcopy(_chain_dict)
+                tmp_chain = _deepcopy(_chain_card)
                 tmp_chain['Begin'] = int(fields_line[3])
                 tmp_chain['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -109,7 +109,7 @@ def _parse_GFF(GFF):
                 tmp_num_chains+=1
                 del(tmp_chain,tmp_txt)
             if fields_line[2]=='Domain':
-                tmp_domain = _deepcopy(_domain_dict)
+                tmp_domain = _deepcopy(_domain_card)
                 tmp_domain['Begin'] = int(fields_line[3])
                 tmp_domain['End'] = int(fields_line[4])
                 tmp_break = fields_line[8].split('|')
@@ -123,7 +123,7 @@ def _parse_GFF(GFF):
                 tmp_num_domains+=1
                 del(tmp_domain,tmp_break,tmp_txt)
             if fields_line[2]=='Region':
-                tmp_region = _deepcopy(_region_dict)
+                tmp_region = _deepcopy(_region_card)
                 tmp_region['Begin'] = int(fields_line[3])
                 tmp_region['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -134,7 +134,7 @@ def _parse_GFF(GFF):
                 tmp_num_regions+=1
                 del(tmp_region,tmp_txt)
             if fields_line[2]=='Motif':
-                tmp_motif = _deepcopy(_motif_dict)
+                tmp_motif = _deepcopy(_motif_card)
                 tmp_motif['Begin'] = int(fields_line[3])
                 tmp_motif['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -145,7 +145,7 @@ def _parse_GFF(GFF):
                 tmp_num_motifs+=1
                 del(tmp_motif,tmp_txt)
             if fields_line[2]=='Mutagenesis':
-                tmp_mutagenesis = _deepcopy(_mutagenesis_dict)
+                tmp_mutagenesis = _deepcopy(_mutagenesis_card)
                 tmp_mutagenesis['Begin'] = int(fields_line[3])
                 tmp_mutagenesis['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -156,7 +156,7 @@ def _parse_GFF(GFF):
                 tmp_num_mutagenesis+=1
                 del(tmp_mutagenesis,tmp_txt)
             if fields_line[2]=='Modified residue':
-                tmp_modified = _deepcopy(_modified_res_dict)
+                tmp_modified = _deepcopy(_modified_res_card)
                 tmp_modified['Begin'] = int(fields_line[3])
                 tmp_modified['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -167,7 +167,7 @@ def _parse_GFF(GFF):
                 tmp_num_modified+=1
                 del(tmp_modified,tmp_txt)
             if fields_line[2]=='Cross-link':
-                tmp_crosslink = _deepcopy(_cross_link_dict)
+                tmp_crosslink = _deepcopy(_cross_link_card)
                 tmp_crosslink['Begin'] = int(fields_line[3])
                 tmp_crosslink['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -178,7 +178,7 @@ def _parse_GFF(GFF):
                 tmp_num_crosslink+=1
                 del(tmp_crosslink,tmp_txt)
             if fields_line[2]=='Alternative sequence':
-                tmp_altseq = _deepcopy(_alternative_seq_dict)
+                tmp_altseq = _deepcopy(_alternative_seq_card)
                 tmp_altseq['Begin'] = int(fields_line[3])
                 tmp_altseq['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -189,7 +189,7 @@ def _parse_GFF(GFF):
                 tmp_num_altseq+=1
                 del(tmp_altseq,tmp_txt)
             if fields_line[2]=='Sequence conflict':
-                tmp_seqconf = _deepcopy(_seq_conflict_dict)
+                tmp_seqconf = _deepcopy(_seq_conflict_card)
                 tmp_seqconf['Begin'] = int(fields_line[3])
                 tmp_seqconf['End'] = int(fields_line[4])
                 tmp_txt=fields_line[8].split(';')
@@ -213,9 +213,9 @@ def _parse_basic_entry(entry=None, card=None):
     dict_result=entry
 
     if card is None:
-        from sabueso.fields.protein import _protein_dict
-        tmp_card = _deepcopy(_protein_dict)
-        del(_protein_dict)
+        from sabueso.fields.protein import protein_card as _protein_card
+        tmp_card = _deepcopy(_protein_card)
+        del(_protein_card)
     else:
         tmp_card = card
 
@@ -223,21 +223,22 @@ def _parse_basic_entry(entry=None, card=None):
     tmp_card['Name'].append(dict_result['name'])
 
     # Full Name
-    if type(dict_result['protein']['recommendedName']['fullName'])!=str:
-        tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName']['#text'])
-    else:
-        tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName'])
-
+    if 'recommendedName' in dict_result['protein'].keys():
+        if 'fullName' in dict_result['protein']['recommendedName'].keys():
+            if type(dict_result['protein']['recommendedName']['fullName'])!=str:
+                tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName']['#text'])
+            else:
+                tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName'])
     # Short Name
-    if 'shortName' in dict_result['protein']['recommendedName'].keys():
-        if type(dict_result['protein']['recommendedName']['shortName'])==list:
-            for shortName in dict_result['protein']['recommendedName']['shortName']:
-                if type(shortName)==str:
-                    tmp_card['Short Name'].append(shortName)
-                else:
-                    tmp_card['Short Name'].append(shortName['#text'])
-        else:
-            tmp_card['Short Name'].append(dict_result['protein']['recommendedName']['shortName'])
+        if 'shortName' in dict_result['protein']['recommendedName'].keys():
+            if type(dict_result['protein']['recommendedName']['shortName'])==list:
+                for shortName in dict_result['protein']['recommendedName']['shortName']:
+                    if type(shortName)==str:
+                        tmp_card['Short Name'].append(shortName)
+                    else:
+                        tmp_card['Short Name'].append(shortName['#text'])
+            else:
+                tmp_card['Short Name'].append(dict_result['protein']['recommendedName']['shortName'])
 
     # Alternative Name
     if 'alternativeName' in dict_result['protein'].keys():
@@ -348,9 +349,9 @@ def _parse_basic_entry(entry=None, card=None):
 
     # PDBs
         elif dbreference['@type']=='PDB':
-            from sabueso.fields.pdb import _pdb_dict
-            tmp_pdb = _deepcopy(_pdb_dict)
-            tmp_pdb['id']=dbreference['@id']
+            from sabueso.fields.pdb import pdb_card as _pdb_card
+            tmp_pdb = _deepcopy(_pdb_card)
+            tmp_pdb['Id']=dbreference['@id']
             for pdb_field in dbreference['property']:
                 if pdb_field['@type']=='method':
                     tmp_pdb['Method']=pdb_field['@value']
@@ -358,13 +359,13 @@ def _parse_basic_entry(entry=None, card=None):
                     tmp_pdb['Resolution']=pdb_field['@value']
                 if pdb_field['@type']=='chains':
                     tmp_pdb['Chains']=pdb_field['@value']
-            tmp_card['PDB'][tmp_pdb['id']]=tmp_pdb
+            tmp_card['PDB'][tmp_pdb['Id']]=tmp_pdb
             del(tmp_pdb)
 
     return tmp_card
 
 
-def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
+def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
 
     url = 'http://www.uniprot.org/uniprot/'+uniprot+'.xml'
 
@@ -408,10 +409,10 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
                         tmp_card['Subunit Structure'].append(comment['text'])
 
             if comment['@type']=='alternative products':
-                from sabueso.fields.protein import _isoform_dict
+                from sabueso.fields.protein import isoform_card as _isoform_card
                 if type(comment['isoform'])==list:
                     for isoform in comment['isoform']:
-                        tmp_isoform = _deepcopy(_isoform_dict)
+                        tmp_isoform = _deepcopy(_isoform_card)
                         tmp_isoform['Name'] =  isoform['name']
                         tmp_isoform_indice = int(isoform['id'].split('-')[-1])
                         tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
@@ -421,7 +422,7 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
                         del(tmp_isoform_indice)
                 else:
                     isoform = comment['isoform']
-                    tmp_isoform = _deepcopy(_isoform_dict)
+                    tmp_isoform = _deepcopy(_isoform_card)
                     tmp_isoform['Name'] =  isoform['name']
                     tmp_isoform_indice = int(isoform['id'].split('-')[-1])
                     tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
@@ -429,12 +430,12 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
                     tmp_isoform['UniProt'] = isoform['id']
                     tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
                     del(tmp_isoform_indice)
-                del(_isoform_dict)
+                del(_isoform_card)
 
             if with_interactions:
                 if comment['@type']=='interaction':
-                    from sabueso.fields.interaction import _interaction_dict
-                    tmp_interaction = _deepcopy(_interaction_dict)
+                    from sabueso.fields.interaction import _interaction_card
+                    tmp_interaction = _deepcopy(_interaction_card)
                     tmp_interactant=tmp_interaction['Interactants'][0]
                     tmp_interactant['UniProt']=uniprot_id
                     tmp_interactant['IntAct']=comment['interactant'][0]['@intactId']
@@ -452,7 +453,7 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
                         tmp_interactant['Organism Scientific']=tmp_organism
                         del(tmp_uniprot,tmp_organism)
                     tmp_card['Interactions'].append(tmp_interaction)
-                    del(tmp_interaction,tmp_interactant,_interaction_dict)
+                    del(tmp_interaction,tmp_interactant,_interaction_card)
     else:
         if dict_result['comment']['@type']=='function':
             tmp_card['Function'].append(dict_result['comment']['text'])
@@ -462,15 +463,15 @@ def card_protein(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
     # Fix lack of isoforms where number of isoforms == 1:
 
     if len(tmp_card['Sequence']['Isoforms'])==0:
-        from sabueso.fields.protein import _isoform_dict
-        tmp_isoform = _deepcopy(_isoform_dict)
+        from sabueso.fields.protein import _isoform_card
+        tmp_isoform = _deepcopy(_isoform_card)
         tmp_isoform['Name'] =  str(1)
         tmp_isoform_indice = 1
         tmp_isoform['UniProt'] = tmp_card['UniProt'][0]+'-1'
         tmp_isoform['FASTA'] = _get_FASTA(tmp_isoform['UniProt'])
         tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
         tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
-        del(tmp_isoform_indice,_isoform_dict)
+        del(tmp_isoform_indice,_isoform_card)
 
     # Structure
     # Domains

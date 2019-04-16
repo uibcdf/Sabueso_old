@@ -64,7 +64,7 @@ def _data_from_chemid(chem_id=None):
 
 def _ligand_from_pdb(pdb=None):
 
-    from sabueso.fields.pdb import _ligand_dict
+    from sabueso.fields.pdb import ligand_card as _ligand_card
     ligands={}
     url = 'https://www.ebi.ac.uk/pdbe/api/pdb/entry/ligand_monomers/'+pdb
     request = _urllib.request.Request(url)
@@ -73,7 +73,7 @@ def _ligand_from_pdb(pdb=None):
     ligand_api_dict = _json.loads(response_txt)
     pdbid = list(ligand_api_dict.keys())[0]
     for tmp_ligand in ligand_api_dict[pdbid]:
-        tmp_dict=_deepcopy(_ligand_dict)
+        tmp_dict=_deepcopy(_ligand_card)
         tmp_dict['Name']=tmp_ligand['chem_comp_name']
         tmp_dict['Residue Name']=tmp_ligand['chem_comp_id']
         tmp_dict['Entity']=tmp_ligand['chem_comp_id']
@@ -91,12 +91,12 @@ def _get_seq_from_fasta_rcsb(pdb=None,chainId=None):
     fasta_txt = response.read().decode('utf-8')
     return ''.join(fasta_txt.split('\n')[1:])
 
-def card_pdb(pdb=None, card=None):
+def pdb_card(pdb=None, card=None):
 
     if card is None:
-        from sabueso.fields.pdb import _pdb_dict
-        tmp_card = _deepcopy(_pdb_dict)
-        del(_pdb_dict)
+        from sabueso.fields.pdb import pdb_card as _pdb_card
+        tmp_card = _deepcopy(_pdb_card)
+        del(_pdb_card)
     else:
         tmp_card = _deepcopy(card)
 
@@ -106,10 +106,10 @@ def card_pdb(pdb=None, card=None):
     pdb_id=tmp_card['Id']
 
     _mmtf_pdb = _mmtf.fetch(pdb_id)
-    from sabueso.fields.pdb import _bioAssemblies_dict
-    from sabueso.fields.pdb import _group_dict
-    from sabueso.fields.pdb import _chain_dict
-    from sabueso.fields.pdb import _entity_dict
+    from sabueso.fields.pdb import bioAssemblies_card as _bioAssemblies_card
+    from sabueso.fields.pdb import group_card as _group_card
+    from sabueso.fields.pdb import chain_card as _chain_card
+    from sabueso.fields.pdb import entity_card as _entity_card
 
     tmp_card['MMTF']=_mmtf_pdb
     tmp_card['Method']=_mmtf_pdb.experimental_methods
@@ -126,7 +126,7 @@ def card_pdb(pdb=None, card=None):
     ## bioAssemblies
 
     for ii in _mmtf_pdb.bio_assembly:
-        _tmp_item = _deepcopy(_bioAssemblies_dict)
+        _tmp_item = _deepcopy(_bioAssemblies_card)
         _tmp_item['Name']=ii['name']
         _tmp_item['Chains']=ii['transformList'][0]['chainIndexList']
         tmp_card['bioAssembly'][ii['name']]=_tmp_item
@@ -135,7 +135,7 @@ def card_pdb(pdb=None, card=None):
     ## Groups
 
     for ii in range(_mmtf_pdb.num_groups):
-        _tmp_item = _deepcopy(_group_dict)
+        _tmp_item = _deepcopy(_group_card)
         _tmp_item['Id'] = _mmtf_pdb.group_id_list[ii]
         _tmp_group = _mmtf_pdb.group_list[_mmtf_pdb.group_type_list[ii]]
         _tmp_item['Name'] = _tmp_group['groupName']
@@ -154,7 +154,7 @@ def card_pdb(pdb=None, card=None):
     ind_start=0
     _tmp_dssp = [_sec_struct_codes[ii] for ii in _mmtf_pdb.sec_struct_list]
     for ii in range(_mmtf_pdb.num_chains):
-        _tmp_item = _deepcopy(_chain_dict)
+        _tmp_item = _deepcopy(_chain_card)
         _tmp_item['Index'] = ii
         _tmp_item['Id'] = _mmtf_pdb.chain_id_list[ii]
         _tmp_item['Name'] = _mmtf_pdb.chain_name_list[ii]
@@ -183,7 +183,7 @@ def card_pdb(pdb=None, card=None):
     ## Entities
 
     for _tmp_item in _mmtf_pdb.entity_list:
-        _tmp_entity = _deepcopy(_entity_dict)
+        _tmp_entity = _deepcopy(_entity_card)
         _tmp_entity['Description']=_tmp_item['description']
         _tmp_entity['Type']=_tmp_item['type']
         _tmp_entity['Sequence']=_tmp_item['sequence']

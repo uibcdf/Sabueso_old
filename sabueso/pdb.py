@@ -1,5 +1,4 @@
-from .DBs.RCSB import card_pdb as _card_rcsb
-from sabueso.fields.pdb import _pdb_dict
+from .DBs.RCSB import pdb_card as _pdb_card_rcsb
 
 class PDB():
 
@@ -10,7 +9,7 @@ class PDB():
         self.card = None
 
         if pdb is not None:
-            tmp_card = _card_rcsb(pdb=pdb)
+            tmp_card = _pdb_card_rcsb(pdb=pdb)
             self.card = tmp_card
             del(tmp_card,pdb)
 

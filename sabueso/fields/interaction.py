@@ -1,10 +1,12 @@
-_interactant_dict = {
+from copy import deepcopy as _deepcopy
+
+interactant_card = {
     'UniProt' : [],
     'IntAct' : [],
     'Organism Scientific': [],
     'Short Name': []
 }
 
-_interaction_dict = {
+interaction_card = {
     'Interactants' : [_interactant_dict, _interactant_dict]
 }

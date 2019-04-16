@@ -9,17 +9,17 @@ def target_query(string=None, organism=None):
    list_result=[]
    for tmp_target in result:
        if tmp_target['target_type']=='SINGLE PROTEIN':
-           list_result.append(card_protein(tmp_target['target_chembl_id']))
+           list_result.append(protein_card(tmp_target['target_chembl_id']))
 
    return list_result
 
-def card_protein(chembl=None, card=None):
+def protein_card(chembl=None, card=None):
 
     if card is None:
-        from sabueso.fields.protein import _protein_dict
-        tmp_card = _deepcopy(_protein_dict)
+        from sabueso.fields.protein import protein_card as _protein_card
+        tmp_card = _deepcopy(_protein_card)
         tmp_card['ChEMBL'].append(chembl)
-        del(_protein_dict)
+        del(_protein_card)
     else:
         tmp_card = _deepcopy(card)
 
@@ -54,9 +54,9 @@ def card_protein(chembl=None, card=None):
     # PDB
         if src_db == 'PDBe':
             if id_db not in tmp_card['PDB'].keys():
-                from sabueso.fields.pdb import _pdb_dict
-                tmp_pdb = _deepcopy(_pdb_dict)
-                tmp_pdb['id']=id_db
+                from sabueso.fields.pdb import pdb_card as _pdb_card
+                tmp_pdb = _deepcopy(_pdb_card)
+                tmp_pdb['Id']=id_db
                 tmp_card['PDB'][id_db]=tmp_pdb
 
     # UniProt
