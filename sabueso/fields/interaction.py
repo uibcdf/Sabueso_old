@@ -8,5 +8,5 @@ interactant_card = {
 }
 
 interaction_card = {
-    'Interactants' : [_interactant_dict, _interactant_dict]
+    'Interactants' : [interactant_card, interactant_card]
 }

@@ -1,6 +1,7 @@
 import urllib as _urllib
 import xmltodict as _xmltodict
 from copy import deepcopy as _deepcopy
+from sabueso.fields.protein import in_pdb_card as _in_pdb_card
 
 def target_query(string=None, organism=None, max_results=20):
 
@@ -17,9 +18,9 @@ def target_query(string=None, organism=None, max_results=20):
 
     return list_results
 
-def _get_organism_scientific(uniprot=None):
+def _get_organism_scientific(uniprot_id=None):
 
-    url = 'http://www.uniprot.org/uniprot/'+uniprot+'.xml'
+    url = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.xml'
     request = _urllib.request.Request(url)
     request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response = _urllib.request.urlopen(request)
@@ -37,9 +38,9 @@ def _get_organism_scientific(uniprot=None):
     del(url,request,response,xml_result,dict_result)
     return tmp_name
 
-def _get_FASTA(uniprot=None):
+def _get_FASTA(uniprot_id=None):
 
-    url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot+'.fasta'
+    url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.fasta'
     request_fasta = _urllib.request.Request(url_fasta)
     request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response_fasta = _urllib.request.urlopen(request_fasta)
@@ -49,9 +50,9 @@ def _get_FASTA(uniprot=None):
 
     return fasta_result
 
-def _get_GFF(uniprot=None):
+def _get_GFF(uniprot_id=None):
 
-    url_gff = 'http://www.uniprot.org/uniprot/'+uniprot+'.gff'
+    url_gff = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.gff'
     request_gff = _urllib.request.Request(url_gff)
     request_gff.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
     response_gff = _urllib.request.urlopen(request_gff)
@@ -349,25 +350,26 @@ def _parse_basic_entry(entry=None, card=None):
 
     # PDBs
         elif dbreference['@type']=='PDB':
-            from sabueso.fields.pdb import pdb_card as _pdb_card
-            tmp_pdb = _deepcopy(_pdb_card)
-            tmp_pdb['Id']=dbreference['@id']
+            tmp_pdb_id=dbreference['@id']
             for pdb_field in dbreference['property']:
-                if pdb_field['@type']=='method':
-                    tmp_pdb['Method']=pdb_field['@value']
-                if pdb_field['@type']=='resolution':
-                    tmp_pdb['Resolution']=pdb_field['@value']
                 if pdb_field['@type']=='chains':
-                    tmp_pdb['Chains']=pdb_field['@value']
-            tmp_card['PDB'][tmp_pdb['Id']]=tmp_pdb
+                    tmp_in_pdb_card=_deepcopy(_in_pdb_card)
+                    tmp_data=pdb_field['@value'].split('=')
+                    tmp_in_pbb_card['Id']=tmp_pdb_id
+                    tmp_in_pbb_card['Chains']=tmp_data[0]
+                    tmp_in_pbb_card['Begin']=int(tmp_data[1].split('-')[0])
+                    tmp_in_pbb_card['End']=int(tmp_data[1].split('-')[1])
+                    tmp_in_pdb_card['Length']=tmp_in_pdb_card['End']-tmp_in_pdb_card['Begin']+1
+                    tmp_card['in PDB'][tmp_pdb_id]=tmp_in_pdb_card
+                    del(tmp_in_pdb_card,tmp_data)
             del(tmp_pdb)
 
     return tmp_card
 
 
-def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=True):
+def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=True):
 
-    url = 'http://www.uniprot.org/uniprot/'+uniprot+'.xml'
+    url = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.xml'
 
     request = _urllib.request.Request(url)
     request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
@@ -376,10 +378,10 @@ def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
     dict_result = _xmltodict.parse(xml_result)
     dict_result = dict_result['uniprot']['entry']
 
-    tmp_card = _parse_basic_xml_entry(dict_result)
+    tmp_card = _parse_basic_entry(dict_result)
 
     # FASTA
-    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot)
+    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot_id)
 
     # Function
     # Subunit Structure
@@ -434,7 +436,7 @@ def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
 
             if with_interactions:
                 if comment['@type']=='interaction':
-                    from sabueso.fields.interaction import _interaction_card
+                    from sabueso.fields.interaction import interaction_card as _interaction_card
                     tmp_interaction = _deepcopy(_interaction_card)
                     tmp_interactant=tmp_interaction['Interactants'][0]
                     tmp_interactant['UniProt']=uniprot_id
@@ -463,7 +465,7 @@ def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
     # Fix lack of isoforms where number of isoforms == 1:
 
     if len(tmp_card['Sequence']['Isoforms'])==0:
-        from sabueso.fields.protein import _isoform_card
+        from sabueso.fields.protein import isoform_card as _isoform_card
         tmp_isoform = _deepcopy(_isoform_card)
         tmp_isoform['Name'] =  str(1)
         tmp_isoform_indice = 1
@@ -498,3 +500,4 @@ def protein_card(uniprot=None, card=None, with_interactions=True, with_FASTA=Tru
     del(tmp_gff)
 
     return tmp_card
+

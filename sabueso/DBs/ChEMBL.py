@@ -53,11 +53,8 @@ def protein_card(chembl=None, card=None):
 
     # PDB
         if src_db == 'PDBe':
-            if id_db not in tmp_card['PDB'].keys():
-                from sabueso.fields.pdb import pdb_card as _pdb_card
-                tmp_pdb = _deepcopy(_pdb_card)
-                tmp_pdb['Id']=id_db
-                tmp_card['PDB'][id_db]=tmp_pdb
+            if id_db not in tmp_card['in PDB'].keys():
+                tmp_card['in PDB'][id_db]=None
 
     # UniProt
         elif src_db == 'UniProt':

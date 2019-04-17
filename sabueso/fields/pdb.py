@@ -55,6 +55,7 @@ chain_card = {
 }
 
 entity_card = {
+    'Id' : None,
     'Description' : None,
     'Type' : None,
     'Sequence': None,
@@ -67,7 +68,7 @@ ligand_card = {
     'Chemical Id': None,
     'Residue Name': None,
     'Name':None,
-    'Entity':None,
+    'Entity Id':None,
     'Chains':None,
     'ChEMBL':None,
     'InChIKey':None,

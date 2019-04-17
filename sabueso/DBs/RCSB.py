@@ -27,62 +27,6 @@ _dssp_to_abc = {"I" : "c", # coil
                 "C" : "c",
                 "X" : "X"} # undefined
 
-def _pdb_to_uniprot_SIFTS(pdb=None):
-
-    url = 'http://www.ebi.ac.uk/pdbe/api/mappings/uniprot/'+pdb
-    request = _urllib.request.Request(url)
-    response = _urllib.request.urlopen(request)
-    response_txt = response.read().decode('utf-8')
-    sifts_api_dict = _json.loads(response_txt)
-    pdbid = list(sifts_api_dict.keys())[0]
-    result=[]
-    for uniprotid in sifts_api_dict[pdbid]['UniProt'].keys():
-        for mapp in sifts_api_dict[pdbid]['UniProt'][uniprotid]['mappings']:
-            tmp_dict={}
-            tmp_dict['uniprot']=uniprotid
-            tmp_dict['entity_id']=mapp['entity_id']
-            tmp_dict['chain_id']=mapp['chain_id']
-            tmp_dict['pdb_start']=mapp['start']['residue_number']
-            tmp_dict['pdb_end']=mapp['end']['residue_number']
-            tmp_dict['uniprot_start']=mapp['unp_start']
-            tmp_dict['uniprot_end']=mapp['unp_end']
-            result.append(tmp_dict)
-    del(url, request, response, response_txt, sifts_api_dict, pdbid, uniprotid, mapp)
-
-    return result
-
-def _data_from_chemid(chem_id=None):
-
-    url = 'https://www.ebi.ac.uk/pdbe/api/pdb/compound/summary/'+chem_id
-    request = _urllib.request.Request(url)
-    response = _urllib.request.urlopen(request)
-    response_txt = response.read().decode('utf-8')
-    ligand_api_dict = _json.loads(response_txt)
-    inchikey = ligand_api_dict[chem_id][0]["inchi_key"]
-    chemblid = ligand_api_dict[chem_id][0]["chembl_id"]
-    return inchikey, chemblid
-
-def _ligand_from_pdb(pdb=None):
-
-    from sabueso.fields.pdb import ligand_card as _ligand_card
-    ligands={}
-    url = 'https://www.ebi.ac.uk/pdbe/api/pdb/entry/ligand_monomers/'+pdb
-    request = _urllib.request.Request(url)
-    response = _urllib.request.urlopen(request)
-    response_txt = response.read().decode('utf-8')
-    ligand_api_dict = _json.loads(response_txt)
-    pdbid = list(ligand_api_dict.keys())[0]
-    for tmp_ligand in ligand_api_dict[pdbid]:
-        tmp_dict=_deepcopy(_ligand_card)
-        tmp_dict['Name']=tmp_ligand['chem_comp_name']
-        tmp_dict['Residue Name']=tmp_ligand['chem_comp_id']
-        tmp_dict['Entity']=tmp_ligand['chem_comp_id']
-        tmp_dict['Chemical Id']=tmp_ligand['chem_comp_id']
-        tmp_dict['InChIKey'],tmp_dict['ChEMBL']=_data_from_chemid(tmp_dict['Chemical Id'])
-        ligands[tmp_dict['Chemical Id']]=tmp_dict
-        del(tmp_dict)
-    return ligands
-
 def _get_seq_from_fasta_rcsb(pdb=None,chainId=None):
 
     url = 'https://www.rcsb.org/pdb/download/downloadFile.do?fileFormat=fastachain&compression=NO&structureId='+pdb+'&chainId='+chainId
@@ -169,40 +113,20 @@ def pdb_card(pdb=None, card=None):
         del(_tmp_item,tmp_seq,_aux_ss)
     del(ind_start,_tmp_dssp)
 
-    _tmp_pdb2unip = _pdb_to_uniprot_SIFTS(pdb=pdb_id)
-    for _tmp_item in _tmp_pdb2unip:
-        _tmp_chain =tmp_card['Chain'][_tmp_item['chain_id']]
-        _tmp_chain['UniProt'] = _tmp_item['uniprot']
-        _tmp_chain['Entity'] = _tmp_item['entity_id']
-        _tmp_chain['PDB_start'] = _tmp_item['pdb_start']
-        _tmp_chain['PDB_end'] = _tmp_item['pdb_end']
-        _tmp_chain['UniProt_start'] = _tmp_item['uniprot_start']
-        _tmp_chain['UniProt_end'] = _tmp_item['uniprot_end']
-    del(_tmp_item,_tmp_pdb2unip)
-
     ## Entities
 
+    entity_id=1
     for _tmp_item in _mmtf_pdb.entity_list:
         _tmp_entity = _deepcopy(_entity_card)
+        _tmp_entity['Id'] = entity_id
         _tmp_entity['Description']=_tmp_item['description']
         _tmp_entity['Type']=_tmp_item['type']
         _tmp_entity['Sequence']=_tmp_item['sequence']
-        _tmp_entity['Chains']=[_mmtf_pdb.chain_id_list[ii] for ii in _tmp_item['chainIndexList']]
-        if _tmp_entity['Type']=='polymer':
-            _tmp_entity['UniProt']=tmp_card['Chain'][_tmp_entity['Chains'][0]]['UniProt']
-            tmp_card['Entity'][_tmp_entity['UniProt']]=_tmp_entity
-        else:
-            tmp_card['Entity'][_tmp_entity['Description']]=_tmp_entity
+        _tmp_entity['Chains']=[_mmtf_pdb.chain_name_list[ii] for ii in _tmp_item['chainIndexList']]
+        tmp_card['Entity'][entity_id]=_tmp_entity
+        entity_id+=1
         del(_tmp_entity)
     del(_tmp_item)
 
-
-
-    tmp_card['Ligand']=_ligand_from_pdb(pdb=pdb_id)
-    for ii in tmp_card['Ligand']:
-        ligand_name = tmp_card['Ligand'][ii]['Name']
-        tmp_card['Ligand'][ii]['Chains']=tmp_card['Entity'][ligand_name]['Chains']
-        tmp_card['Entity'][ii]=tmp_card['Entity'][ligand_name]
-        del(tmp_card['Entity'][ligand_name])
-
     return tmp_card
+

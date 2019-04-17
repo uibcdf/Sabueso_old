@@ -13,18 +13,19 @@ def _remove_duplicates_from_card(card):
 
 class Protein():
 
-    def __init__(self, uniprot=None, withverbose=True):
+    def __init__(self, uniprot_id=None, with_pdbs=True):
 
         self.type = 'Protein'
         self.card = None
 
-        if uniprot is not None:
-            tmp_card = _protein_card_uniprot(uniprot=uniprot)
+        if uniprot_id is not None:
+            tmp_card = _protein_card_uniprot(uniprot_id=uniprot_id)
             if len(tmp_card['ChEMBL'])>0:
                 tmp_card = _protein_card_chembl(card=tmp_card)
             #_remove_duplicates_from_card(tmp_card)
+            self._build_pdbs()
             self.card = tmp_card
-            del(tmp_card,uniprot)
+            del(tmp_card,uniprot_id)
 
     def make_Notebook(self):
         pass
@@ -39,4 +40,13 @@ class Protein():
 
         with open(json_file, 'w') as outfile:
             json.dump(json_list, outfile)
+
+    def drop_pdb(self,pdb_id=None):
+        pass
+
+    def add_pdb(self,pdb_id=None):
+        pass
+
+    def _build_pdbs():
+        pass
 
