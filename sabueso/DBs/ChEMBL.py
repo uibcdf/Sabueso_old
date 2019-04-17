@@ -1,7 +1,9 @@
 from copy import deepcopy as _deepcopy
+from sabueso.fields.protein import in_pdb_card as _in_pdb_card
+from sabueso.fields.protein import segment_card as _segment_card
 
 def target_query(string=None, organism=None):
- 
+
    import gevent.monkey
    gevent.monkey.patch_all(thread=False, select=False)
    from chembl_webresource_client.new_client import new_client as client

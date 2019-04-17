@@ -2,6 +2,7 @@ import urllib as _urllib
 import xmltodict as _xmltodict
 from copy import deepcopy as _deepcopy
 from sabueso.fields.protein import in_pdb_card as _in_pdb_card
+from sabueso.fields.protein import segment_card as _segment_card
 
 def target_query(string=None, organism=None, max_results=20):
 
@@ -354,15 +355,26 @@ def _parse_basic_entry(entry=None, card=None):
             for pdb_field in dbreference['property']:
                 if pdb_field['@type']=='chains':
                     tmp_in_pdb_card=_deepcopy(_in_pdb_card)
-                    tmp_data=pdb_field['@value'].split('=')
-                    tmp_in_pbb_card['Id']=tmp_pdb_id
-                    tmp_in_pbb_card['Chains']=tmp_data[0]
-                    tmp_in_pbb_card['Begin']=int(tmp_data[1].split('-')[0])
-                    tmp_in_pbb_card['End']=int(tmp_data[1].split('-')[1])
-                    tmp_in_pdb_card['Length']=tmp_in_pdb_card['End']-tmp_in_pdb_card['Begin']+1
+                    tmp_segments=pdb_field['@value'].split(',')
+                    tmp_in_pdb_card['Id']=tmp_pdb_id
+                    for tmp_segment in tmp_segments:
+                        tmp_terms_segment=tmp_segment.split('=')
+                        tmp_chains_segment=tmp_terms_segment[0]
+                        tmp_nums_segment=tmp_terms_segment[1].split('-')
+                        tmp_begin=int(tmp_nums_segment[0])
+                        tmp_end=int(tmp_nums_segment[1])
+                        for tmp_chain_segment in tmp_chains_segment.split('/'):
+                            tmp_segment_card=_deepcopy(_segment_card)
+                            tmp_segment_card['Chain']=tmp_chain_segment
+                            tmp_segment_card['Begin']=tmp_begin
+                            tmp_segment_card['End']=tmp_end
+                            tmp_segment_card['Length']=tmp_end-tmp_begin+1
+                            tmp_in_pdb_card['Segment'].append(tmp_segment_card)
+                        del(tmp_terms_segment,tmp_chains_segment,tmp_nums_segment)
+                        del(tmp_begin,tmp_end)
                     tmp_card['in PDB'][tmp_pdb_id]=tmp_in_pdb_card
-                    del(tmp_in_pdb_card,tmp_data)
-            del(tmp_pdb)
+                    del(tmp_in_pdb_card)
+            del(tmp_pdb_id)
 
     return tmp_card
 
