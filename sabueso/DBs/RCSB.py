@@ -1,4 +1,4 @@
-# We start  mmtf-python and some APIs from DBs
+# We start with mmtf-python and some APIs from DBs
 
 from copy import deepcopy as _deepcopy
 import urllib as _urllib
@@ -35,19 +35,16 @@ def _get_seq_from_fasta_rcsb(pdb=None,chainId=None):
     fasta_txt = response.read().decode('utf-8')
     return ''.join(fasta_txt.split('\n')[1:])
 
+def dress_pdb(pdb):
+
+    tmp_mmtf = _mmtf.fetch(pdb.id)
+    pdb.from_mmtf(tmp_mmtf)
+    del(tmp_mmtf)
+    pass
+
 def pdb_card(pdb=None, card=None):
 
-    if card is None:
-        from sabueso.fields.pdb import pdb_card as _pdb_card
-        tmp_card = _deepcopy(_pdb_card)
-        del(_pdb_card)
-    else:
-        tmp_card = _deepcopy(card)
-
-    if pdb is not None:
-        tmp_card['Id']=pdb
-
-    pdb_id=tmp_card['Id']
+    pdb_id=pdb.id
 
     _mmtf_pdb = _mmtf.fetch(pdb_id)
     from sabueso.fields.pdb import bioAssemblies_card as _bioAssemblies_card
