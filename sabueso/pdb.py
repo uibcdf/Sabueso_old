@@ -1,6 +1,6 @@
 from molmodel import PDB as _mme_PDB
 from .DBs.RCSB import dress_pdb as _rcsb_dress_pdb
-from .DBs.PDBe import dress_pdb as _pdbe_dress_pdb
+#from .DBs.PDBe import dress_pdb as _pdbe_dress_pdb
 
 ### The PDB class is fulfilled with the following sequence:
 #
@@ -13,7 +13,9 @@ class PDB(_mme_PDB):
 
     def __init__(self, pdb_id=None, load=True):
 
-        super(_mme_PDB,self).__init__(pdb_id=pdb_id)
+        super(_mme_PDB,self).__init__()
+
+        self.id = pdb_id
 
         if load:
             _rcsb_dress_pdb(self)
