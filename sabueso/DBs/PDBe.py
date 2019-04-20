@@ -63,6 +63,16 @@ def _ligand_from_pdb(pdb=None):
         ligands={}
     return ligands
 
+def dress_pdb(pdb):
+
+
+    _tmp_pdb2unip = _pdb_to_uniprot_SIFTS(pdb=pdb_id)
+
+    # Adding UniProt code to entities
+
+    for bioassembly in pdb.bioassembly:
+        for entity_index in range(len(bioassembly)):
+
 def pdb_card(pdb=None, card=None):
 
     pdb_id=pdb

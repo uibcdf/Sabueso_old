@@ -39,18 +39,11 @@ def dress_pdb(pdb):
 
     tmp_pdb=_pdb_from_pdb_id(pdb.id)
 
-    list_attributes = ['method', 'resolution', 'title', 'deposition_date', 'unit_cell',
-                       'bioassembly', 'chain', 'segment', 'group', 'atom', 'bond', 'num_models',
-                       'num_bioassemblies', 'num_chains', 'num_entities', 'num_segments',
-                       'num_groups', 'num_atoms', 'num_bonds', 'ion', 'water', 'small_molecule',
-                       'protein', 'peptide', 'dna', 'rna', 'num_ions', 'num_waters',
-                       'num_small_molecules', 'num_proteins', 'num_peptides', 'num_dnas',
-                       'num_rnas', 'coordinates']
-
-
-    for pdb_attribute in list_attributes:
-        value = getattr(tmp_pdb, pdb_attribute)
-        setattr(pdb,pdb_attribute,value)
+    list_attributes = []
+    for pdb_attribute in dir(tmp_pdb):
+        if (not callable(getattr(tmp_pdb,pdb_attribute))==True) and (not pdb_attribute.startswith('_')):
+            value = getattr(tmp_pdb, pdb_attribute)
+            setattr(pdb,pdb_attribute,value)
 
     pass
 
