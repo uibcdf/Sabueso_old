@@ -24,14 +24,6 @@ _dssp_to_abc = {"I" : "c", # coil
                 "C" : "c",
                 "X" : "X"} # undefined
 
-def _get_seq_from_fasta_rcsb(pdb=None,chainId=None):
-
-    url = 'https://www.rcsb.org/pdb/download/downloadFile.do?fileFormat=fastachain&compression=NO&structureId='+pdb+'&chainId='+chainId
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request)
-    fasta_txt = response.read().decode('utf-8')
-    return ''.join(fasta_txt.split('\n')[1:])
-
 def dress_pdb(pdb):
 
     # molmodel has a method to create a pdb object coming from the mmtf file from RCSB

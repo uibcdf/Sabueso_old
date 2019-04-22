@@ -1,5 +1,6 @@
 from molmodel import PDB as _mme_PDB
 from .DBs.RCSB import dress_pdb as _rcsb_dress_pdb
+from .DBs.SIFTs import dress_pdb as _sifts_dress_pdb
 #from .DBs.PDBe import dress_pdb as _pdbe_dress_pdb
 
 ### The PDB class is fulfilled with the following sequence:
@@ -19,6 +20,7 @@ class PDB(_mme_PDB):
 
         if load:
             _rcsb_dress_pdb(self)
+            _sifts_dress_pdb(self)
             #_pdbe_dress_pdb(self)
 
     def make_Notebook(self):
