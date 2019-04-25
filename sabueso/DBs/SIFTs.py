@@ -1,4 +1,4 @@
-from molmodel.utils.exceptions import *
+from sabueso.utils.exceptions import *
 import urllib as _urllib
 import json as _json
 
@@ -36,10 +36,13 @@ def dress_pdb(pdb):
 
     uniprot_segments = _pdb_to_uniprot_segments(pdb.id)
 
-    for uniprot_id, segments in uniprot_segments:
+    print(uniprot_segments)
+
+    for uniprot_id, segments in uniprot_segments.items():
         identifier = segments['identifier']
         name = segments['name']
         for mapping in segments['mappings']:
-        _segments = uniprot_segments[uniprot_id]
-        for entity_index in range(len(bioassembly)):
+            _segments = uniprot_segments[uniprot_id]
+            for uniprot_id, segment_fields in _segments.items():
+                print(_segments)
 
