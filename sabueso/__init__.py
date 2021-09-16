@@ -12,8 +12,9 @@ del get_versions, versions
 
 # Add imports here
 
+from . import tools
+
 #from .protein import Protein
-from .pdb import PDB
 #from .query import target as query_target
 
 
