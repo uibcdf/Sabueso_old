@@ -70,9 +70,9 @@ class CrystallographicAndCoordinateTransformationSection():
     def __init__(self):
 
         self.cryst1 = None
-        self.origxn = None
-        self.scalen = None
-        self.mtrixn = None
+        self.origx = None
+        self.scale = None
+        self.mtrix = None
 
 
 class CoordinateSection():
@@ -80,12 +80,6 @@ class CoordinateSection():
     def __init__(self):
 
         self.model = None
-        self.atom = None
-        self.anisou = None
-        self.ter = None
-        self.hetatm = None
-        self.endmdl = None
-
 
 class ConnectivitySection():
 
@@ -200,30 +194,42 @@ class SourceRecord():
 
 class KeywdsRecord():
 
+    def __init__(self):
+
         self.keywds = None
 
 
 class ExpdtaRecord():
+
+    def __init__(self):
 
         self.technique = None
 
 
 class NummdlRecord():
 
+    def __init__(self):
+
         self.modelNumber = None
 
 
 class MdltypRecord():
+
+    def __init__(self):
 
         self.comment = None
 
 
 class AuthorRecord():
 
+    def __init__(self):
+
         self.authorList = None
 
 
 class RevdatRecord():
+
+    def __init__(self):
 
         self.modNum = None
         self.modDate = None
@@ -233,6 +239,8 @@ class RevdatRecord():
 
 
 class SprsdeRecord():
+
+    def __init__(self):
 
         self.sprsdeDate = None
         self.idCode = None
@@ -256,7 +264,7 @@ class RemarkRecord():
 
     def __init__(self):
 
-        self.id = None
+        self.remarkNum = None
         self.message = None
 
 
@@ -273,10 +281,10 @@ class DbrefRecord():
         self.database = None
         self.dbAccession = None
         self.dbIdCode = None
-        self.dbseqBegin = None
-        self.idinsBeg = None
-        self.dbseqEnd = None
-        self.dbinsEnd = None
+        self.dbSeqBegin = None
+        self.dbInsBegin = None
+        self.dbSeqEnd = None
+        self.dbInsEnd = None
 
 
 class Dbref1Dbref2Record():
@@ -292,8 +300,8 @@ class Dbref1Dbref2Record():
         self.database = None
         self.dbAccession = None
         self.dbIdCode = None
-        self.dbseqBegin = None
-        self.dbseqEnd = None
+        self.dbSeqBegin = None
+        self.dbSeqEnd = None
 
 
 class SeqadvRecord():
@@ -372,7 +380,217 @@ class FormulRecord():
         self.text = ''
 
 
+class HelixRecord():
 
+    def __init__(self):
+
+        self.serNum = None
+        self.helixId = None
+        self.initResName = None
+        self.initChainId = None
+        self.initSeqNum = None
+        self.initICode = None
+        self.endResName = None
+        self.endChainId = None
+        self.endSeqNum = None
+        self.endICode = None
+        self.helixClass = None
+        self.comment = None
+        self.length = None
+
+
+class SheetRecord():
+
+    def __init__(self):
+
+        self.strand = None
+        self.sheetId = None
+        self.numStrands = None
+        self.initResName = None
+        self.initChainId = None
+        self.initSeqNum = None
+        self.initICode = None
+        self.endResName = None
+        self.endChainId = None
+        self.endSeqNum = None
+        self.endICode = None
+        self.sense = None
+        self.curAtom = None
+        self.curResName = None
+        self.curChainId = None
+        self.curResSeq = None
+        self.curICode = None
+        self.prevAtom = None
+        self.prevResName = None
+        self.prevChainId = None
+        self.prevResSeq = None
+        self.prevICode = None
+
+
+class SsbondRecord():
+
+    def __init__(self):
+
+        self.serNum = None
+        self.resName1 = None
+        self.chainId1 = None
+        self.seqNum1 = None
+        self.iCode1 = None
+        self.resName2 = None
+        self.chainId2 = None
+        self.seqNum2 = None
+        self.iCode2 = None
+        self.sym1 = None
+        self.sym2 = None
+        self.length = None
+
+
+class LinkRecord():
+
+    def __init__(self):
+
+        self.name1 = None
+        self.altLoc1 = None
+        self.resName1 = None
+        self.chainId1 = None
+        self.resSeq1 = None
+        self.iCode1 = None
+        self.name2 = None
+        self.altLoc2 = None
+        self.resName2 = None
+        self.chainId2 = None
+        self.resSeq2 = None
+        self.iCode2 = None
+        self.sym1 = None
+        self.sym2 = None
+        self.length = None
+
+
+class CispepRecord():
+
+    def __init__(self):
+
+        self.serNum = None
+        self.pep1 = None
+        self.chainId1 = None
+        self.seqNum1 = None
+        self.iCode1 = None
+        self.pep2 = None
+        self.chainId2 = None
+        self.seqNum2 = None
+        self.iCode2 = None
+        self.modNum = None
+        self.measure = None
+
+
+class SiteRecord():
+
+    def __init__(self):
+
+        self.seqNum = None
+        self.siteId = None
+        self.numRes = None
+        self.resName1 = None
+        self.chainId1 = None
+        self.seq1 = None
+        self.iCode1 = None
+        self.resName2 = None
+        self.chainId2 = None
+        self.seq2 = None
+        self.iCode2 = None
+        self.resName3 = None
+        self.chainId3 = None
+        self.seq3 = None
+        self.iCode3 = None
+        self.resName4 = None
+        self.chainId4 = None
+        self.seq4 = None
+        self.iCode4 = None
+
+
+class Cryst1Record():
+
+    def __init__(self):
+
+        self.a = None
+        self.b = None
+        self.c = None
+        self.alpha = None
+        self.beta = None
+        self.gamma = None
+        self.sGroup = None
+        self.z = None
+
+
+class OrigxRecord():
+
+    def __init__(self):
+
+        self.o11 = None
+        self.o12 = None
+        self.o13 = None
+        self.o21 = None
+        self.o22 = None
+        self.o23 = None
+        self.o31 = None
+        self.o32 = None
+        self.o33 = None
+        self.t1 = None
+        self.t2 = None
+        self.t3 = None
+
+
+class ScaleRecord():
+
+    def __init__(self):
+
+        self.s11 = None
+        self.s12 = None
+        self.s13 = None
+        self.s21 = None
+        self.s22 = None
+        self.s23 = None
+        self.s31 = None
+        self.s32 = None
+        self.s33 = None
+        self.u1 = None
+        self.u2 = None
+        self.u3 = None
+
+
+class MtrixRecord():
+
+    def __init__(self):
+
+        self.serial = None
+        self.m11 = None
+        self.m12 = None
+        self.m13 = None
+        self.m21 = None
+        self.m22 = None
+        self.m23 = None
+        self.m31 = None
+        self.m32 = None
+        self.m33 = None
+        self.v1 = None
+        self.v2 = None
+        self.v3 = None
+        self.iGiven = None
+
+class Model():
+
+    def __init__(self):
+
+        self.atom = []
+
+class Atom():
+
+    def __init__(self):
+
+        self.recordName = None
+        self.serial = None
+        self.name = None
+        
 
 class PDBFile33():
 

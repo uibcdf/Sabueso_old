@@ -1,1 +1,1 @@
-from .pdbfile import PDBFile
+from .pdbfile33 import PDBFile33
