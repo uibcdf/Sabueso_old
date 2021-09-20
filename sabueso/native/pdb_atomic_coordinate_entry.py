@@ -1,3 +1,4 @@
+from copy import deepcopy
 
 class TitleSection():
 
@@ -577,26 +578,99 @@ class MtrixRecord():
         self.v3 = None
         self.iGiven = None
 
+
 class Model():
 
     def __init__(self):
 
-        self.atom = []
+        self.serial = None
+        self.record = None
 
-class Atom():
+
+class AtomRecord():
 
     def __init__(self):
 
         self.recordName = None
         self.serial = None
         self.name = None
-        
+        self.altLoc = None
+        self.resName = None
+        self.chainId = None
+        self.resSeq = None
+        self.resSeq = None
+        self.iCode = None
+        self.xyz = None
+        self.occupancy = None
+        self.tempFactor = None
+        self.element = None
+        self.charge = None
+        self.anisou11 = None
+        self.anisou22 = None
+        self.anisou33 = None
+        self.anisou12 = None
+        self.anisou13 = None
+        self.anisou23 = None
 
-class PDBFile33():
+
+class HetatmRecord():
 
     def __init__(self):
 
-        self.version = '3.3'
+        self.recordName = None
+        self.serial = None
+        self.name = None
+        self.altLoc = None
+        self.resName = None
+        self.chainId = None
+        self.resSeq = None
+        self.resSeq = None
+        self.iCode = None
+        self.x = None
+        self.y = None
+        self.z = None
+        self.occupancy = None
+        self.tempFactor = None
+        self.element = None
+        self.charge = None
+        self.anisou11 = None
+        self.anisou22 = None
+        self.anisou33 = None
+        self.anisou12 = None
+        self.anisou13 = None
+        self.anisou23 = None
+
+
+class ConectRecord():
+
+    def __init__(self):
+
+        self.atomSerNum = None
+        self.bondedAtomsSerNum = None
+
+
+class MasterRecord():
+
+    def __init__(self):
+
+        self.numRemark = None
+        self.numHet = None
+        self.numHelix = None
+        self.numSheet = None
+        self.numTurn = None
+        self.numSite = None
+        self.numXform = None
+        self.numCoord = None
+        self.numTer = None
+        self.numConect = None
+        self.numSeq = None
+
+
+class PDBAtomicCoordinateEntry():
+
+    def __init__(self):
+
+        self.version = None
 
         self.title = TitleSection()
         self.primary_structure = PrimaryStructureSection()
@@ -608,6 +682,19 @@ class PDBFile33():
         self.coordinate = CoordinateSection()
         self.connectivity = ConnectivitySection()
         self.bookkeeping = BookkeepingSection()
+
+    def has_atoms_with_alternate_locations(self):
+
+        output = {}
+
+        for model in self.coordinate.model:
+            output[model.serial]=[]
+            for record in model.record:
+                if record.altLoc != ' ':
+                    output[model.serial].append(deepcopy(record))
+
+        return output
+
 
     def _heal(self):
 

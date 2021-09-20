@@ -12,6 +12,9 @@ del get_versions, versions
 
 # Add imports here
 
+from .get_cards import get_cards
+from . import entity_cards as cards
+from . import extra_cards
 from . import tools
 
 #from .protein import Protein

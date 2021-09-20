@@ -23,16 +23,17 @@ dict_helix_class = {
 
 def format33(filename):
 
-    from sabueso.native.pdbfile33 import PDBFile33
-    from sabueso.native.pdbfile33 import HeaderRecord, ObslteRecord, TitleRecord, SplitRecord,\
+    from sabueso.native import PDBAtomicCoordinateEntry
+    from sabueso.native.pdb_atomic_coordinate_entry import HeaderRecord, ObslteRecord, TitleRecord, SplitRecord,\
     CaveatRecord, CompndRecord, SourceRecord, KeywdsRecord, ExpdtaRecord, NummdlRecord,\
     MdltypRecord, AuthorRecord, RevdatRecord, SprsdeRecord, JrnlRecord, RemarkRecord, DbrefRecord,\
     Dbref1Dbref2Record, SeqadvRecord, SeqresRecord, ModresRecord, HetRecord, HetnamRecord,\
     HetsynRecord, FormulRecord, HelixRecord, SheetRecord, SsbondRecord, LinkRecord, CispepRecord,\
-    SiteRecord, Cryst1Record, OrigxRecord, ScaleRecord, MtrixRecord
+    SiteRecord, Cryst1Record, OrigxRecord, ScaleRecord, MtrixRecord, Model, AtomRecord,\
+    HetatmRecord, MasterRecord
     from sabueso.tools.file.pdb import download
 
-    pdb = PDBFile33()
+    pdb = PDBAtomicCoordinateEntry()
 
     #if not is_filename(item):
     #    raise ValueError
@@ -989,8 +990,151 @@ def format33(filename):
             line = lines[counter]
             record = line[0:6]
 
+        ### ATOM/HETATM
+        elif record in ['ATOM  ', 'HETATM']:
+
+            model = Model()
+            model.record = []
+            try:
+                pdb.coordinate.model.append(model)
+            except:
+                pdb.coordinate.model=[]
+                pdb.coordinate.model.append(model)
+
+            prev_record = lines[counter-1][0:6]
+
+            if prev_record == 'MODEL ':
+                model.serial = int(lines[counter-1][10:14])
+            else:
+                model.serial = len(pdb.coordinate.model)
+
+            while record in ['ATOM  ', 'HETATM', 'ANISOU', 'TER   ']:
+
+                if record == 'ATOM  ':
+
+                    record_element = AtomRecord()
+                    model.record.append(record_element)
+
+                    record_element.recordName = 'ATOM'
+                    record_element.serial = int(line[6:11])
+                    record_element.name = line[12:16].strip()
+                    record_element.altLoc = line[16]
+                    record_element.resName = line[17:20].strip()
+                    record_element.chainId = line[21]
+                    record_element.resSeq = line[22:26].strip()
+                    record_element.iCode = line[26]
+                    record_element.x = float(line[30:38])
+                    record_element.y = float(line[38:46])
+                    record_element.z = float(line[46:54])
+                    record_element.occupancy = float(line[54:60])
+                    record_element.tempFactor = float(line[60:66])
+                    record_element.element = line[76:78].strip()
+                    record_element.charge = line[78:80]
+
+                elif record == 'HETATM':
+
+                    record_element = AtomRecord()
+                    model.record.append(record_element)
+
+                    record_element.recordName = 'HETATOM'
+                    record_element.serial = int(line[6:11])
+                    record_element.name = line[12:16].strip()
+                    record_element.altLoc = line[16]
+                    record_element.resName = line[17:20].strip()
+                    record_element.chainId = line[21]
+                    record_element.resSeq = line[22:26].strip()
+                    record_element.iCode = line[26]
+                    record_element.x = float(line[30:38])
+                    record_element.y = float(line[38:46])
+                    record_element.z = float(line[46:54])
+                    record_element.occupancy = float(line[54:60])
+                    record_element.tempFactor = float(line[60:66])
+                    record_element.element = line[76:78].strip()
+                    record_element.charge = line[78:80]
+
+                elif record == 'ANISOU':
+
+                    record_element = AtomRecord()
+                    model.record.append(record_element)
+
+                    if record_element.serial!=int(line[6:11]):
+                        raise ValueError("ANISOU record not referring previous atom record.")
+
+                    record_element.anisou11 = int(line[28:35])
+                    record_element.anisou22 = int(line[35:42])
+                    record_element.anisou33 = int(line[42:49])
+                    record_element.anisou12 = int(line[49:56])
+                    record_element.anisou13 = int(line[56:63])
+                    record_element.anisou23 = int(line[63:70])
+
+                counter += 1
+                line = lines[counter]
+                record = line[0:6]
 
 
+        ##### Connectivity section
+
+        ### Conect
+        elif record=='CONECT':
+
+            pdb.connectivity.conect=[]
+
+            previous_serial_atom_number = -1
+
+            while record=='CONECT':
+
+                if previous_serial_atom_number != int(line[6:11]):
+
+                    conect = ConectRecord()
+                    pdb.connectivity.conect.append(conect)
+                    conect.bondedAtomsSerialNumbers=[]
+
+                    conect.atomSerNum = int(line[6:11])
+                    conect.bondedAtomsSerNum = []
+
+                    position=11
+                    while not line[position:position+5].isspace():
+                        conect.bondedAtomsSerNum(int(line[position:position+5]))
+                        position+=5
+                        if position>=31:
+                            break
+
+                    previous_serial_atom_number = connect.atomSerNum
+
+                else:
+
+                    position=11
+                    while not line[position:position+5].isspace():
+                        conect.bondedAtomsSerNum(int(line[position:position+5]))
+                        position+=5
+                        if position>=31:
+                            break
+
+                counter += 1
+                line = lines[counter]
+                record = line[0:6]
+
+        ### Bookkeeping
+        elif record=='MASTER':
+
+            master = MasterRecord()
+            pdb.bookkeeping.master=master
+
+            master.numRemark = int(line[10:15])
+            master.numHet = int(line[20:25])
+            master.numHelix = int(line[25:30])
+            master.numSheet = int(line[30:35])
+            master.numTurn = int(line[35:40])
+            master.numSite = int(line[40:45])
+            master.numXform = int(line[45:50])
+            master.numCoord = int(line[50:55])
+            master.numTer = int(line[55:60])
+            master.numConect = int(line[60:65])
+            master.numSeq = int(line[65:70])
+
+            counter += 1
+            line = lines[counter]
+            record = line[0:6]
 
 
         else:

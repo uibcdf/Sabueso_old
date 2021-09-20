@@ -1,1 +1,2 @@
-from .pdbfile33 import PDBFile33
+from .pdb_atomic_coordinate_entry import PDBAtomicCoordinateEntry
+
