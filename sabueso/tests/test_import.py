@@ -7,7 +7,7 @@ import sabueso
 import pytest
 import sys
 
-def test_imported():
+def test_sabueso_imported():
     """Sample test, will always pass so long as import statement worked"""
     assert "sabueso" in sys.modules
 

@@ -1,4 +1,4 @@
-def to_PDBAtomicCoordinateEntry(filename):
+def to_sabueso_PDBAtomicCoordinateEntry(filename):
 
     from .guess_format_version import guess_format_version
     from . import parsers

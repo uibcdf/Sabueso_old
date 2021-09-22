@@ -1,0 +1,3 @@
+from .string_is_uniprot import string_is_uniprot
+from .to_sabueso_UniProtKBEntry import to_sabueso_UniProtKBEntry
+
