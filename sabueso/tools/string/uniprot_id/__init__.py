@@ -1,0 +1,4 @@
+from .string_is_uniprot_id import string_is_uniprot_id
+from .to_uniprotkb_dict import to_uniprotkb_dict
+from .to_sabueso_UniProtKBEntry import to_sabueso_UniProtKBEntry
+
