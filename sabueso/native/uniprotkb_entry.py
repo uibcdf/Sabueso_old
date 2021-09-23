@@ -28,3 +28,4 @@ class UniProtKBEntry():
         self.name = None
 
         self.protein = Protein()
+
