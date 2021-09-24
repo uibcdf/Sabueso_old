@@ -1,5 +1,5 @@
 from .get_form import get_form
-from .get_cards_from import dict_get_cards_from
+from .forms import dict_get_cards_from
 
 def get_cards(molecular_system, molecule_index='all'):
 

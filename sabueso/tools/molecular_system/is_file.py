@@ -1,7 +1,7 @@
 
 def is_file(molecular_system):
 
-    from sabueso.get_cards_from import file_extensions_recognized
+    from sabueso.forms import file_extensions_recognized
 
     output = False
 

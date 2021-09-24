@@ -20,7 +20,7 @@ except:
 
 
 setup(
-    name='wabueso',
+    name='sabueso',
     author='UIBCDF Lab',
     author_email='uibcdf@gmail.com',
     version=versioneer.get_version(),

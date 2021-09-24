@@ -1,6 +1,6 @@
 def is_string(molecular_system):
 
-    from sabueso.get_cards_from import string_names_recognized
+    from sabueso.forms import string_names_recognized
     from sabueso.tools.string import guess_form
 
     output = False

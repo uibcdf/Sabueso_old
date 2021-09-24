@@ -3,8 +3,7 @@ import urllib
 import requests
 from sabueso.tools.database.UniProtKB import is_accessible as UniProtKB_is_accessible
 
-
-def to_uniprotkb_dict(string):
+def to_uniprotkb_XMLDict(string):
 
     url = 'http://www.uniprot.org/uniprot/'+string+'.xml'
     headers = {'user-agent': 'Python lib at https://github.com/uibcdf/sabueso || prada.gracia@gmail.com'}
@@ -18,4 +17,5 @@ def to_uniprotkb_dict(string):
     dict_result = xmltodict.parse(r.text)
 
     return dict_result
+
 

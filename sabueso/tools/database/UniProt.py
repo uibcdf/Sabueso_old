@@ -221,26 +221,6 @@ def _parse_basic_entry(entry=None, card=None):
     else:
         tmp_card = card
 
-    # Name
-    tmp_card['Name'].append(dict_result['name'])
-
-    # Full Name
-    if 'recommendedName' in dict_result['protein'].keys():
-        if 'fullName' in dict_result['protein']['recommendedName'].keys():
-            if type(dict_result['protein']['recommendedName']['fullName'])!=str:
-                tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName']['#text'])
-            else:
-                tmp_card['Full Name'].append(dict_result['protein']['recommendedName']['fullName'])
-    # Short Name
-        if 'shortName' in dict_result['protein']['recommendedName'].keys():
-            if type(dict_result['protein']['recommendedName']['shortName'])==list:
-                for shortName in dict_result['protein']['recommendedName']['shortName']:
-                    if type(shortName)==str:
-                        tmp_card['Short Name'].append(shortName)
-                    else:
-                        tmp_card['Short Name'].append(shortName['#text'])
-            else:
-                tmp_card['Short Name'].append(dict_result['protein']['recommendedName']['shortName'])
 
     # Alternative Name
     if 'alternativeName' in dict_result['protein'].keys():

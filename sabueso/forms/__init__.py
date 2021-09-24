@@ -20,7 +20,7 @@ for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', '
 
     for api_name in list_apis:
 
-        mod = import_module('sabueso.get_cards_from.'+dirname+'.'+api_name)
+        mod = import_module('sabueso.forms.'+dirname+'.'+api_name)
 
         form_name = mod.form_name
         forms.append(form_name)
