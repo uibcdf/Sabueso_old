@@ -1,4 +1,5 @@
-from evidency import Evidence
+from evidence import Evidence
+from collections import OrderedDict
 
 form_name='uniprotkb.XMLDict'
 
@@ -9,57 +10,15 @@ def this_dict_is_a_uniprotkb_XMLDict(item):
 
     return list(item.keys())==['uniprot']
 
-def _get(record, entry):
-
-    output = Evidence()
-
-    aux = DatabaseReference()
-    aux.name = 'UniProtKB'
-    aux.id = entry['accession'][0]
-
-    output.references.append(aux)
-
-    if type(record)==str:
-        output.value = record
-    elif type(record)==list:
-        output.value = record
-    elif type(record)==OrderedDict:
-        if '#text' in record:
-            output.value = record['#text']
-            with_db_evidence = True
-        else:
-            print(type(record))
-            print(record)
-            raise ValueError('Evidence without known value')
-
-        if '@evidence' in record:
-            evidence_number_in_db = int(record['@evidence'])
-            evidence_from_db = entry['evidence'][evidence_number_in_db-1]
-            if int(evidence_from_db['@key'])!=evidence_number_in_db:
-                raise ValueError('Evidence number does not match evidence @key')
-            if 'source' in evidence_from_db:
-                if 'dbReference' in evidence_from_db['source']:
-                    aux = DatabaseReference()
-                    aux.name = evidence_from_db['source']['dbReference']['@type']
-                    aux.id = evidence_from_db['source']['dbReference']['@id']
-                    output.references.append(aux)
-        else:
-            print(type(record))
-            print(record)
-            raise ValueError('Evidence without known references')
-    else:
-        print(type(record))
-        print(record)
-        raise ValueError('Unknown record')
-
-    return output
+###### Get
 
 def _add_reference_to_evidence(evidence, evidence_in_db):
 
-    if 'source' in evidence_from_db:
-        if 'dbReference' in evidence_from_db['source']:
-            dbtype = evidence_from_db['source']['dbReference']['@type']
-            dbid = evidence_from_db['source']['dbReference']['@id']
+    if 'source' in evidence_in_db:
+        if 'dbReference' in evidence_in_db['source']:
+
+            dbtype = evidence_in_db['source']['dbReference']['@type']
+            dbid = evidence_in_db['source']['dbReference']['@id']
 
             if dbtype=='UniProtKB':
                 evidence.add_UniProtKB(id=dbid)
@@ -70,17 +29,17 @@ def _add_reference_to_evidence(evidence, evidence_in_db):
             else:
                 raise ValueError('Uknown source')
 
-def get_n_entities(item):
+def get_entity_index(item, indices='all'):
 
-    return 1
+    return [0]
 
-def get_entity_names(item):
+def get_entity_name(item, indices='all'):
 
     output = []
 
     entity_name = Evidence()
 
-    fullName = item['uniprot']['entry']['recommendedName']['fullName']
+    fullName = item['uniprot']['entry']['protein']['recommendedName']['fullName']
 
     if type(fullName)==str:
         entity_name.value=fullName
@@ -89,22 +48,30 @@ def get_entity_names(item):
             entity_name.value = fullName['#text']
         if '@evidence' in fullName:
             evidence_number_in_db = fullName['@evidence']
-            evidence_from_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
-            if int(evidence_from_db['@key'])!=evidence_number_in_db:
+            evidence_in_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
+            if evidence_in_db['@key']!=evidence_number_in_db:
                 raise ValueError('Evidence number does not match evidence @key')
-            _add_reference_to_evidence(entity_name, evidence_from_db)
+            _add_reference_to_evidence(entity_name, evidence_in_db)
+
+    accession = item['uniprot']['entry']['accession'][0]
+    entity_name.add_UniProtKB(id=accession)
 
     output.append(entity_name)
 
     return output
 
-def get_card(entity_name):
+def get_entity_id(item, indices='all'):
 
-    pass
+    accession = item['uniprot']['entry']['accession'][0]
 
-def get_cards(entity_names='all'):
+    return [accession]
 
-    output = []
+def get_entity_type(item, indices='all'):
 
-    pass
+    return ['protein']
+
+def get_n_entities(item, indices='all'):
+
+    return 1
+
 

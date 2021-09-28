@@ -5,6 +5,9 @@ from sabueso.tools.database.UniProtKB import is_accessible as UniProtKB_is_acces
 
 def to_uniprotkb_XMLDict(string):
 
+    if string.startswith('uniprot_id:'):
+        string=string[11:]
+
     url = 'http://www.uniprot.org/uniprot/'+string+'.xml'
     headers = {'user-agent': 'Python lib at https://github.com/uibcdf/sabueso || prada.gracia@gmail.com'}
     r = requests.get(url, headers=headers, timeout=5)

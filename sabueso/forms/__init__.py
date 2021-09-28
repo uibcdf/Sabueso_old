@@ -6,7 +6,7 @@ forms = []
 
 dict_type = {}
 dict_is_form = {}
-dict_get_cards_from = {}
+dict_get = {}
 
 file_extensions_recognized = []
 string_names_recognized = []
@@ -27,7 +27,14 @@ for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', '
 
         dict_type[form_name]=typename
         dict_is_form.update(mod.is_form)
-        dict_get_cards_from[form_name]=mod.get_cards
+        dict_get[form_name]= {'system':{}, 'entity':{}, }
+
+        for method in mod.__dict__.keys():
+            if method.startswith('get_'):
+                option = method[4:]
+                dict_get[form_name][option]=getattr(mod, method)
+
+
 
         del(mod, form_name)
 

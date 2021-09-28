@@ -8,7 +8,9 @@ def string_is_uniprot_id(string):
 
     output = False
 
-    if pattern.match(string):
+    if string.startswith('uniprot_id:'):
+        output = True
+    elif pattern.match(string):
         try:
             import requests
             request = requests.get('https://uniprot.org/uniprot/{}'.format(string), stream=True)
