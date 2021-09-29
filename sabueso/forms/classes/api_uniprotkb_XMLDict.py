@@ -74,4 +74,39 @@ def get_n_entities(item, indices='all'):
 
     return 1
 
+def is_ion(item, indices='all'):
+
+    return [False]
+
+def is_water(item, indices='all'):
+
+    return [False]
+
+def is_cosolute(item, indices='all'):
+
+    return [False]
+
+def is_small_molecule(item, indices='all'):
+
+    return [False]
+
+def is_lipid(item, indices='all'):
+
+    return [False]
+
+def is_peptide(item, indices='all'):
+
+    return [False]
+
+def is_protein(item, indices='all'):
+
+    return [True]
+
+def is_rna(item, indices='all'):
+
+    return [False]
+
+def is_dna(item, indices='all'):
+
+    return [False]
 

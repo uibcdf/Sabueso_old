@@ -1,2 +1,2 @@
-from .is_protein import is_protein
+from .is_protein_name import is_protein_name
 

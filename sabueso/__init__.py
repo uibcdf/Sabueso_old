@@ -14,6 +14,7 @@ del get_versions, versions
 
 from .get_form import get_form
 from .get import get
+from . import entity
 from . import entity_cards
 from . import extra_cards
 from . import tools

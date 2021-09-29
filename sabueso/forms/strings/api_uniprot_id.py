@@ -8,7 +8,6 @@ is_form = {
     }
 
 
-
 ###### Get
 
 def aux_get(item, indices='all', frame_indices='all'):
@@ -23,7 +22,6 @@ def aux_get(item, indices='all', frame_indices='all'):
     output = _get(tmp_item, indices=indices)
 
     return output
-
 
 def get_entity_index(item, indices='all'):
 
@@ -44,4 +42,40 @@ def get_entity_type(item, indices='all'):
 def get_n_entities(item, indices='all'):
 
     return 1
+
+def is_ion(item, indices='all'):
+
+    return [False]
+
+def is_water(item, indices='all'):
+
+    return [False]
+
+def is_cosolute(item, indices='all'):
+
+    return [False]
+
+def is_small_molecule(item, indices='all'):
+
+    return [False]
+
+def is_lipid(item, indices='all'):
+
+    return [False]
+
+def is_peptide(item, indices='all'):
+
+    return [False]
+
+def is_protein(item, indices='all'):
+
+    return [True]
+
+def is_rna(item, indices='all'):
+
+    return [False]
+
+def is_dna(item, indices='all'):
+
+    return [False]
 

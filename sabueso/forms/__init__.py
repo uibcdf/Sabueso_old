@@ -6,6 +6,15 @@ forms = []
 
 dict_type = {}
 dict_is_form = {}
+dict_is_ion = {}
+dict_is_water = {}
+dict_is_cosolute = {}
+dict_is_small_molecule = {}
+dict_is_lipid = {}
+dict_is_peptide = {}
+dict_is_protein = {}
+dict_is_rna = {}
+dict_is_dna = {}
 dict_get = {}
 
 file_extensions_recognized = []
@@ -25,9 +34,17 @@ for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', '
         form_name = mod.form_name
         forms.append(form_name)
 
-        dict_type[form_name]=typename
+        dict_type[form_name] = typename
         dict_is_form.update(mod.is_form)
-        dict_get[form_name]= {'system':{}, 'entity':{}, }
+        dict_is_ion[form_name] = mod.is_ion
+        dict_is_water[form_name] = mod.is_water
+        dict_is_cosolute[form_name] = mod.is_cosolute
+        dict_is_small_molecule[form_name] = mod.is_small_molecule
+        dict_is_peptide[form_name] = mod.is_peptide
+        dict_is_protein[form_name] = mod.is_protein
+        dict_is_rna[form_name] = mod.is_rna
+        dict_is_dna[form_name] = mod.is_dna
+        dict_get[form_name] = {}
 
         for method in mod.__dict__.keys():
             if method.startswith('get_'):

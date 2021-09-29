@@ -4,17 +4,61 @@ is_form = {
     'string:pdb_id': form_name,
     }
 
-#def get_cards(molecular_system):
-#
-#    from sabueso.get_cards_from.files.api_pdb import get_cards as get_cards_from_file_pdb
-#    from sabueso.tools.file.pdb import download
-#    from os import remove
-#
-#    tmp_molecular_system = download(pdbid=molecular_system)
-#
-#    output = get_cards_from_file_pdb(tmp_molecular_system)
-#
-#    remove(tmp_molecular_system)
-#
-#    return output
+###### Get
+
+def get_entity_index(item, indices='all'):
+
+    raise NotImplementedError
+
+def get_entity_name(item, indices='all'):
+
+    raise NotImplementedError
+
+def get_entity_id(item, indices='all'):
+
+    raise NotImplementedError
+
+def get_entity_type(item, indices='all'):
+
+    raise NotImplementedError
+
+def get_n_entities(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_ion(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_water(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_cosolute(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_small_molecule(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_lipid(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_peptide(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_protein(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_rna(item, indices='all'):
+
+    raise NotImplementedError
+
+def is_dna(item, indices='all'):
+
+    raise NotImplementedError
 
