@@ -20,4 +20,3 @@ def to_uniprotkb_XMLDict(string):
 
     return dict_result
 
-
