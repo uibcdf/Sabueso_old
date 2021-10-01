@@ -1,3 +1,0 @@
-from .string_is_uniprot_id import string_is_uniprot_id
-from .to_uniprotkb_XMLDict import to_uniprotkb_XMLDict
-

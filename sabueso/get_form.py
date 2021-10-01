@@ -1,6 +1,6 @@
 from sabueso.forms import dict_is_form
 from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
-from sabueso.tools.molecular_system import is_file, is_string
+from sabueso._private_tools.molecular_system import is_file, is_string
 from collections import OrderedDict
 
 def get_form(molecular_system):

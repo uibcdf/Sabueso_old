@@ -14,12 +14,7 @@ del get_versions, versions
 
 from .get_form import get_form
 from .get import get
-from . import entity
-from . import entity_cards
-from . import extra_cards
+from .cards import get_cards
+from .entity import *
 from . import tools
-
-#from .protein import Protein
-#from .query import target as query_target
-
 
