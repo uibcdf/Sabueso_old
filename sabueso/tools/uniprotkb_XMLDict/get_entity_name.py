@@ -1,6 +1,9 @@
-def get_entity_name(item, entity='all')
+from collections import OrderedDict
+from evidence import Evidence
 
-    from .get_evidence
+def get_entity_name(item, entity='all'):
+
+    from ._add_reference_to_evidence import _add_reference_to_evidence
 
     entity_name = Evidence()
 

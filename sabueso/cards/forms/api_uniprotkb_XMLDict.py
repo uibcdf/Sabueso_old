@@ -5,7 +5,7 @@ def get_cards(molecular_system, indices='all'):
 
     from sabueso.cards.entity_cards import ProteinCard
     from sabueso.cards.stack_of_cards import StackOfCards
-    from sabueso.forms.api_uniprotkb_XMLDict import _add_reference_to_evidence, get_entity_name
+    from sabueso.tools.uniprotkb_XMLDict import get_entity_name
 
     stack = StackOfCards()
 

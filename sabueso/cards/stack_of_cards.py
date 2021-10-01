@@ -1,6 +1,5 @@
 class StackOfCards():
 
-
     def __init__(self):
 
         self.cards = {} # name: card
@@ -15,6 +14,17 @@ class StackOfCards():
         self.n_dnas = 0
         self.n_rnas = 0
         self.n_cards = 0
+
+    def __repr__(self):
+
+        text= f'<StackOfCards with {self.n_cards} cards'
+
+        if self.n_cards:
+            text +='>'
+        else:
+            text +='>'
+
+        return text
 
     def add(self, cards):
 
