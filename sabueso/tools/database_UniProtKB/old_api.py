@@ -221,43 +221,9 @@ def _parse_basic_entry(entry=None, card=None):
     else:
         tmp_card = card
 
-
-    # Alternative Name
-    if 'alternativeName' in dict_result['protein'].keys():
-        if type(dict_result['protein']['alternativeName'])==list:
-            for alternativeName in dict_result['protein']['alternativeName']:
-                if type(alternativeName['fullName'])==str:
-                    tmp_card['Alternative Name'].append(alternativeName['fullName'])
-                else:
-                    tmp_card['Alternative Name'].append(alternativeName['fullName']['#text'])
-        else:
-            tmp_card['Alternative Name'].append(dict_result['protein']['alternativeName']['fullName'])
-
-    # Type
-    tmp_card['Type'].append('Protein')
-
-    # Organism
-    if 'organism' in dict_result.keys():
-        if type(dict_result['organism']['name'])==list:
-            for name in dict_result['organism']['name']:
-                if name['@type']=='scientific':
-                    tmp_card['Organism Scientific'].append(name['#text'])
-                if name['@type']=='common':
-                    tmp_card['Organism'].append(name['#text'])
-        else:
-            tmp_card['Organism'].append(dict_result['organism']['name']['#text'])
-
     # Host
     if 'organismHost' in dict_result.keys():
         tmp_card['Host'].append(dict_result['organismHost']['name'][0]['#text'])
-
-    # Uniprot
-
-    if type(dict_result['accession'])== list:
-        for ii in dict_result['accession']:
-            tmp_card['UniProt'].append(ii)
-    else:
-        tmp_card['UniProt'].append(dict_result['accession'])
 
     # Sequence
     tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
