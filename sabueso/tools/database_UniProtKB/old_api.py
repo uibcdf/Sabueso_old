@@ -19,26 +19,6 @@ def target_query(string=None, organism=None, max_results=20):
 
     return list_results
 
-def _get_organism_scientific(uniprot_id=None):
-
-    url = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.xml'
-    request = _urllib.request.Request(url)
-    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
-    response = _urllib.request.urlopen(request)
-    xml_result = response.read().decode('utf-8')
-    dict_result = _xmltodict.parse(xml_result)
-    dict_result = dict_result['uniprot']['entry']
-    tmp_name = None
-
-    if 'organism' in dict_result.keys():
-        if type(dict_result['organism']['name'])==list:
-            for name in dict_result['organism']['name']:
-                if name['@type']=='scientific':
-                    tmp_name=name['#text']
-
-    del(url,request,response,xml_result,dict_result)
-    return tmp_name
-
 def _get_FASTA(uniprot_id=None):
 
     url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.fasta'
@@ -228,99 +208,6 @@ def _parse_basic_entry(entry=None, card=None):
     # Sequence
     tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
 
-
-    for dbreference in dict_result['dbReference']:
-
-    # ChEMBL
-        if dbreference['@type']=='ChEMBL':
-            tmp_card['ChEMBL'].append(dbreference['@id'])
-
-    # BioGRID
-        elif dbreference['@type']=='BioGRID':
-            tmp_card['BioGRID'].append(dbreference['@id'])
-
-    # Protein Model Portal
-        elif dbreference['@type']=='ProteinModelPortal':
-            tmp_card['ProteinModelPortal'].append(dbreference['@id'])
-
-    # Swiss Model
-        elif dbreference['@type']=='SMR':
-            tmp_card['Swiss-Model'].append(dbreference['@id'])
-
-    # DIP
-        elif dbreference['@type']=='DIP':
-            tmp_card['DIP'].append(dbreference['@id'])
-
-    # ELM
-        elif dbreference['@type']=='ELM':
-            tmp_card['ELM'].append(dbreference['@id'])
-
-    # IntAct
-        elif dbreference['@type']=='IntAct':
-            tmp_card['IntAct'].append(dbreference['@id'])
-
-    # MINT
-        elif dbreference['@type']=='MINT':
-            tmp_card['MINT'].append(dbreference['@id'])
-
-    # BindingDB
-        elif dbreference['@type']=='BindingDB':
-            tmp_card['BindingDB'].append(dbreference['@id'])
-
-    # InterPro
-        elif dbreference['@type']=='InterPro':
-            tmp_card['InterPro'].append(dbreference['@id'])
-
-    # Pfam
-        elif dbreference['@type']=='Pfam':
-            tmp_card['Pfam'].append(dbreference['@id'])
-
-    # ProDom
-        elif dbreference['@type']=='ProDom':
-            tmp_card['ProDom'].append(dbreference['@id'])
-
-    # SUPFAM
-        elif dbreference['@type']=='SUPFAM':
-            tmp_card['SUPFAM'].append(dbreference['@id'])
-
-    # STRING
-        elif dbreference['@type']=='STRING':
-            tmp_card['STRING'].append(dbreference['@id'])
-
-    # iPTMnet
-        elif dbreference['@type']=='iPTMnet':
-            tmp_card['iPTMnet'].append(dbreference['@id'])
-
-    # PhosphoSitePlus
-        elif dbreference['@type']=='PhosphoSitePlus':
-            tmp_card['PhosphoSitePlus'].append(dbreference['@id'])
-
-    # PDBs
-        elif dbreference['@type']=='PDB':
-            tmp_pdb_id=dbreference['@id']
-            for pdb_field in dbreference['property']:
-                if pdb_field['@type']=='chains':
-                    tmp_in_pdb_card=_deepcopy(_in_pdb_card)
-                    tmp_segments=pdb_field['@value'].split(',')
-                    tmp_in_pdb_card['Id']=tmp_pdb_id
-                    for tmp_segment in tmp_segments:
-                        tmp_terms_segment=tmp_segment.split('=')
-                        tmp_chains_segment=tmp_terms_segment[0]
-                        tmp_nums_segment=tmp_terms_segment[1].split('-')
-                        tmp_begin=int(tmp_nums_segment[0])
-                        tmp_end=int(tmp_nums_segment[1])
-                        for tmp_chain_segment in tmp_chains_segment.split('/'):
-                            tmp_segment_card=_deepcopy(_segment_card)
-                            tmp_segment_card['Chain']=tmp_chain_segment
-                            tmp_segment_card['Begin']=tmp_begin
-                            tmp_segment_card['End']=tmp_end
-                            tmp_segment_card['Length']=tmp_end-tmp_begin+1
-                            tmp_in_pdb_card['Segment'].append(tmp_segment_card)
-                        del(tmp_terms_segment,tmp_chains_segment,tmp_nums_segment)
-                        del(tmp_begin,tmp_end)
-                    tmp_card['in PDB'][tmp_pdb_id]=tmp_in_pdb_card
-                    del(tmp_in_pdb_card)
-            del(tmp_pdb_id)
 
     return tmp_card
 

@@ -20,8 +20,12 @@ def get_ec(item, entity='all'):
                     raise ValueError('Evidence number does not match evidence @key')
                 _add_reference_to_evidence(evidence, evidence_in_db)
 
-    accession = item['uniprot']['entry']['accession'][0]
-    evidence.add_UniProtKB(id=accession)
+        accession = item['uniprot']['entry']['accession'][0]
+        evidence.add_UniProtKB(id=accession)
 
-    return evidence
+        return evidence
+
+    else:
+
+        return None
 

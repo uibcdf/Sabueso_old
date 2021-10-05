@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from evidence import Evidence
 
 def get_uniprot(item, entity='all'):
