@@ -1,7 +1,8 @@
-from collections import OrderedDict
 from evidence import Evidence
 
 def get_dbreference(item, entity='all', dbname=None):
+
+    from ._add_reference_to_evidence import _add_reference_to_evidence
 
     uniprot = item['uniprot']['entry']['accession'][0]
     dbReference = item['uniprot']['entry']['dbReference']
@@ -10,11 +11,12 @@ def get_dbreference(item, entity='all', dbname=None):
     for db in dbReference:
         if db['@type']==dbname:
             accession = db['@id']
-            n_entries+=1
             evidence = Evidence()
             evidence.value = accession
             if dbname=='ChEMBL':
                 evidence.add_ChEMBL(id=accession)
+            elif dbname=='EC':
+                evidence.add_EC(id=accession)
             elif dbname=='DIP':
                 evidence.add_DIP(id=accession)
             elif dbname=='ELM':
@@ -41,6 +43,14 @@ def get_dbreference(item, entity='all', dbname=None):
                 evidence.add_Swiss_Model(id=accession)
             else:
                 raise ValueError('Database name not recognized')
+            if '@evidence' in db:
+                evidence_numbers_in_db = db['@evidence'].split()
+                for evidence_number_in_db in evidence_numbers_in_db:
+                    evidence_in_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
+                    if evidence_in_db['@key']!=evidence_number_in_db:
+                        raise ValueError('Evidence number does not match evidence @key')
+                    _add_reference_to_evidence(evidence, evidence_in_db)
+
             evidence.add_UniProtKB(id=uniprot)
             output.append(evidence)
 

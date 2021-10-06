@@ -4,6 +4,10 @@ from evidence import Evidence
 def get_ec(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence
+    from .get_dbreference import get_dbreference
+
+    in_name = False
+    in_db = False
 
     if 'ecNumber' in item['uniprot']['entry']['protein']['recommendedName']:
 
@@ -23,9 +27,23 @@ def get_ec(item, entity='all'):
         accession = item['uniprot']['entry']['accession'][0]
         evidence.add_UniProtKB(id=accession)
 
-        return evidence
+        evicence_in_name=evidence
+        in_name=True
+
+    evidence = get_dbreference(item, dbname='EC')
+    if evidence is not None:
+        evicence_in_db=evidence
+        in_db=True
+
+    if (in_db==False) and (in_name==False):
+
+        return None
+
+    elif (in_db==True) and (in_name==True):
+
+        return evi.join([evidence_in_name, evidence_in_db])
 
     else:
 
-        return None
+        raise ValueError("EC is not in both name and dbreference)
 
