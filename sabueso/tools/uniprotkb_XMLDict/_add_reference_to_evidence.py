@@ -7,11 +7,11 @@ def _add_reference_to_evidence(evidence, evidence_in_db):
             dbid = evidence_in_db['source']['dbReference']['@id']
 
             if dbtype=='UniProtKB':
-                evidence.add_UniProtKB(id=dbid)
+                evidence.add_reference({'database':'UniProtKB', 'id':dbid})
             elif dbtype=='PubMed':
-                evidence.add_PubMed(id=dbid)
+                evidence.add_reference({'database':'PubMed', 'id':dbid})
             elif dbtype=='DOI':
-                evidence.add_PubMed(id=dbid)
+                evidence.add_reference({'database':'DOI', 'id':dbid})
             else:
                 raise ValueError('Uknown source')
 

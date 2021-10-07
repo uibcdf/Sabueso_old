@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from evidence import Evidence
 
 def get_organism_common_name(item, entity='all'):
@@ -26,11 +25,11 @@ def get_organism_common_name(item, entity='all'):
         dbref_id = organism['dbReference']['@id']
 
         if dbref_type=='NCBI Taxonomy':
-            evidence.add_NCBI_Taxonomy(id=dbref_id)
+            evidence.add_reference({'database':'NCBI_Taxonomy', 'id':dbref_id})
         else:
             raise ValueError('Unknown reference in database')
 
-        evidence.add_UniProtKB(id=accession)
+            evidence.add_reference({'database':'UniProtKB', 'id':accession})
 
         output = evidence
 

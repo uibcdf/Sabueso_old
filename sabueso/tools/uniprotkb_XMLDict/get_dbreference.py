@@ -14,33 +14,33 @@ def get_dbreference(item, entity='all', dbname=None):
             evidence = Evidence()
             evidence.value = accession
             if dbname=='ChEMBL':
-                evidence.add_ChEMBL(id=accession)
+                evidence.add_reference({'database':'ChEMBL', 'id':accession})
             elif dbname=='EC':
-                evidence.add_EC(id=accession)
+                evidence.add_reference({'database':'EC', 'id':accession})
             elif dbname=='DIP':
-                evidence.add_DIP(id=accession)
+                evidence.add_reference({'database':'DIP', 'id':accession})
             elif dbname=='ELM':
-                evidence.add_ELM(id=accession)
+                evidence.add_reference({'database':'ELM', 'id':accession})
             elif dbname=='IntAct':
-                evidence.add_IntAct(id=accession)
+                evidence.add_reference({'database':'IntAct', 'id':accession})
             elif dbname=='BindingDB':
-                evidence.add_BindingDB(id=accession)
+                evidence.add_reference({'database':'BindingDB', 'id':accession})
             elif dbname=='BioGRID':
-                evidence.add_BioGRID(id=accession)
+                evidence.add_reference({'database':'BioGRID', 'id':accession})
             elif dbname=='iPTMnet':
-                evidence.add_iPTMnet(id=accession)
+                evidence.add_reference({'database':'iPTMnet', 'id':accession})
             elif dbname=='MINT':
-                evidence.add_MINT(id=accession)
+                evidence.add_reference({'database':'MINT', 'id':accession})
             elif dbname=='PhosphoSitePlus':
-                evidence.add_PhosphoSitePlus(id=accession)
+                evidence.add_reference({'database':'PhosphoSitePlus', 'id':accession})
             elif dbname=='ProDom':
-                evidence.add_ProDom(id=accession)
+                evidence.add_reference({'database':'ProDom', 'id':accession})
             elif dbname=='ProteinModelPortal':
-                evidence.add_ProteinModelPortal(id=accession)
+                evidence.add_reference({'database':'ProteinModelPortal', 'id':accession})
             elif dbname=='STRING':
-                evidence.add_ProteinModelPortal(id=accession)
+                evidence.add_reference({'database':'STRING', 'id':accession})
             elif dbname=='SMR':
-                evidence.add_Swiss_Model(id=accession)
+                evidence.add_reference({'database':'SwissModel', 'id':accession})
             else:
                 raise ValueError('Database name not recognized')
             if '@evidence' in db:
@@ -51,7 +51,7 @@ def get_dbreference(item, entity='all', dbname=None):
                         raise ValueError('Evidence number does not match evidence @key')
                     _add_reference_to_evidence(evidence, evidence_in_db)
 
-            evidence.add_UniProtKB(id=uniprot)
+            evidence.add_reference({'database':'UniProtKB', 'id':uniprot})
             output.append(evidence)
 
     if len(output)>1:

@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from evidence import Evidence
 
 def get_pdbs(item, entity='all'):
@@ -13,8 +12,8 @@ def get_pdbs(item, entity='all'):
             accession = db['@id']
             evidence = Evidence()
             evidence.value = accession
-            evidence.add_PDB(id=accession)
-            evidence.add_UniProtKB(id=uniprot)
+            evidence.add_reference({'database':'PDB', 'id':accession})
+            evidence.add_reference({'database':'UniProtKB', 'id':uniprot})
             output.append(evidence)
 
     return output

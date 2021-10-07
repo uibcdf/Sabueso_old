@@ -2,7 +2,8 @@ import requests
 from io import BytesIO
 import pandas
 
-def query(query_string, output=['id', 'entry name', 'reviewed', 'protein names', 'organism'], sort='score'):
+def query(query_string, output=['id', 'entry name', 'reviewed', 'protein names', 'organism'],
+        max_results=None, sort='score'):
 
 
     url = "https://www.uniprot.org/uniprot/?query="
@@ -19,6 +20,9 @@ def query(query_string, output=['id', 'entry name', 'reviewed', 'protein names',
 
     columns = ",".join(output)
     url += '&columns='+columns
+
+    if max_results is not None:
+        url += '&limit='+max_results
 
     if sort=='score':
         url += '&sort=score'

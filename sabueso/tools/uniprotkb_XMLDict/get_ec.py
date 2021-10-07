@@ -1,5 +1,4 @@
-from collections import OrderedDict
-from evidence import Evidence
+import evidence as evi
 
 def get_ec(item, entity='all'):
 
@@ -12,7 +11,7 @@ def get_ec(item, entity='all'):
     if 'ecNumber' in item['uniprot']['entry']['protein']['recommendedName']:
 
         ecNumber = item['uniprot']['entry']['protein']['recommendedName']['ecNumber']
-        evidence = Evidence()
+        evidence = evi.Evidence()
 
         if '#text' in ecNumber:
             evidence.value = ecNumber['#text']
@@ -25,14 +24,14 @@ def get_ec(item, entity='all'):
                 _add_reference_to_evidence(evidence, evidence_in_db)
 
         accession = item['uniprot']['entry']['accession'][0]
-        evidence.add_UniProtKB(id=accession)
+        evidence.add_reference({'database':'UniProtKB', 'id':accession})
 
-        evicence_in_name=evidence
+        evidence_in_name=evidence
         in_name=True
 
     evidence = get_dbreference(item, dbname='EC')
     if evidence is not None:
-        evicence_in_db=evidence
+        evidence_in_db=evidence
         in_db=True
 
     if (in_db==False) and (in_name==False):
@@ -45,5 +44,5 @@ def get_ec(item, entity='all'):
 
     else:
 
-        raise ValueError("EC is not in both name and dbreference)
+        raise ValueError("EC is not in name and neither in dbreference")
 

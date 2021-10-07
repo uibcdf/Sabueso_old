@@ -2,7 +2,7 @@ class StackOfCards():
 
     def __init__(self):
 
-        self.cards = {} # name: card
+        self.card = {} # name: card
 
         self.n_ions = 0
         self.n_waters = 0
@@ -34,7 +34,7 @@ class StackOfCards():
             cards=[cards]
 
         for card in cards:
-            self.cards[card.name.value]=card
+            self.card[card.name.value]=card
             if card.type == 'ion':
                 self.n_ions+=1
             elif card.type == 'water':
@@ -63,7 +63,7 @@ class StackOfCards():
 
             output = list(self.cards.values())
 
-            self.cards = {}
+            self.card = {}
             self.n_ions = 0
             self.n_waters = 0
             self.n_cosolutes = 0
@@ -77,7 +77,7 @@ class StackOfCards():
 
         else:
 
-            output = self.cards.pop(name)
+            output = self.card.pop(name)
 
             if card.type == 'ion':
                 self.n_ions-=1

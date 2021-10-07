@@ -23,7 +23,7 @@ def get_alternative_names(item, entity='all'):
                     if evidence_in_db['@key']!=evidence_number_in_db:
                         raise ValueError('Evidence number does not match evidence @key')
                     _add_reference_to_evidence(evidence, evidence_in_db)
-        evidence.add_UniProtKB(id=accession)
+        evidence.add_reference({'database':'UniProtKB', 'id':accession})
         output.append(evidence)
 
     if 'alternativeName' in item['uniprot']['entry']['protein']:
@@ -42,7 +42,7 @@ def get_alternative_names(item, entity='all'):
                                 if evidence_in_db['@key']!=evidence_number_in_db:
                                     raise ValueError('Evidence number does not match evidence @key')
                                 _add_reference_to_evidence(evidence, evidence_in_db)
-                    evidence.add_UniProtKB(id=accession)
+                    evidence.add_reference({'database':'UniProtKB', 'id':accession})
                     output.append(evidence)
                 if 'shortName' in alternativeName:
                     evidence = Evidence()
@@ -57,7 +57,7 @@ def get_alternative_names(item, entity='all'):
                                 if evidence_in_db['@key']!=evidence_number_in_db:
                                     raise ValueError('Evidence number does not match evidence @key')
                                 _add_reference_to_evidence(evidence, evidence_in_db)
-                    evidence.add_UniProtKB(id=accession)
+                    evidence.add_reference({'database':'UniProtKB', 'id':accession})
                     output.append(evidence)
         else:
             if 'fullName' in alternativeName:
@@ -73,7 +73,7 @@ def get_alternative_names(item, entity='all'):
                             if evidence_in_db['@key']!=evidence_number_in_db:
                                 raise ValueError('Evidence number does not match evidence @key')
                             _add_reference_to_evidence(evidence, evidence_in_db)
-                evidence.add_UniProtKB(id=accession)
+                evidence.add_reference({'database':'UniProtKB', 'id':accession})
                 output.append(evidence)
             if 'shortName' in alternativeName:
                 evidence = Evidence()
@@ -88,7 +88,7 @@ def get_alternative_names(item, entity='all'):
                             if evidence_in_db['@key']!=evidence_number_in_db:
                                 raise ValueError('Evidence number does not match evidence @key')
                             _add_reference_to_evidence(evidence, evidence_in_db)
-                evidence.add_UniProtKB(id=accession)
+                evidence.add_reference({'database':'UniProtKB', 'id':accession})
                 output.append(evidence)
 
     return output

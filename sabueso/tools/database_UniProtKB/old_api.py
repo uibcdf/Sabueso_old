@@ -4,45 +4,6 @@ from copy import deepcopy as _deepcopy
 from sabueso.fields.protein import in_pdb_card as _in_pdb_card
 from sabueso.fields.protein import segment_card as _segment_card
 
-def target_query(string=None, organism=None, max_results=20):
-
-    url = 'http://www.uniprot.org/uniprot/?query='+string+'&format=xml&limit='+str(max_results)+'&sort=score'
-    request = _urllib.request.Request(url)
-    request.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
-    response = _urllib.request.urlopen(request)
-    xml_result = response.read().decode('utf-8')
-    dict_result = _xmltodict.parse(xml_result)
-
-    list_results=[]
-    for entry in dict_result['uniprot']['entry']:
-        list_results.append(_parse_basic_entry(entry))
-
-    return list_results
-
-def _get_FASTA(uniprot_id=None):
-
-    url_fasta = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.fasta'
-    request_fasta = _urllib.request.Request(url_fasta)
-    request_fasta.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
-    response_fasta = _urllib.request.urlopen(request_fasta)
-    fasta_result = response_fasta.read().decode('utf-8')
-
-    del(url_fasta,request_fasta,response_fasta)
-
-    return fasta_result
-
-def _get_GFF(uniprot_id=None):
-
-    url_gff = 'http://www.uniprot.org/uniprot/'+uniprot_id+'.gff'
-    request_gff = _urllib.request.Request(url_gff)
-    request_gff.add_header('User-Agent', 'Python at https://github.com/uibcdf/Sabueso || prada.gracia@gmail.com')
-    response_gff = _urllib.request.urlopen(request_gff)
-    gff_result = response_gff.read().decode('utf-8')
-
-    del(url_gff,request_gff,response_gff)
-
-    return gff_result
-
 def _parse_GFF(GFF):
 
     tmp_lines = GFF.split('\n')
@@ -185,32 +146,6 @@ def _parse_GFF(GFF):
     return to_chains,to_domains,to_regions,to_motifs,to_mutagenesis,to_modified,\
            to_crosslink,to_altseq,to_seqconf
 
-def _get_sequence_from_FASTA(FASTA=None):
-
-    tmp_lines = FASTA.split('\n')
-    return ''.join(tmp_lines[1:])
-
-def _parse_basic_entry(entry=None, card=None):
-
-    dict_result=entry
-
-    if card is None:
-        from sabueso.fields.protein import protein_card as _protein_card
-        tmp_card = _deepcopy(_protein_card)
-        del(_protein_card)
-    else:
-        tmp_card = card
-
-    # Host
-    if 'organismHost' in dict_result.keys():
-        tmp_card['Host'].append(dict_result['organismHost']['name'][0]['#text'])
-
-    # Sequence
-    tmp_card['Sequence']['Canonical']=dict_result['sequence']['#text'].replace('\n','')
-
-
-    return tmp_card
-
 
 def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=True):
 
@@ -224,9 +159,6 @@ def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=
     dict_result = dict_result['uniprot']['entry']
 
     tmp_card = _parse_basic_entry(dict_result)
-
-    # FASTA
-    tmp_card['Sequence']['FASTA']=_get_FASTA(uniprot_id)
 
     # Function
     # Subunit Structure
@@ -255,30 +187,6 @@ def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=
                     except:
                         tmp_card['Subunit Structure'].append(comment['text'])
 
-            if comment['@type']=='alternative products':
-                from sabueso.fields.protein import isoform_card as _isoform_card
-                if type(comment['isoform'])==list:
-                    for isoform in comment['isoform']:
-                        tmp_isoform = _deepcopy(_isoform_card)
-                        tmp_isoform['Name'] =  isoform['name']
-                        tmp_isoform_indice = int(isoform['id'].split('-')[-1])
-                        tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
-                        tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
-                        tmp_isoform['UniProt'] = isoform['id']
-                        tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
-                        del(tmp_isoform_indice)
-                else:
-                    isoform = comment['isoform']
-                    tmp_isoform = _deepcopy(_isoform_card)
-                    tmp_isoform['Name'] =  isoform['name']
-                    tmp_isoform_indice = int(isoform['id'].split('-')[-1])
-                    tmp_isoform['FASTA'] = _get_FASTA(isoform['id'])
-                    tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
-                    tmp_isoform['UniProt'] = isoform['id']
-                    tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
-                    del(tmp_isoform_indice)
-                del(_isoform_card)
-
             if with_interactions:
                 if comment['@type']=='interaction':
                     from sabueso.fields.interaction import interaction_card as _interaction_card
@@ -306,19 +214,6 @@ def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=
             tmp_card['Function'].append(dict_result['comment']['text'])
         if dict_result['comment']['@type']=='subunit':
             tmp_card['Subunit Structure'].append(dict_result['comment']['text'])
-
-    # Fix lack of isoforms where number of isoforms == 1:
-
-    if len(tmp_card['Sequence']['Isoforms'])==0:
-        from sabueso.fields.protein import isoform_card as _isoform_card
-        tmp_isoform = _deepcopy(_isoform_card)
-        tmp_isoform['Name'] =  str(1)
-        tmp_isoform_indice = 1
-        tmp_isoform['UniProt'] = tmp_card['UniProt'][0]+'-1'
-        tmp_isoform['FASTA'] = _get_FASTA(tmp_isoform['UniProt'])
-        tmp_isoform['Sequence'] = _get_sequence_from_FASTA(tmp_isoform['FASTA'])
-        tmp_card['Sequence']['Isoforms'][tmp_isoform_indice]=tmp_isoform
-        del(tmp_isoform_indice,_isoform_card)
 
     # Structure
     # Domains

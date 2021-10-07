@@ -23,7 +23,7 @@ def get_name(item, entity='all'):
                 _add_reference_to_evidence(evidence, evidence_in_db)
 
     accession = item['uniprot']['entry']['accession'][0]
-    evidence.add_UniProtKB(id=accession)
+    evidence.add_reference({'database':'UniProtKB', 'id':accession})
 
     return evidence
 
