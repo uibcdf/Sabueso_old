@@ -2,50 +2,45 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-isoform_dict = {
+disease_dict = {
         'references':[],
-        'name':None,
-        'alternative_names':None,
-        'type':None,
-        'sequence':None,
-        'begin':None,
-        'end':None,
-        'original':None,
-        'variation':None,
-        'vsp':None,
-        'uniprot':None,
+        'name':[],
+        'acronym':None,
+        'description':None,
+        'mim':None,
+        'uniprot_disease':None,
+        'proteins_involved':None,
         }
 
-
-def is_isoform_dict(item):
+def is_disease_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(isoform_dict)==set(item):
+        if set(disease_dict)==set(item):
             output = True
 
     return output
 
 
-class IsoformCard(Card):
+class DiseaseCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'isoform'
+        self.card_type = 'disease'
 
-        if is_isoform_dict(item):
+        if is_disease_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in isoform_dict.items():
+            for key, value in disease_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(isoform_dict)
+        output = deepcopy(disease_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -70,5 +65,5 @@ class IsoformCard(Card):
 
     def __repr__(self):
 
-        return f'<IsoformCard: {self.name}>'
+        return f'<DiseaseCard: {self.name}>'
 

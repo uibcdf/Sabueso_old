@@ -2,8 +2,7 @@ class Card():
 
     def __init__(self):
 
-        self.name = None
-        self.type = None
+        self.card_type = None
 
     def dump(self, filename): # dump to json file
 

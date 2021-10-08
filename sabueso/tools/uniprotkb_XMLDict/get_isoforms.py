@@ -1,17 +1,9 @@
 import evidence as evi
 from copy import deepcopy
 
-isoform_dict = {
-        'id':None,
-        'name':None,
-        'sequence':None,
-        'type':None,
-        'VSP':None,
-        'references':[]
-        }
+def get_isoforms(item, entity='all', as_cards=False):
 
-def get_isoforms(item, entity='all'):
-
+    from sabueso.cards import IsoformCard, isoform_dict
     from ._add_reference_to_evidence import _add_reference_to_evidence
     from ._get_reference_from_dbevidence import _get_reference_from_dbevidence
 
@@ -28,27 +20,31 @@ def get_isoforms(item, entity='all'):
             if type(comment['isoform']) is not list:
                 isoform=comment['isoform']
                 aux_dict=deepcopy(isoform_dict)
-                aux_dict['id']=isoform['id']
-                aux_dict['name']=isoform['name']
+                aux_dict['uniprot']=isoform['id']
+                aux_dict['name']=isoform['name'][0]
+                aux_dict['alternative_names']=isoform['name'][1:]
                 aux_dict['type']=event_type
                 if isoform['sequence']['@type']=='described':
-                    aux_dict['VSP']=isoform['sequence']['@ref']
+                    aux_dict['vsp']=isoform['sequence']['@ref']
                 output.append(aux_dict)
             else:
                 for isoform in comment['isoform']:
                     aux_dict=deepcopy(isoform_dict)
-                    aux_dict['id']=isoform['id']
-                    aux_dict['name']=isoform['name']
+                    aux_dict['uniprot']=isoform['id']
+                    aux_dict['name']=isoform['name'][0]
+                    aux_dict['alternative_names']=isoform['name'][1:]
                     aux_dict['type']=event_type
                     if isoform['sequence']['@type']=='described':
-                        aux_dict['VSP']=isoform['sequence']['@ref']
+                        aux_dict['vsp']=isoform['sequence']['@ref']
                     output.append(aux_dict)
 
     # Fix lack of isoforms where isoforms==1
+
     if len(output)==0:
         aux_dict=deepcopy(isoform_dict)
-        aux_dict['id']=accession+'-1'
-        aux_dict['name']=['1']
+        aux_dict['uniprot']=accession+'-1'
+        aux_dict['name']='1'
+        aux_dict['alternative_names']=[]
         output.append(aux_dict)
 
     ### Info in feature
@@ -58,7 +54,7 @@ def get_isoforms(item, entity='all'):
             feature_id = feature['@id']
             if feature_id.startswith('VSP_'):
                 for aux in output:
-                    if aux['VSP']==feature_id:
+                    if aux['vsp']==feature_id:
                         aux['original']=feature['original']
                         aux['variation']=feature['variation']
                         aux['begin']=feature['location']['begin']['@position']
@@ -75,6 +71,9 @@ def get_isoforms(item, entity='all'):
     ref = evi.reference({'database':'UniProtKB', 'id':accession})
     for aux in output:
         aux['references'].append(ref)
+
+    if as_cards:
+        output = [IsoformCard(ii) for ii in output]
 
     return output
 

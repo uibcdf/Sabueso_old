@@ -1,4 +1,4 @@
-from .forms import dict_get_cards
+from .cards.forms import dict_get_cards
 
 def get_cards(molecular_system, entities='all'):
 

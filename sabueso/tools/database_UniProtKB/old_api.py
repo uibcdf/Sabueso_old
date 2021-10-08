@@ -160,61 +160,6 @@ def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=
 
     tmp_card = _parse_basic_entry(dict_result)
 
-    # Function
-    # Subunit Structure
-    # Interactions
-    # Isoforms
-    if type(dict_result['comment'])== list:
-        for comment in dict_result['comment']:
-
-            if comment['@type']=='function':
-                if type(comment['text'])==list:
-                    for function in comment['text']:
-                            tmp_card['Function'].append(function['#text'])
-                else:
-                    try:
-                        tmp_card['Function'].append(comment['text']['#text'])
-                    except:
-                        tmp_card['Function'].append(comment['text'])
-
-            if comment['@type']=='subunit':
-                if type(comment['text'])==list:
-                    for function in comment['text']:
-                            tmp_card['Subunit Structure'].append(function['#text'])
-                else:
-                    try:
-                        tmp_card['Subunit Structure'].append(comment['text']['#text'])
-                    except:
-                        tmp_card['Subunit Structure'].append(comment['text'])
-
-            if with_interactions:
-                if comment['@type']=='interaction':
-                    from sabueso.fields.interaction import interaction_card as _interaction_card
-                    tmp_interaction = _deepcopy(_interaction_card)
-                    tmp_interactant=tmp_interaction['Interactants'][0]
-                    tmp_interactant['UniProt']=uniprot_id
-                    tmp_interactant['IntAct']=comment['interactant'][0]['@intactId']
-                    tmp_interactant['Organism Scientific']=tmp_card['Organism Scientific'][0]
-                    tmp_interactant['Short Name']=tmp_card['Short Name']
-                    tmp_interactant=tmp_interaction['Interactants'][1]
-                    tmp_interactant['UniProt']=comment['interactant'][1]['id']
-                    tmp_interactant['IntAct']=comment['interactant'][1]['@intactId']
-                    tmp_interactant['Short Name']=comment['interactant'][1]['label']
-                    if comment['organismsDiffer']=='false':
-                        tmp_interactant['Organism']=tmp_card['Organism Scientific'][0]
-                    else:
-                        tmp_uniprot = comment['interactant'][1]['id']
-                        tmp_organism = _get_organism_scientific(tmp_uniprot)
-                        tmp_interactant['Organism Scientific']=tmp_organism
-                        del(tmp_uniprot,tmp_organism)
-                    tmp_card['Interactions'].append(tmp_interaction)
-                    del(tmp_interaction,tmp_interactant,_interaction_card)
-    else:
-        if dict_result['comment']['@type']=='function':
-            tmp_card['Function'].append(dict_result['comment']['text'])
-        if dict_result['comment']['@type']=='subunit':
-            tmp_card['Subunit Structure'].append(dict_result['comment']['text'])
-
     # Structure
     # Domains
 

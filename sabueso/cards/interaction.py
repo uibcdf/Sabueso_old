@@ -2,50 +2,45 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-isoform_dict = {
+interaction_dict = {
         'references':[],
-        'name':None,
-        'alternative_names':None,
-        'type':None,
-        'sequence':None,
-        'begin':None,
-        'end':None,
-        'original':None,
-        'variation':None,
-        'vsp':None,
-        'uniprot':None,
+        'interactants':[],
+        'n_experiments':None,
+        'same_organism':None,
+        'intact':None,
+        'imex':None,
+        'with_mutations':None,
         }
 
-
-def is_isoform_dict(item):
+def is_interaction_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(isoform_dict)==set(item):
+        if set(interaction_dict)==set(item):
             output = True
 
     return output
 
 
-class IsoformCard(Card):
+class InteractionCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'isoform'
+        self.card_type = 'interaction'
 
-        if is_isoform_dict(item):
+        if is_interaction_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in isoform_dict.items():
+            for key, value in interaction_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(isoform_dict)
+        output = deepcopy(interaction_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -64,11 +59,11 @@ class IsoformCard(Card):
                 except:
                     continue
 
-        df = DataFrame(aux_dict, index =[self.name])
+        df = DataFrame(aux_dict, index =[self.ebi])
 
         return df
 
     def __repr__(self):
 
-        return f'<IsoformCard: {self.name}>'
+        return f'<InteractionCard: {self.interactants}>'
 

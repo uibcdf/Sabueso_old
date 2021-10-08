@@ -10,3 +10,8 @@ from .protein import ProteinCard
 from .rna import RNACard
 from .dna import DNACard
 
+from .organism import OrganismCard, organism_dict
+from .isoform import IsoformCard, isoform_dict
+from .interaction import InteractionCard, interaction_dict
+from .interactant import InteractantCard, interactant_dict
+

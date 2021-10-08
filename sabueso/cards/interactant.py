@@ -2,50 +2,45 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-isoform_dict = {
+interactant_dict = {
         'references':[],
-        'name':None,
-        'alternative_names':None,
         'type':None,
-        'sequence':None,
-        'begin':None,
-        'end':None,
-        'original':None,
-        'variation':None,
-        'vsp':None,
+        'name':None,
+        'intact':None,
         'uniprot':None,
+        'mutations':None,
+        'isoform_specific':None,
         }
 
-
-def is_isoform_dict(item):
+def is_interactant_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(isoform_dict)==set(item):
+        if set(interactant_dict)==set(item):
             output = True
 
     return output
 
 
-class IsoformCard(Card):
+class InteractantCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'isoform'
+        self.card_type = 'interactant'
 
-        if is_isoform_dict(item):
+        if is_interactant_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in isoform_dict.items():
+            for key, value in interactant_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(isoform_dict)
+        output = deepcopy(interactant_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -70,5 +65,10 @@ class IsoformCard(Card):
 
     def __repr__(self):
 
-        return f'<IsoformCard: {self.name}>'
+        if self.name is not None:
+            return f'<InteractantCard: {self.type}, {self.name}>'
+        elif self.intact is not None:
+            return f'<InteractantCard: {self.type}, {self.intact}>'
+        else:
+            return f'<InteractantCard: unknown>'
 
