@@ -107,6 +107,10 @@ class ProteinCard(EntityCard):
 
         return df
 
+    def to_jupyter_notebook(self):
+
+        pass
+
     def __repr__(self):
 
         return f'<ProteinCard: {self.name.value}, {self.organism.common_name.value}>'
