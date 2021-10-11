@@ -5,6 +5,7 @@ from pandas import DataFrame
 protein_dict = {
         'references': [],
         'name': None,                            # DB: UniProtKB
+        'key_name': None,                        # DB: UniProtKB
         'short_name': None,                      # DB: UniProtKB
         'uniprot_entry_name': None,              # DB: UniProtKB
         'alternative_names': None,               # DB: UniProtKB
@@ -107,9 +108,20 @@ class ProteinCard(EntityCard):
 
         return df
 
-    def to_jupyter_notebook(self):
+    def to_jupyter_notebook(self, filename=None):
 
-        pass
+        import nbformat as nbf
+        from .notebooks import protein_notebook
+
+        nb = protein_notebook(self)
+
+        if filename is None:
+            filename = f'{self.key_name.value}.ipynb'
+
+        with open(filename, 'w') as fff:
+            nbf.write(nb, fff)
+
+        return filename
 
     def __repr__(self):
 

@@ -1,3 +1,5 @@
+from evidence import Evidence
+
 def get_uniprot_name(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence

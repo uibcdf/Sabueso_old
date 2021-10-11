@@ -1,4 +1,5 @@
 from .get_name import get_name
+from .get_key_name import get_key_name
 from .get_short_name import get_short_name
 from .get_uniprot_entry_name import get_uniprot_entry_name
 from .get_alternative_names import get_alternative_names

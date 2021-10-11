@@ -3,6 +3,7 @@ def get_protein_card(item):
     from sabueso.cards import ProteinCard
     from sabueso.cards import OrganismCard
     from .get_name import get_name
+    from .get_key_name import get_key_name
     from .get_short_name import get_short_name
     from .get_uniprot_entry_name import get_uniprot_entry_name
     from .get_alternative_names import get_alternative_names
@@ -21,6 +22,7 @@ def get_protein_card(item):
 
     # Names
     card.name = get_name(item)
+    card.key_name = get_key_name(item)
     card.short_name = get_short_name(item)
     card.uniprot_entry_name = get_uniprot_entry_name(item)
     card.alternative_names = get_alternative_names(item)
@@ -47,7 +49,7 @@ def get_protein_card(item):
     card.subunit_structure = get_subunit_structure(item)
 
     # Chains
-    card.chains = get_chains(item)
+    #card.chains = get_chains(item)
 
     # Databases
     card.uniprot =get_uniprot(item)
