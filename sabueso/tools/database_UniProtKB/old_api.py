@@ -8,8 +8,6 @@ def _parse_GFF(GFF):
 
     tmp_lines = GFF.split('\n')
 
-    to_chains={}
-    to_domains={}
     to_regions={}
     to_motifs={}
     to_mutagenesis={}
@@ -27,8 +25,6 @@ def _parse_GFF(GFF):
     tmp_num_seqconf=0
     tmp_num_altseq=0
 
-    from sabueso.fields.protein import domain_card as _domain_card
-    from sabueso.fields.protein import chain_card as _chain_card
     from sabueso.fields.protein import region_card as _region_card
     from sabueso.fields.protein import motif_card as _motif_card
     from sabueso.fields.protein import mutagenesis_card as _mutagenesis_card
@@ -40,42 +36,6 @@ def _parse_GFF(GFF):
     for line in tmp_lines[2:]:
         fields_line = line.split('\t')
         if len(fields_line)>1:
-            if fields_line[2]=='Chain':
-                tmp_chain = _deepcopy(_chain_card)
-                tmp_chain['Begin'] = int(fields_line[3])
-                tmp_chain['End'] = int(fields_line[4])
-                tmp_txt=fields_line[8].split(';')
-                for ii in tmp_txt:
-                    if ii.startswith('Note='):
-                        tmp_chain['Description'] = ii.replace('Note=','')
-                to_chains[tmp_num_chains]=tmp_chain
-                tmp_num_chains+=1
-                del(tmp_chain,tmp_txt)
-            if fields_line[2]=='Domain':
-                tmp_domain = _deepcopy(_domain_card)
-                tmp_domain['Begin'] = int(fields_line[3])
-                tmp_domain['End'] = int(fields_line[4])
-                tmp_break = fields_line[8].split('|')
-                if tmp_break[-1].startswith('PROSITE'):
-                    tmp_domain['PROSITE-ProRule'] = tmp_break[-1].split('=')[-1]
-                tmp_txt=tmp_break[0].split(';')
-                for ii in tmp_txt:
-                    if ii.startswith('Note='):
-                        tmp_domain['Name'] = ii.replace('Note=','')
-                to_domains[tmp_num_domains]=tmp_domain
-                tmp_num_domains+=1
-                del(tmp_domain,tmp_break,tmp_txt)
-            if fields_line[2]=='Region':
-                tmp_region = _deepcopy(_region_card)
-                tmp_region['Begin'] = int(fields_line[3])
-                tmp_region['End'] = int(fields_line[4])
-                tmp_txt=fields_line[8].split(';')
-                for ii in tmp_txt:
-                    if ii.startswith('Note='):
-                        tmp_region['Name'] = ii.replace('Note=','')
-                to_regions[tmp_num_regions]=tmp_region
-                tmp_num_regions+=1
-                del(tmp_region,tmp_txt)
             if fields_line[2]=='Motif':
                 tmp_motif = _deepcopy(_motif_card)
                 tmp_motif['Begin'] = int(fields_line[3])
@@ -167,9 +127,6 @@ def protein_card(uniprot_id=None, card=None, with_interactions=True, with_FASTA=
     to_chains,to_domains,to_regions,to_motifs,to_mutagenesis,to_modified,\
     to_crosslink,to_altseq,to_seqconf = _parse_GFF(tmp_gff)
 
-    tmp_card['Structure']['Chain']=to_chains
-    tmp_card['Structure']['Domain']=to_domains
-    tmp_card['Structure']['Region']=to_regions
     tmp_card['Structure']['Motif']=to_motifs
 
     tmp_card['Sequence']['PostTranslational Modifications']['Modified Residues']=to_modified

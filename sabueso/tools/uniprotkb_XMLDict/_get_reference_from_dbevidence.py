@@ -23,8 +23,12 @@ def _get_reference_from_dbevidence(evidence_number_in_db, item):
                 ref = evi.reference({'database':'PubMed', 'id':dbid})
             elif dbtype=='DOI':
                 ref = evi.reference({'database':'DOI', 'id':dbid})
+            elif dbtype=='PROSITE-ProRule':
+                ref = evi.reference({'database':'PROSITE_ProRule', 'id':dbid})
+            elif dbtype=='PDB':
+                ref = evi.reference({'database':'PDB', 'id':dbid})
             else:
-                raise ValueError('Uknown source')
+                raise ValueError(f'Unknown source: {dbtype}')
 
     return ref
 

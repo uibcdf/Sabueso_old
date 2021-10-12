@@ -19,9 +19,9 @@ protein_dict = {
         #'sequence_conflics': [],                # DB: UniProtKB
         #'alternative_sequences': [],            # DB: UniProtKB
         #'secondary_structure': None,            # DB: UniProtKB
-        #'chains': None,                         # DB: UniProtKB
-        #'domains': None,                        # DB: UniProtKB
-        #'regions': None,                        # DB: UniProtKB
+        'chains': [],                            # DB: UniProtKB
+        'domains': None,                         # DB: UniProtKB
+        'regions': None,                         # DB: UniProtKB
         #'motifs': None,                         # DB: UniProtKB
         #'binding_sites': None                   # DB: UniProtKB
         'interactions':[],                       # DB: UniProtKB

@@ -17,4 +17,8 @@ from .get_pdbs import get_pdbs
 from .get_host import get_host
 from .get_canonical_sequence import get_canonical_sequence
 from .get_isoforms import get_isoforms
+from .get_chains import get_chains
+from .get_domains import get_domains
+from .get_regions import get_regions
 from .get_protein_card import get_protein_card
+

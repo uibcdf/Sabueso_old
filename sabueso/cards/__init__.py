@@ -14,4 +14,7 @@ from .organism import OrganismCard, organism_dict
 from .isoform import IsoformCard, isoform_dict
 from .interaction import InteractionCard, interaction_dict
 from .interactant import InteractantCard, interactant_dict
+from .chain import ChainCard, chain_dict
+from .domain import DomainCard, domain_dict
+from .region import RegionCard, region_dict
 

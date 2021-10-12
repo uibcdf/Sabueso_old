@@ -12,6 +12,9 @@ def get_protein_card(item):
     from .get_function import get_function
     from .get_canonical_sequence import get_canonical_sequence
     from .get_isoforms import get_isoforms
+    from .get_chains import get_chains
+    from .get_domains import get_domains
+    from .get_regions import get_regions
     from .get_uniprot import get_uniprot
     from .get_ec import get_ec
     from .get_dbreference import get_dbreference
@@ -38,18 +41,16 @@ def get_protein_card(item):
 
     # Sequence
     card.sequence = get_canonical_sequence(item)
-
-    # Isoforms
     card.isoforms = get_isoforms(item, as_cards=True)
+
+    # Structure
+    card.subunit_structure = get_subunit_structure(item)
+    card.chains = get_chains(item, as_cards=True)
+    card.domains = get_domains(item, as_cards=True)
+    card.regions = get_regions(item, as_cards=True)
 
     # Interactions
     card.interactions = get_interactions(item, as_cards=True)
-
-    # Subunit structure
-    card.subunit_structure = get_subunit_structure(item)
-
-    # Chains
-    #card.chains = get_chains(item)
 
     # Databases
     card.uniprot =get_uniprot(item)
