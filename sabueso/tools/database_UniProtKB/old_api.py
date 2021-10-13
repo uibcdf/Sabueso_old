@@ -8,7 +8,6 @@ def _parse_GFF(GFF):
 
     tmp_lines = GFF.split('\n')
 
-    to_regions={}
     to_motifs={}
     to_mutagenesis={}
     to_modified={}
@@ -25,8 +24,6 @@ def _parse_GFF(GFF):
     tmp_num_seqconf=0
     tmp_num_altseq=0
 
-    from sabueso.fields.protein import region_card as _region_card
-    from sabueso.fields.protein import motif_card as _motif_card
     from sabueso.fields.protein import mutagenesis_card as _mutagenesis_card
     from sabueso.fields.protein import modified_res_card as _modified_res_card
     from sabueso.fields.protein import cross_link_card as _cross_link_card
@@ -36,17 +33,6 @@ def _parse_GFF(GFF):
     for line in tmp_lines[2:]:
         fields_line = line.split('\t')
         if len(fields_line)>1:
-            if fields_line[2]=='Motif':
-                tmp_motif = _deepcopy(_motif_card)
-                tmp_motif['Begin'] = int(fields_line[3])
-                tmp_motif['End'] = int(fields_line[4])
-                tmp_txt=fields_line[8].split(';')
-                for ii in tmp_txt:
-                    if ii.startswith('Note='):
-                        tmp_motif['Name'] = ii.replace('Note=','')
-                to_motifs[tmp_num_motifs]=tmp_motif
-                tmp_num_motifs+=1
-                del(tmp_motif,tmp_txt)
             if fields_line[2]=='Mutagenesis':
                 tmp_mutagenesis = _deepcopy(_mutagenesis_card)
                 tmp_mutagenesis['Begin'] = int(fields_line[3])

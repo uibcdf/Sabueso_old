@@ -6,11 +6,12 @@ def get_regions(item, entity='all', as_cards=False):
     from sabueso.cards import RegionCard, region_dict
     from ._add_reference_to_evidence import _add_reference_to_evidence
     from ._get_reference_from_dbevidence import _get_reference_from_dbevidence
+    from .get_uniprot import get_uniprot
 
     output = []
 
-    accession = item['uniprot']['entry']['accession'][0]
-    ref_uniprot = evi.reference({'database':'UniProtKB', 'id':accession})
+    uniprot = get_uniprot(item, entity=entity)
+    ref_uniprot = uniprot.references[0]
 
     for feature in item['uniprot']['entry']['feature']:
 

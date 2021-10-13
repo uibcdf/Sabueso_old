@@ -2,41 +2,41 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-motif_dict = {
+nucleotide_binding_region_dict = {
         'references':[],
-        'description':None,
+        'nucleotide':None,
         'begin':None,
         'end':None,
         }
 
-def is_motif_dict(item):
+def is_nucleotide_binding_region_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(motif_dict)==set(item):
+        if set(nucleotide_binding_region_dict)==set(item):
             output = True
 
     return output
 
-class MotifCard(Card):
+class NucleotideBindingRegionCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'motif'
+        self.card_type = 'nucleotide binding region'
 
-        if is_motif_dict(item):
+        if is_nucleotide_binding_region_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in motif_dict.items():
+            for key, value in nucleotide_binding_region_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(motif_dict)
+        output = deepcopy(nucleotide_binding_region_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -61,5 +61,5 @@ class MotifCard(Card):
 
     def __repr__(self):
 
-        return f'<MotifCard: {self.description} {self.begin}-{self.end}>'
+        return f'<NucleotideBindingRegionCard: {self.nucleotide} {self.begin}-{self.end}>'
 

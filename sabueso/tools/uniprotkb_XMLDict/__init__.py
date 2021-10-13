@@ -20,5 +20,7 @@ from .get_isoforms import get_isoforms
 from .get_chains import get_chains
 from .get_domains import get_domains
 from .get_regions import get_regions
+from .get_motifs import get_motifs
+from .get_nucleotide_binding_regions import get_nucleotide_binding_regions
 from .get_protein_card import get_protein_card
 

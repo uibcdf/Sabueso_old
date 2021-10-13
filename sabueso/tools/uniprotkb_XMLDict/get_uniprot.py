@@ -3,7 +3,10 @@ from evidence import Evidence
 def get_uniprot(item, entity='all'):
 
     evidence = Evidence()
-    accession = item['uniprot']['entry']['accession'][0]
+    if type(item['uniprot']['entry']['accession']) is list:
+        accession = item['uniprot']['entry']['accession'][0]
+    else:
+        accession = item['uniprot']['entry']['accession']
     evidence.value = accession
     evidence.add_reference({'database':'UniProtKB', 'id':accession})
 

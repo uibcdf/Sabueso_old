@@ -4,50 +4,51 @@ from pandas import DataFrame
 
 protein_dict = {
         'references': [],
-        'name': None,                            # DB: UniProtKB
-        'key_name': None,                        # DB: UniProtKB
-        'short_name': None,                      # DB: UniProtKB
-        'uniprot_entry_name': None,              # DB: UniProtKB
-        'alternative_names': None,               # DB: UniProtKB
-        'organism': None,                        # DB: UniProtKB
-        'host': None,                            # DB: UniProtKB
-        'function': None,                        # DB: UniProtKB
-        'subunit_structure': None,               # DB: UniProtKB
-        'sequence': None,                        # DB: UniProtKB
-        'isoforms': [],                          # DB: UniProtKB
-        #'posttranslational_modifications': [],  # DB: UniProtKB
-        #'sequence_conflics': [],                # DB: UniProtKB
-        #'alternative_sequences': [],            # DB: UniProtKB
-        #'secondary_structure': None,            # DB: UniProtKB
-        'chains': [],                            # DB: UniProtKB
-        'domains': None,                         # DB: UniProtKB
-        'regions': None,                         # DB: UniProtKB
-        #'motifs': None,                         # DB: UniProtKB
-        #'binding_sites': None                   # DB: UniProtKB
-        'interactions':[],                       # DB: UniProtKB
-        #'ligands': []                           # DB: UniProtKB
-        'uniprot': None,                         # DB: UniProtKB
-        'ec': None,                              # DB: UniProtKB
-        'chembl': None,                          # DB: UniProtKB
-        'biogrid': None,                         # DB: UniProtKB
-        'swiss_model': None,                     # DB: UniProtKB
-        'dip': None,                             # DB: UniProtKB
-        'elm': None,                             # DB: UniProtKB
-        'intact': None,                          # DB: UniProtKB
-        'mint': None,                            # DB: UniProtKB
-        'bindingdb': None,                       # DB: UniProtKB
-        'interpro': None,                        # DB: UniProtKB
-        'pfam': None,                            # DB: UniProtKB
-        'prodom': None,                          # DB: UniProtKB
-        'supfam': None,                          # DB: UniProtKB
-        'string': None,                          # DB: UniProtKB
-        'iptmnet': None,                         # DB: UniProtKB
-        'phosphositeplus': None,                 # DB: UniProtKB
+        'name': None,                               # DB: UniProtKB
+        'key_name': None,                           # DB: UniProtKB
+        'short_name': None,                         # DB: UniProtKB
+        'uniprot_entry_name': None,                 # DB: UniProtKB
+        'alternative_names': None,                  # DB: UniProtKB
+        'organism': None,                           # DB: UniProtKB
+        'host': None,                               # DB: UniProtKB
+        'function': None,                           # DB: UniProtKB
+        'subunit_structure': None,                  # DB: UniProtKB
+        'sequence': None,                           # DB: UniProtKB
+        'isoforms': [],                             # DB: UniProtKB
+        #'posttranslational_modifications': [],     # DB: UniProtKB
+        #'sequence_conflics': [],                   # DB: UniProtKB
+        #'alternative_sequences': [],               # DB: UniProtKB
+        #'secondary_structure': None,               # DB: UniProtKB
+        'chains': [],                               # DB: UniProtKB
+        'domains': [],                              # DB: UniProtKB
+        'regions': [],                              # DB: UniProtKB
+        'motifs': [],                               # DB: UniProtKB
+        'nucleotide_binding_regions': [],           # DB: UniProtKB
+        #'binding_sites': None                      # DB: UniProtKB
+        'interactions':[],                          # DB: UniProtKB
+        #'ligands': []                              # DB: UniProtKB
+        'uniprot': None,                            # DB: UniProtKB
+        'ec': None,                                 # DB: UniProtKB
+        'chembl': None,                             # DB: UniProtKB
+        'biogrid': None,                            # DB: UniProtKB
+        'swiss_model': None,                        # DB: UniProtKB
+        'dip': None,                                # DB: UniProtKB
+        'elm': None,                                # DB: UniProtKB
+        'intact': None,                             # DB: UniProtKB
+        'mint': None,                               # DB: UniProtKB
+        'bindingdb': None,                          # DB: UniProtKB
+        'interpro': None,                           # DB: UniProtKB
+        'pfam': None,                               # DB: UniProtKB
+        'prodom': None,                             # DB: UniProtKB
+        'supfam': None,                             # DB: UniProtKB
+        'string': None,                             # DB: UniProtKB
+        'iptmnet': None,                            # DB: UniProtKB
+        'phosphositeplus': None,                    # DB: UniProtKB
 
         ### PDBs
 
-        #self.pdbs = []                              # DB: UniProtKB
-        #self.segment_in_pdb = {}                    # DB: UniProtKB
+        #self.pdbs = []                                 # DB: UniProtKB
+        #self.segment_in_pdb = {}                       # DB: UniProtKB
 
         #self.pdbids100 = None
         #self.pdbids95 = None

@@ -17,4 +17,6 @@ from .interactant import InteractantCard, interactant_dict
 from .chain import ChainCard, chain_dict
 from .domain import DomainCard, domain_dict
 from .region import RegionCard, region_dict
+from .motif import MotifCard, motif_dict
+from .nucleotide_binding_region import NucleotideBindingRegionCard, nucleotide_binding_region_dict
 

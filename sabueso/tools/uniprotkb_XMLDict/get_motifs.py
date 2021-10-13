@@ -1,9 +1,9 @@
 import evidence as evi
 from copy import deepcopy
 
-def get_domains(item, entity='all', as_cards=False):
+def get_motifs(item, entity='all', as_cards=False):
 
-    from sabueso.cards import DomainCard, domain_dict
+    from sabueso.cards import MotifCard, motif_dict
     from ._add_reference_to_evidence import _add_reference_to_evidence
     from ._get_reference_from_dbevidence import _get_reference_from_dbevidence
     from .get_uniprot import get_uniprot
@@ -15,8 +15,8 @@ def get_domains(item, entity='all', as_cards=False):
 
     for feature in item['uniprot']['entry']['feature']:
 
-        if feature['@type']=='domain':
-            aux_dict=deepcopy(domain_dict)
+        if feature['@type']=='short sequence motif':
+            aux_dict=deepcopy(motif_dict)
             aux_dict['description']=feature['@description']
             aux_dict['begin']=feature['location']['begin']['@position']
             aux_dict['end']=feature['location']['end']['@position']
@@ -30,7 +30,7 @@ def get_domains(item, entity='all', as_cards=False):
             output.append(aux_dict)
 
     if as_cards:
-        output = [DomainCard(ii) for ii in output]
+        output = [MotifCard(ii) for ii in output]
 
     return output
 
