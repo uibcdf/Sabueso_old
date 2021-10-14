@@ -15,6 +15,9 @@ protein_dict = {
         'subunit_structure': None,                  # DB: UniProtKB
         'sequence': None,                           # DB: UniProtKB
         'isoforms': [],                             # DB: UniProtKB
+        'modified_residues': [],                    # DB: UniProtKB
+        'natural_mutations': [],                    # DB: UniProtKB
+        'artificial_mutations': [],                 # DB: UniProtKB
         #'posttranslational_modifications': [],     # DB: UniProtKB
         #'sequence_conflics': [],                   # DB: UniProtKB
         #'alternative_sequences': [],               # DB: UniProtKB
@@ -24,7 +27,10 @@ protein_dict = {
         'regions': [],                              # DB: UniProtKB
         'motifs': [],                               # DB: UniProtKB
         'nucleotide_binding_regions': [],           # DB: UniProtKB
-        #'binding_sites': None                      # DB: UniProtKB
+        'dna_binding_regions': [],                  # DB: UniProtKB
+        'zinc_finger_regions': [],                  # DB: UniProtKB
+        'ca_binding_regions': [],                   # DB: UniProtKB
+        'binding_sites': [],                        # DB: UniProtKB
         'interactions':[],                          # DB: UniProtKB
         #'ligands': []                              # DB: UniProtKB
         'uniprot': None,                            # DB: UniProtKB

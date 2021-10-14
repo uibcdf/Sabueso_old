@@ -27,8 +27,15 @@ def _get_reference_from_dbevidence(evidence_number_in_db, item):
                 ref = evi.reference({'database':'PROSITE_ProRule', 'id':dbid})
             elif dbtype=='PDB':
                 ref = evi.reference({'database':'PDB', 'id':dbid})
+            elif dbtype=='SAM':
+                if dbid=='MobiDB-lite':
+                    from .get_uniprot import get_uniprot
+                    ref_uniprot=get_uniprot(item)
+                    ref = evi.reference({'database':'MobiDB', 'id':ref_uniprot.value})
+                else:
+                    raise ValueError(f'Unknown SAM source {dbtype} in evidence {evidence_in_db}')
             else:
-                raise ValueError(f'Unknown source: {dbtype}')
+                raise ValueError(f'Unknown source {dbtype} in evidence {evidence_in_db}')
 
     return ref
 

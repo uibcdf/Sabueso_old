@@ -55,8 +55,8 @@ def get_isoforms(item, entity='all', as_cards=False):
             if feature_id.startswith('VSP_'):
                 for aux in output:
                     if aux['vsp']==feature_id:
-                        aux['original']=feature['original']
-                        aux['variation']=feature['variation']
+                        if 'original' in feature: aux['original']=feature['original']
+                        if 'variation' in feature: aux['variation']=feature['variation']
                         aux['begin']=feature['location']['begin']['@position']
                         aux['end']=feature['location']['end']['@position']
                         if '@evidence' in feature:

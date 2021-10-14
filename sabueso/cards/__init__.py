@@ -19,4 +19,10 @@ from .domain import DomainCard, domain_dict
 from .region import RegionCard, region_dict
 from .motif import MotifCard, motif_dict
 from .nucleotide_binding_region import NucleotideBindingRegionCard, nucleotide_binding_region_dict
+from .dna_binding_region import DNABindingRegionCard, dna_binding_region_dict
+from .zinc_finger_region import ZincFingerRegionCard, zinc_finger_region_dict
+from .ca_binding_region import CaBindingRegionCard, ca_binding_region_dict
+from .binding_site import BindingSiteCard, binding_site_dict
+from .modified_residue import ModifiedResidueCard, modified_residue_dict
+from .mutation import MutationCard, mutation_dict
 

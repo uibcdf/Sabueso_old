@@ -22,5 +22,12 @@ from .get_domains import get_domains
 from .get_regions import get_regions
 from .get_motifs import get_motifs
 from .get_nucleotide_binding_regions import get_nucleotide_binding_regions
+from .get_dna_binding_regions import get_dna_binding_regions
+from .get_zinc_finger_regions import get_zinc_finger_regions
+from .get_ca_binding_regions import get_ca_binding_regions
+from .get_binding_sites import get_binding_sites
+from .get_modified_residues import get_modified_residues
+from .get_natural_mutations import get_natural_mutations
+from .get_artificial_mutations import get_artificial_mutations
 from .get_protein_card import get_protein_card
 

@@ -12,11 +12,18 @@ def get_protein_card(item):
     from .get_function import get_function
     from .get_canonical_sequence import get_canonical_sequence
     from .get_isoforms import get_isoforms
+    from .get_modified_residues import get_modified_residues
+    from .get_natural_mutations import get_natural_mutations
+    from .get_artificial_mutations import get_artificial_mutations
     from .get_chains import get_chains
     from .get_domains import get_domains
     from .get_regions import get_regions
     from .get_motifs import get_motifs
     from .get_nucleotide_binding_regions import get_nucleotide_binding_regions
+    from .get_dna_binding_regions import get_dna_binding_regions
+    from .get_zinc_finger_regions import get_zinc_finger_regions
+    from .get_ca_binding_regions import get_ca_binding_regions
+    from .get_binding_sites import get_binding_sites
     from .get_uniprot import get_uniprot
     from .get_ec import get_ec
     from .get_dbreference import get_dbreference
@@ -44,6 +51,9 @@ def get_protein_card(item):
     # Sequence
     card.sequence = get_canonical_sequence(item)
     card.isoforms = get_isoforms(item, as_cards=True)
+    card.modified_residues = get_modified_residues(item, as_cards=True)
+    card.natural_mutations = get_natural_mutations(item, as_cards=True)
+    card.artificial_mutations = get_artificial_mutations(item, as_cards=True)
 
     # Structure
     card.subunit_structure = get_subunit_structure(item)
@@ -52,6 +62,10 @@ def get_protein_card(item):
     card.regions = get_regions(item, as_cards=True)
     card.motifs = get_motifs(item, as_cards=True)
     card.nucleotide_binding_regions = get_nucleotide_binding_regions(item, as_cards=True)
+    card.dna_binding_regions = get_dna_binding_regions(item, as_cards=True)
+    card.zinc_finger_regions = get_zinc_finger_regions(item, as_cards=True)
+    card.ca_binding_regions = get_ca_binding_regions(item, as_cards=True)
+    card.binding_sites = get_binding_sites(item, as_cards=True)
 
     # Interactions
     card.interactions = get_interactions(item, as_cards=True)

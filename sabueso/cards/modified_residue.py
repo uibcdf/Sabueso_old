@@ -2,40 +2,41 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-binding_site_dict = {
+
+modified_residue_dict = {
         'references':[],
         'description':None,
         'position':None,
         }
 
-def is_binding_site_dict(item):
+def is_modified_residue_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(binding_site_dict)==set(item):
+        if set(modified_residue_dict)==set(item):
             output = True
 
     return output
 
-class BindingSiteCard(Card):
+class ModifiedResidueCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'binding site'
+        self.card_type = 'modified residue'
 
-        if is_binding_site_dict(item):
+        if is_modified_residue_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in binding_site_dict.items():
+            for key, value in modified_residue_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(ca_binding_region_dict)
+        output = deepcopy(modified_residue_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -60,5 +61,5 @@ class BindingSiteCard(Card):
 
     def __repr__(self):
 
-        return f'<BindingSiteCard: {self.description} {self.position}>'
+        return f'<MutationCard: {self.description} {self.position}>'
 

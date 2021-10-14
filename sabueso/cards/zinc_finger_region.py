@@ -2,40 +2,41 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-binding_site_dict = {
+zinc_finger_region_dict = {
         'references':[],
         'description':None,
-        'position':None,
+        'begin':None,
+        'end':None,
         }
 
-def is_binding_site_dict(item):
+def is_zinc_finger_region_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(binding_site_dict)==set(item):
+        if set(zinc_finger_region_dict)==set(item):
             output = True
 
     return output
 
-class BindingSiteCard(Card):
+class ZincFingerRegionCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'binding site'
+        self.card_type = 'zinc finger region'
 
-        if is_binding_site_dict(item):
+        if is_zinc_finger_region_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in binding_site_dict.items():
+            for key, value in zinc_finger_region_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(ca_binding_region_dict)
+        output = deepcopy(zinc_finger_region_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -54,11 +55,11 @@ class BindingSiteCard(Card):
                 except:
                     continue
 
-        df = DataFrame(aux_dict, index =[self.position])
+        df = DataFrame(aux_dict, index =[self.begin+'-'+self.end])
 
         return df
 
     def __repr__(self):
 
-        return f'<BindingSiteCard: {self.description} {self.position}>'
+        return f'<ZincFingerRegionCard: {self.description} {self.begin}-{self.end}>'
 

@@ -1,12 +1,15 @@
 import evidence as evi
+from collections import OrderedDict
 
 def get_function(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence
+    from .get_uniprot import get_uniprot
 
     output = []
 
-    accession = item['uniprot']['entry']['accession'][0]
+    uniprot = get_uniprot(item, entity=entity)
+    ref_uniprot = uniprot.references[0]
 
     ### Info in comment
 
@@ -14,43 +17,41 @@ def get_function(item, entity='all'):
 
         if comment['@type']=='function':
 
-            if type(comment['text'])==list:
-                for comment_function in comment['text']:
+            if type(comment)!=OrderedDict:
+                raise ValueError("Comment type not recognized for function")
 
-                    function = evi.Evidence()
-                    function.value = comment_function['#text']
+            comment_text = comment['text']
 
-                    if '@evidence' in comment_function:
-                        evidence_numbers_in_db = comment_function['@evidence'].split(' ')
+            if type(comment_text)==OrderedDict:
+                comment_text = list(comment_text)
+            elif type(comment_text)==str:
+                comment_text = [comment_text]
+
+            if type(comment_text)!=list:
+                raise ValueError("Text in comment not recognized for function")
+
+            for aux in comment_text:
+
+                evidence = evi.Evidence()
+
+                if type(aux)==OrderedDict:
+
+                    evidence.value = aux['#text']
+
+                    if '@evidence' in aux:
+                        evidence_numbers_in_db = aux['@evidence'].split(' ')
                         for evidence_number_in_db in evidence_numbers_in_db:
                             evidence_in_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
                             if evidence_in_db['@key']!=evidence_number_in_db:
                                 raise ValueError('Evidence number does not match evidence @key')
-                            _add_reference_to_evidence(function, evidence_in_db)
-                            function.add_reference({'database':'UniProtKB', 'id':accession})
+                            _add_reference_to_evidence(evidence, evidence_in_db)
 
-                    output.append(function)
+                elif type(aux)==str:
+                    evidence.value = aux
 
-            else:
+                evidence.add_reference(ref_uniprot)
 
-                function = evi.Evidence()
-                function.value = comment['text']['#text']
-
-                if '@evidence' in comment['text']:
-                    evidence_numbers_in_db = comment['text']['@evidence'].split(' ')
-                    for evidence_number_in_db in evidence_numbers_in_db:
-                        evidence_in_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
-                        if evidence_in_db['@key']!=evidence_number_in_db:
-                            raise ValueError('Evidence number does not match evidence @key')
-                        _add_reference_to_evidence(function, evidence_in_db)
-                        function.add_reference({'database':'UniProtKB', 'id':accession})
-
-                output.append(function)
-
-    if len(output)==0:
-        output = None
-    elif len(output)==1:
-        output = output[0]
+                output.append(evidence)
 
     return output
 
