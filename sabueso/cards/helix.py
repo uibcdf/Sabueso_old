@@ -2,43 +2,41 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-
-sequence_conflict_dict = {
+helix_dict = {
         'references':[],
         'description':None,
-        'position':None,
-        'original':None,
-        'variation':None,
+        'begin':None,
+        'end':None,
         }
 
-def is_sequence_conflict_dict(item):
+def is_helix_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(sequence_conflict_dict)==set(item):
+        if set(helix_dict)==set(item):
             output = True
 
     return output
 
-class SequenceConflictCard(Card):
+class HelixCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'sequence conflict'
+        self.card_type = 'helix'
 
-        if is_sequence_conflict_dict(item):
+        if is_helix_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in sequence_conflict_dict.items():
+            for key, value in helix_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(sequence_conflict_dict)
+        output = deepcopy(helix_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -57,11 +55,11 @@ class SequenceConflictCard(Card):
                 except:
                     continue
 
-        df = DataFrame(aux_dict, index =[self.position])
+        df = DataFrame(aux_dict, index =[self.begin+'-'+self.end])
 
         return df
 
     def __repr__(self):
 
-        return f'<SequenceConflictCard: {self.original}{self.position}{self.variation}>'
+        return f'<HelixCard: {self.description} {self.begin}-{self.end}>'
 

@@ -15,6 +15,7 @@ def get_protein_card(item):
     from .get_modified_residues import get_modified_residues
     from .get_natural_mutations import get_natural_mutations
     from .get_artificial_mutations import get_artificial_mutations
+    from .get_sequence_conflicts import get_sequence_conflicts
     from .get_chains import get_chains
     from .get_domains import get_domains
     from .get_regions import get_regions
@@ -29,6 +30,7 @@ def get_protein_card(item):
     from .get_dbreference import get_dbreference
     from .get_interactions import get_interactions
     from .get_subunit_structure import get_subunit_structure
+    from .get_secondary_structure import get_secondary_structure
 
     card = ProteinCard()
 
@@ -54,9 +56,11 @@ def get_protein_card(item):
     card.modified_residues = get_modified_residues(item, as_cards=True)
     card.natural_mutations = get_natural_mutations(item, as_cards=True)
     card.artificial_mutations = get_artificial_mutations(item, as_cards=True)
+    card.sequence_conflicts = get_sequence_conflicts(item, as_cards=True)
 
     # Structure
     card.subunit_structure = get_subunit_structure(item)
+    card.secondary_structure = get_secondary_structure(item, as_cards=True)
     card.chains = get_chains(item, as_cards=True)
     card.domains = get_domains(item, as_cards=True)
     card.regions = get_regions(item, as_cards=True)

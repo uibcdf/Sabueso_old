@@ -29,5 +29,7 @@ from .get_binding_sites import get_binding_sites
 from .get_modified_residues import get_modified_residues
 from .get_natural_mutations import get_natural_mutations
 from .get_artificial_mutations import get_artificial_mutations
+from .get_sequence_conflicts import get_sequence_conflicts
+from .get_secondary_structure import get_secondary_structure
 from .get_protein_card import get_protein_card
 

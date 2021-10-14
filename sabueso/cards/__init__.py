@@ -25,4 +25,9 @@ from .ca_binding_region import CaBindingRegionCard, ca_binding_region_dict
 from .binding_site import BindingSiteCard, binding_site_dict
 from .modified_residue import ModifiedResidueCard, modified_residue_dict
 from .mutation import MutationCard, mutation_dict
+from .sequence_conflict import SequenceConflictCard, sequence_conflict_dict
+from .helix import HelixCard, helix_dict
+from .strand import StrandCard, strand_dict
+from .turn import TurnCard, turn_dict
+from .secondary_structure import SecondaryStructureCard, secondary_structure_dict
 

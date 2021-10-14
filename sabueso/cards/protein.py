@@ -18,10 +18,9 @@ protein_dict = {
         'modified_residues': [],                    # DB: UniProtKB
         'natural_mutations': [],                    # DB: UniProtKB
         'artificial_mutations': [],                 # DB: UniProtKB
+        'sequence_conflicts': [],                   # DB: UniProtKB
         #'posttranslational_modifications': [],     # DB: UniProtKB
-        #'sequence_conflics': [],                   # DB: UniProtKB
-        #'alternative_sequences': [],               # DB: UniProtKB
-        #'secondary_structure': None,               # DB: UniProtKB
+        'secondary_structure': None,                # DB: UniProtKB
         'chains': [],                               # DB: UniProtKB
         'domains': [],                              # DB: UniProtKB
         'regions': [],                              # DB: UniProtKB

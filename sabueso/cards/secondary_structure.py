@@ -2,43 +2,42 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-
-sequence_conflict_dict = {
+secondary_structure_dict = {
         'references':[],
         'description':None,
-        'position':None,
-        'original':None,
-        'variation':None,
+        'helices':[],
+        'strands':[],
+        'turns':[],
         }
 
-def is_sequence_conflict_dict(item):
+def is_secondary_structure_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(sequence_conflict_dict)==set(item):
+        if set(secondary_structure_dict)==set(item):
             output = True
 
     return output
 
-class SequenceConflictCard(Card):
+class SecondaryStructureCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'sequence conflict'
+        self.card_type = 'secondary_structure'
 
-        if is_sequence_conflict_dict(item):
+        if is_secondary_structure_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in sequence_conflict_dict.items():
+            for key, value in secondary_structure_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(sequence_conflict_dict)
+        output = deepcopy(secondary_structure_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -57,11 +56,11 @@ class SequenceConflictCard(Card):
                 except:
                     continue
 
-        df = DataFrame(aux_dict, index =[self.position])
+        df = DataFrame(aux_dict, index =['ss'])
 
         return df
 
     def __repr__(self):
 
-        return f'<SequenceConflictCard: {self.original}{self.position}{self.variation}>'
+        return f'<SecondaryStructureCard: {len(self.helices)} helices, {len(self.strands)} strands and {len(self.turns)} turns>'
 
