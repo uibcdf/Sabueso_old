@@ -30,4 +30,7 @@ from .helix import HelixCard, helix_dict
 from .strand import StrandCard, strand_dict
 from .turn import TurnCard, turn_dict
 from .secondary_structure import SecondaryStructureCard, secondary_structure_dict
+from .catalytic_activity import CatalyticActivityCard, catalytic_activity_dict
+from .location_in_cell import LocationInCellCard, location_in_cell_dict
+from .disease import DiseaseCard, disease_dict
 

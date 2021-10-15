@@ -7,6 +7,7 @@ domain_dict = {
         'description':None,
         'begin':None,
         'end':None,
+        'note':None,
         }
 
 def is_domain_dict(item):

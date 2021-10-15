@@ -9,7 +9,13 @@ def get_protein_card(item):
     from .get_alternative_names import get_alternative_names
     from .get_organism import get_organism
     from .get_host import get_host
+    from .get_location_in_cell import get_location_in_cell
+    from .get_tissue_specificity import get_tissue_specificity
     from .get_function import get_function
+    from .get_catalytic_activity import get_catalytic_activity
+    from .get_activity_regulation import get_activity_regulation
+    from .get_metabolic_pathways import get_metabolic_pathways
+    from .get_diseases import get_diseases
     from .get_canonical_sequence import get_canonical_sequence
     from .get_isoforms import get_isoforms
     from .get_modified_residues import get_modified_residues
@@ -31,6 +37,7 @@ def get_protein_card(item):
     from .get_interactions import get_interactions
     from .get_subunit_structure import get_subunit_structure
     from .get_secondary_structure import get_secondary_structure
+    from .get_domain_comments import get_domain_comments
 
     card = ProteinCard()
 
@@ -41,14 +48,17 @@ def get_protein_card(item):
     card.uniprot_entry_name = get_uniprot_entry_name(item)
     card.alternative_names = get_alternative_names(item)
 
-    # Organism
+    # Location and expression
     card.organism = get_organism(item, as_card=True)
-
-    # Host
     card.host = get_host(item)
+    card.location_in_cell = get_location_in_cell(item, as_cards=True)
+    card.tissue_specificity = get_tissue_specificity(item)
 
     # Function
     card.function = get_function(item)
+    card.catalytic_activity = get_catalytic_activity(item)
+    card.activity_regulation = get_activity_regulation(item)
+    card.metabolic_pathways = get_metabolic_pathways(item)
 
     # Sequence
     card.sequence = get_canonical_sequence(item)
@@ -71,8 +81,14 @@ def get_protein_card(item):
     card.ca_binding_regions = get_ca_binding_regions(item, as_cards=True)
     card.binding_sites = get_binding_sites(item, as_cards=True)
 
+    # Diseases
+    card.diseases = get_diseases(item, as_cards=True)
+
     # Interactions
     card.interactions = get_interactions(item, as_cards=True)
+
+    # Other comments
+    card.other_comments['domain']= get_domain_comments(item)
 
     # Databases
     card.uniprot =get_uniprot(item)

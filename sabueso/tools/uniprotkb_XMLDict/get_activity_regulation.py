@@ -1,7 +1,7 @@
 import evidence as evi
 from collections import OrderedDict
 
-def get_function(item, entity='all'):
+def get_activity_regulation(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence
     from .get_uniprot import get_uniprot
@@ -15,10 +15,10 @@ def get_function(item, entity='all'):
 
     for comment in item['uniprot']['entry']['comment']:
 
-        if comment['@type']=='function':
+        if comment['@type']=='activity regulation':
 
             if type(comment)!=OrderedDict:
-                raise ValueError("Comment type not recognized for function")
+                raise ValueError("Comment type not recognized for activity regulation")
 
             comment_text = comment['text']
 
@@ -26,7 +26,7 @@ def get_function(item, entity='all'):
                 comment_text = [comment_text]
 
             if type(comment_text)!=list:
-                raise ValueError("Text in comment not recognized for function")
+                raise ValueError("Text in comment not recognized for activity regulation")
 
             for aux in comment_text:
 

@@ -2,44 +2,41 @@ from .card import Card
 from copy import deepcopy
 from pandas import DataFrame
 
-disease_dict = {
+
+location_in_cell_dict = {
         'references':[],
-        'name':None,
-        'acronym':None,
-        'description':None,
+        'location':[],
         'note':None,
-        'proteins_involved':None,
         }
 
-def is_disease_dict(item):
+def is_location_in_cell_dict(item):
 
     output = False
 
     if type(item) is dict:
-        if set(disease_dict)==set(item):
+        if set(location_in_cell_dict)==set(item):
             output = True
 
     return output
 
-
-class DiseaseCard(Card):
+class LocationInCellCard(Card):
 
     def __init__(self, item=None):
 
         super().__init__()
 
-        self.card_type = 'disease'
+        self.card_type = 'location in cell'
 
-        if is_disease_dict(item):
+        if is_location_in_cell_dict(item):
             for key, value in item.items():
                 setattr(self,key,value)
         else:
-            for key, value in disease_dict.items():
+            for key, value in location_in_cell_dict.items():
                 setattr(self, key, value)
 
     def to_dict(self):
 
-        output = deepcopy(disease_dict)
+        output = deepcopy(location_in_cell_dict)
         for key in output:
             output[key]=getattr(self, key)
 
@@ -64,5 +61,5 @@ class DiseaseCard(Card):
 
     def __repr__(self):
 
-        return f'<DiseaseCard: {self.name}>'
+        return f'<LocationInCellCard: {self.location}>'
 

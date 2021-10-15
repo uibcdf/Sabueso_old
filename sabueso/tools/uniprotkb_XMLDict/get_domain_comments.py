@@ -1,7 +1,7 @@
 import evidence as evi
 from collections import OrderedDict
 
-def get_function(item, entity='all'):
+def get_domain_comments(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence
     from .get_uniprot import get_uniprot
@@ -15,7 +15,7 @@ def get_function(item, entity='all'):
 
     for comment in item['uniprot']['entry']['comment']:
 
-        if comment['@type']=='function':
+        if comment['@type']=='domain':
 
             if type(comment)!=OrderedDict:
                 raise ValueError("Comment type not recognized for function")

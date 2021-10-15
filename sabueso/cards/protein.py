@@ -11,7 +11,12 @@ protein_dict = {
         'alternative_names': None,                  # DB: UniProtKB
         'organism': None,                           # DB: UniProtKB
         'host': None,                               # DB: UniProtKB
+        'location_in_cell': None,                   # DB: UniProtKB
+        'tissue_specificity': None,                 # DB: UniProtKB
         'function': None,                           # DB: UniProtKB
+        'catalytic_activity': None,                 # DB: UniProtKB
+        'activity_regulation': None,                # DB: UniProtKB
+        'metabolic_pathways': None,                 # DB: UniProtKB
         'subunit_structure': None,                  # DB: UniProtKB
         'sequence': None,                           # DB: UniProtKB
         'isoforms': [],                             # DB: UniProtKB
@@ -30,6 +35,7 @@ protein_dict = {
         'zinc_finger_regions': [],                  # DB: UniProtKB
         'ca_binding_regions': [],                   # DB: UniProtKB
         'binding_sites': [],                        # DB: UniProtKB
+        'diseases':[],                              # DB: UniProtKB
         'interactions':[],                          # DB: UniProtKB
         #'ligands': []                              # DB: UniProtKB
         'uniprot': None,                            # DB: UniProtKB
@@ -49,6 +55,7 @@ protein_dict = {
         'string': None,                             # DB: UniProtKB
         'iptmnet': None,                            # DB: UniProtKB
         'phosphositeplus': None,                    # DB: UniProtKB
+        'other_comments': {},                    # DB: UniProtKB
 
         ### PDBs
 
