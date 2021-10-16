@@ -1,4 +1,4 @@
-from .card import Card
+from sabueso.cards.card import Card
 from copy import deepcopy
 from pandas import DataFrame
 

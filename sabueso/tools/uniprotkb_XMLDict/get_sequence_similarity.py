@@ -1,14 +1,12 @@
 import evidence as evi
 from collections import OrderedDict
 
-def get_function(item, entity='all'):
+def get_sequence_similarity(item, entity='all'):
 
     from ._add_reference_to_evidence import _add_reference_to_evidence
-    from ._get_reference_from_dbevidence import _get_reference_from_dbevidence
-
     from .get_uniprot import get_uniprot
 
-    output = {'function':[], 'references':[], 'notes':[]}
+    output = []
 
     uniprot = get_uniprot(item, entity=entity)
     ref_uniprot = uniprot.references[0]
@@ -17,10 +15,10 @@ def get_function(item, entity='all'):
 
     for comment in item['uniprot']['entry']['comment']:
 
-        if comment['@type']=='function':
+        if comment['@type']=='similarity':
 
             if type(comment)!=OrderedDict:
-                raise ValueError("Comment type not recognized for function")
+                raise ValueError("Comment type not recognized for sequence similarity")
 
             comment_text = comment['text']
 
@@ -28,7 +26,7 @@ def get_function(item, entity='all'):
                 comment_text = [comment_text]
 
             if type(comment_text)!=list:
-                raise ValueError("Text in comment not recognized for function")
+                raise ValueError("Text in comment not recognized for sequence similarity")
 
             for aux in comment_text:
 
@@ -41,18 +39,17 @@ def get_function(item, entity='all'):
                     if '@evidence' in aux:
                         evidence_numbers_in_db = aux['@evidence'].split(' ')
                         for evidence_number_in_db in evidence_numbers_in_db:
-                            ref = _get_reference_from_dbevidence(evidence_number_in_db, item)
-                            evidence.add_reference(ref)
-                            output['references'].append(ref)
+                            evidence_in_db = item['uniprot']['entry']['evidence'][int(evidence_number_in_db)-1]
+                            if evidence_in_db['@key']!=evidence_number_in_db:
+                                raise ValueError('Evidence number does not match evidence @key')
+                            _add_reference_to_evidence(evidence, evidence_in_db)
 
                 elif type(aux)==str:
                     evidence.value = aux
 
                 evidence.add_reference(ref_uniprot)
 
-                output['function'].append(evidence)
-
-    output['references'].append(ref_uniprot)
+                output.append(evidence)
 
     return output
 

@@ -1,4 +1,4 @@
-from .entity import EntityCard
+from sabueso.cards.entity import EntityCard
 from copy import deepcopy
 from pandas import DataFrame
 
@@ -9,6 +9,7 @@ protein_dict = {
         'short_name': None,                         # DB: UniProtKB
         'uniprot_entry_name': None,                 # DB: UniProtKB
         'alternative_names': None,                  # DB: UniProtKB
+        'family': None,                             # DB: UniProtKB
         'organism': None,                           # DB: UniProtKB
         'host': None,                               # DB: UniProtKB
         'location_in_cell': None,                   # DB: UniProtKB

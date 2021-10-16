@@ -38,6 +38,7 @@ from .get_artificial_mutations import get_artificial_mutations
 from .get_sequence_conflicts import get_sequence_conflicts
 from .get_secondary_structure import get_secondary_structure
 from .get_protein_card import get_protein_card
+from .get_sequence_similarity import get_sequence_similarity
 from .get_domain_comments import get_domain_comments
 from .missing_info import missing_info
 

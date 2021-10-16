@@ -38,6 +38,7 @@ def get_protein_card(item):
     from .get_subunit_structure import get_subunit_structure
     from .get_secondary_structure import get_secondary_structure
     from .get_domain_comments import get_domain_comments
+    from .get_sequence_similarity import get_sequence_similarity
 
     card = ProteinCard()
 
@@ -47,6 +48,9 @@ def get_protein_card(item):
     card.short_name = get_short_name(item)
     card.uniprot_entry_name = get_uniprot_entry_name(item)
     card.alternative_names = get_alternative_names(item)
+
+    # Family
+    card.family = get_sequence_similarity(item)
 
     # Location and expression
     card.organism = get_organism(item, as_card=True)
