@@ -1,7 +1,7 @@
 
-def get_function_card(protein):
+def get_function(item):
 
-    from sabueso.cards.protein.function import FunctionCard
+    from sabueso.cards.item.function import FunctionCard
     from sabueso.tools.uniprotkb_XMLDict import is_uniprotkb_XMLDict
     from sabueso.tools.uniprotkb_XMLDict import get_uniprotkb_XMLDict
     from sabueso.tools.uniprotkb_XMLDict import get_name as get_name_from_uniprotkb_XMLDict
@@ -11,10 +11,10 @@ def get_function_card(protein):
 
     card = FunctionCard()
 
-    if is_uniprotkb_XMLDict(protein):
-        uniprotkb_XMLDict = protein
+    if is_uniprotkb_XMLDict(item):
+        uniprotkb_XMLDict = item
     else:
-        uniprotkb_XMLDict = get_uniprotkb_XMLDict(protein)
+        uniprotkb_XMLDict = get_uniprotkb_XMLDict(item)
 
     card.protein_name = get_name_from_uniprotkb_XMLDict(uniprotkb_XMLDict)
     card.protein_key_name = get_key_name_from_uniprotkb_XMLDict(uniprotkb_XMLDict)
@@ -28,3 +28,4 @@ def get_function_card(protein):
     card.references += output_uniprotkb['references']
 
     return card
+

@@ -15,6 +15,7 @@ del get_versions, versions
 from .get_form import get_form
 from .get import get
 from .get_cards import get_cards
-from .entity import *
+
+from . import protein
 from . import tools
 
