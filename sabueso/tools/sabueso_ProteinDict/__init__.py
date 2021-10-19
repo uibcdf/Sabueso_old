@@ -1,3 +1,2 @@
 from .is_sabueso_ProteinDict import is_sabueso_ProteinDict
-from .to_string_uniprot_id import to_string_uniprot_id
 

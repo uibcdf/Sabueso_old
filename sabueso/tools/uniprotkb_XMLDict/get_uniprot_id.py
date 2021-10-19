@@ -1,6 +1,6 @@
 from evidence import Evidence
 
-def get_uniprot(item, entity='all'):
+def get_uniprot_id(item, entity='all'):
 
     evidence = Evidence()
     if type(item['uniprot']['entry']['accession']) is list:

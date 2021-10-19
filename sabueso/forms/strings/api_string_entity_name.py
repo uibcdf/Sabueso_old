@@ -1,4 +1,10 @@
-def to_string_uniprot_id(item, max_results=None):
+form_name='string:entity_name'
+
+is_form = {
+        'string:entity_name': form_name
+    }
+
+def to_string_uniprot_id(item, indices='all', max_results=None):
 
     from sabueso.tools.database_UniProtKB import query as query_UniProtKB
 
@@ -38,4 +44,62 @@ def to_string_uniprot_id(item, max_results=None):
         output = output[0]
 
     return output
+
+###### Get
+
+def get_entity_index(item, indices='all'):
+
+    return [0]
+
+def get_entity_name(item, indices='all'):
+
+    raise NotImplementedError()
+
+def get_entity_id(item, indices='all'):
+
+    return [None]
+
+def get_entity_type(item, indices='all'):
+
+    raise NotImplementedError()
+
+def get_n_entities(item, indices='all'):
+
+    return 1
+
+def is_ion(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_water(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_cosolute(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_small_molecule(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_lipid(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_peptide(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_protein(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_rna(item, indices='all'):
+
+    raise NotImplementedError()
+
+def is_dna(item, indices='all'):
+
+    raise NotImplementedError()
 

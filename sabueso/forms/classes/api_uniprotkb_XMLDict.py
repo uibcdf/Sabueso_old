@@ -9,6 +9,26 @@ def this_dict_is_a_uniprotkb_XMLDict(item):
 
     return is_uniprotkb_XMLDict(item)
 
+def to_string_ec_id(item, indices='all'):
+
+    from sabueso.tools.uniprotkb_XMLDict.get_ec import get_ec
+
+    ec = get_ec(item, entity=entity)
+
+    output = 'ec:'+ec.value
+
+    return output
+
+def to_string_uniprot_id(item, entity='all'):
+
+    from sabueso.tools.uniprotkb_XMLDict import get_uniprot_id import get_uniprot_id
+
+    uniprot = get_uniprot(item, entity=entity)
+
+    output = 'uniprot:'+uniprot.value
+
+    return output
+
 ###### Get
 
 def get_entity_index(item, indices='all'):

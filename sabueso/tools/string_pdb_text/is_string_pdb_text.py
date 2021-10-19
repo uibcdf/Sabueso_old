@@ -1,5 +1,5 @@
 
-def is_pdb_text(item):
+def is_string_pdb_text(item):
 
     import re
 

@@ -3,7 +3,7 @@ import re
 pattern= re.compile('[0-9][a-zA-Z_0-9]{3}')
 
 
-def is_pdb_id(item):
+def is_string_pdb_id(item):
 
     output = False
 
