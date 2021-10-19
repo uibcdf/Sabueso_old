@@ -6,5 +6,10 @@ def is_protein(molecular_system, indices='all'):
 
     form = get_form(molecular_system)
 
-    return dict_is_protein[form](molecular_system, indices='all')
+    output = dict_is_protein[form](molecular_system, indices='all')
+
+    if len(output)==1:
+        output = output[0]
+
+    return output
 

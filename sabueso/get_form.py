@@ -16,12 +16,18 @@ def get_form(molecular_system):
 
     if type(molecular_system)==dict:
 
+        from sabueso.tools.sabueso_ProteinDict import is_sabueso_ProteinDict
+        from sabueso.forms.api_sabueso_ProteinDict import form_name as form_name_sabueso_ProteinDict
+
+        if is_sabueso_ProteinDict:
+            return form_name_sabueso_ProteinDict
+
         raise NotImplementedError()
 
     if type(molecular_system)==OrderedDict:
 
-        from sabueso.forms.classes.api_uniprotkb_XMLDict import this_dict_is_uniprotkb_XMLDict
-        from sabueso.forms.classes.api_uniprotkb_XMLDict import form as form_uniprotkb_XMLDict
+        from sabueso.tools.uniprotkb_XMLDict import is_uniprotkb_XMLDict
+        from sabueso.forms.api_uniprotkb_XMLDict import form_name as form_name_uniprotkb_XMLDict
 
         if this_dict_is_uniprotkb_XMLDict(molecular_system):
             return form_uniprotkb_XMLDict
@@ -29,7 +35,7 @@ def get_form(molecular_system):
             raise NotImplementedError()
 
     if is_list_or_tuple(molecular_system):
-        output = [get_form(ii) for ii in molecular_system]
+        output = [get_form_name(ii) for ii in molecular_system]
         return output
 
     try:

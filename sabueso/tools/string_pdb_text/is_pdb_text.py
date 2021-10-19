@@ -1,5 +1,5 @@
 
-def string_is_pdb_text(string):
+def is_pdb_text(item):
 
     import re
 
@@ -8,7 +8,7 @@ def string_is_pdb_text(string):
 
     for pattern in [pattern_1, pattern_2]:
 
-        n_good_lines = len(re.findall(pattern, string))
+        n_good_lines = len(re.findall(pattern, item))
         output = (n_good_lines>0)
 
         if output:

@@ -1,4 +1,4 @@
-from .string_is_uniprot import string_is_uniprot
+from .is_uniprot_id import is_uniprot_id
 from .to_uniprotkb_XMLDict import to_uniprotkb_XMLDict
 from .get_canonical_sequence import get_canonical_sequence
 from .to_string_fasta_text import to_string_fasta_text

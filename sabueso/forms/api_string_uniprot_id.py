@@ -1,10 +1,10 @@
 import sys
 import importlib
 
-form_name='string:uniprot'
+form_name='string:uniprot_id'
 
 is_form = {
-    'string:uniprot': form_name,
+    'string:uniprot_id': form_name,
     }
 
 

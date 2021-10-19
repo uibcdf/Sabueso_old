@@ -5,7 +5,9 @@ is_form={
 
 def this_dict_is_a_uniprotkb_XMLDict(item):
 
-    return list(item.keys())==['uniprot']
+    from sabueso.tools.uniprotkb_XMLDict import is_uniprotkb_XMLDict
+
+    return is_uniprotkb_XMLDict(item)
 
 ###### Get
 

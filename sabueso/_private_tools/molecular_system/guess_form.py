@@ -1,17 +1,17 @@
-from sabueso.tools.string_pdb_text import string_is_pdb_text
-from sabueso.tools.string_pdb import string_is_pdb
-from sabueso.tools.string_uniprot import string_is_uniprot
+from sabueso.tools.string_pdb_text import is_pdb_text
+from sabueso.tools.string_pdb_id import is_pdb_id
+from sabueso.tools.string_uniprot_id import is_uniprot_id
 
 def guess_form(string):
 
     output = None
 
-    if string_is_pdb_text(string):
+    if is_pdb_text(string):
         output = 'string:pdb_text'
-    elif string_is_pdb(string):
-        output = 'string:pdb'
-    elif string_is_uniprot(string):
-        output = 'string:uniprot'
+    elif is_pdb_id(string):
+        output = 'string:pdb_id'
+    elif is_uniprot_id(string):
+        output = 'string:uniprot_id'
 
     return output
 

@@ -5,15 +5,6 @@ form_name='sabueso.ProteinDict'
 is_form={
 }
 
-def this_dict_is_a_sabueso_ProteinDict(item):
-
-    output = False
-
-    if ('protein_name' in item) or ('uniprot_id' in item):
-        output = True
-
-    return output
-
 ###### Get
 
 ## General

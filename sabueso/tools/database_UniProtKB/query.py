@@ -22,7 +22,7 @@ def query(query_string, output=['id', 'entry name', 'reviewed', 'protein names',
     url += '&columns='+columns
 
     if max_results is not None:
-        url += '&limit='+max_results
+        url += '&limit='+str(max_results)
 
     if sort=='score':
         url += '&sort=score'
