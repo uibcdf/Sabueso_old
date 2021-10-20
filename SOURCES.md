@@ -22,3 +22,15 @@
 [Exploring domains and functional
 sites](https://tess.elixir-europe.org/workflows/fork-structural-bioinformatics-2-exploring-predictions-of-protein-functional-sites-using-funfams-in-cath-gene3d-9655793d-1cee-4164-a0c2-c7104ddb44c4a)
 
+## Small Molecules
+
+### To bechecked
+
+https://go.drugbank.com/     
+
+## Diseases
+
+### To be checked
+
+https://diseases.uniprot.org/disease/DI-03832/protein     
+

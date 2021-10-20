@@ -54,7 +54,16 @@ class FunctionCard(Card):
 
         nb = notebook(self)
 
-        return nb
+        from IPython.display import display, HTML, Markdown, Latex
+
+        for cell in nb['cells']:
+            if cell['cell_type']=='markdown':
+                display(Markdown(cell['source']))
+            elif cell['cell_type']=='code':
+                print('The notebook has cells with code')
+            else:
+                print('Cell type note recognized')
+        pass
 
     def __repr__(self):
 
