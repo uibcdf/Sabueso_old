@@ -1,11 +1,8 @@
-from sabueso.forms import dict_convert, dict_has
+from sabueso.forms import dict_convert
 from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
 from sabueso._private_tools._digestion import *
 from sabueso._private_tools.exceptions import *
-from sabueso._private_tools.selection import selection_is_all
-from sabueso._private_tools.forms import to_form_is_file, form_of_file
-from sabueso.multitool.select import select
-from sabueso.multitool.get_form import get_form
+from sabueso.get_form import get_form
 
 def convert(item, to_form=None, indices='all'):
 

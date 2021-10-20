@@ -1,2 +1,2 @@
-from .is_pdb_text import is_pdb_text
+from .is_string_pdb_text import is_string_pdb_text
 

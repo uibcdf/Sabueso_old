@@ -93,7 +93,18 @@ def is_peptide(item, indices='all'):
 
 def is_protein(item, indices='all'):
 
-    raise NotImplementedError()
+    from sabueso.forms.strings.api_string_entity_name import to_string_uniprot_id
+
+    output = False
+
+    try:
+        uniprot_id = to_string_uniprot_id(item, max_results=200)
+        if uniprot_id:
+            output = True
+    except:
+        pass
+
+    return [output]
 
 def is_rna(item, indices='all'):
 

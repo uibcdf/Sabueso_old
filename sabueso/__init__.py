@@ -13,6 +13,7 @@ del get_versions, versions
 # Add imports here
 
 from .get_form import get_form
+from .convert import convert
 from .get import get
 from .get_cards import get_cards
 

@@ -6,4 +6,4 @@ from . import string_uniprot_id
 from . import database_RCSB_PDB
 from . import database_UniProtKB
 from . import sabueso_ProteinDict
-
+from . import sabueso_UniProtKB_XMLDict

@@ -1,7 +1,7 @@
 
 def is_string_entity_name(item):
 
-    from .is_protein import is_protein
+    from sabueso.forms.strings.api_string_entity_name import is_protein
 
     output = False
 

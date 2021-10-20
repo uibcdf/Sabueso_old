@@ -23,14 +23,14 @@ string_names_recognized = []
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', 'string'], ['viewers', 'viewer']]:
+for dirname in ['classes', 'files', 'strings']:
 
     type_dir = os.path.join(current_dir, dirname)
     list_apis = [filename.split('.')[0] for filename in os.listdir(type_dir) if filename.startswith('api')]
 
     for api_name in list_apis:
 
-        mod = import_module('sabueso.forms.'+dirname+'.'api_name)
+        mod = import_module('sabueso.forms.'+dirname+'.'+api_name)
 
         form_name = mod.form_name
         forms.append(form_name)
@@ -60,14 +60,13 @@ for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', '
 
         for method in mod.__dict__.keys():
             if method.startswith('to_'):
-                if converts_to_be_loaded[api_name][method]:
-                    if method.startswith('to_string_'):
-                        out_form_name=method.replace('to_','').replace('_',':')
-                    elif method.startswith('to_file_'):
-                        out_form_name=method.replace('to_','').replace('_',':')
-                    else:
-                        out_form_name=method.replace('to_','').replace('_','.')
-                    dict_convert[form_name][out_form_name]= getattr(mod, method)
+                if method.startswith('to_string_'):
+                    out_form_name=method.replace('to_string_','string:')
+                elif method.startswith('to_file_'):
+                    out_form_name=method.replace('to_file_','file:')
+                else:
+                    out_form_name=method.replace('to_','').replace('_','.',1)
+                dict_convert[form_name][out_form_name]= getattr(mod, method)
 
         for method in mod.__dict__.keys():
             if method.startswith('get_'):
@@ -76,7 +75,7 @@ for dirname, typename in [['classes', 'class'], ['files', 'file'], ['strings', '
 
         del(mod, form_name, form_type)
 
-del(list_apis, import_module, dirname, typename)
+del(list_apis, import_module, dirname)
 
 for aux_form_name in list(dict_is_form.keys()):
     if type(aux_form_name) is str:
