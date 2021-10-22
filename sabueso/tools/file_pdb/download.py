@@ -1,5 +1,5 @@
 
-def download(pdbid=None, output_filename=None, tempfile=False, wwPDB_Partner='RCSB PDB'):
+def download(pdb_id=None, output_filename=None, tempfile=False, wwPDB_Partner='RCSB PDB'):
 
     from sabueso._private_tools.files_and_directories import temp_filename
     from urllib.request import urlretrieve
@@ -11,7 +11,7 @@ def download(pdbid=None, output_filename=None, tempfile=False, wwPDB_Partner='RC
 
     if wwPDB_Partner=='RCSB PDB':
 
-        filename = pdbid.capitalize()+'.pdb'
+        filename = pdb_id.capitalize()+'.pdb'
         fullurl = 'https://files.rcsb.org/download/'+filename
 
         if output_filename is None:
