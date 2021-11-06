@@ -1,0 +1,3 @@
+from .is_string_uniprot_id import is_string_uniprot_id
+from .get_canonical_sequence import get_canonical_sequence
+

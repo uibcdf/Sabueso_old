@@ -1,0 +1,10 @@
+channels:
+- conda-forge
+- default
+dependencies:
+- python
+- pyyaml
+- pytest
+- pip
+- pytest-cov
+- codecov

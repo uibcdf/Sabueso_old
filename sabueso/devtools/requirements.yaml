@@ -1,0 +1,61 @@
+production:
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - python
+    - pyyaml
+
+development:
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - python
+    - pyyaml
+    - jupyterlab
+
+test:
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - python
+    - pyyaml
+    - pytest
+    - pip
+    - pytest-cov
+    - codecov
+
+docs:
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - python
+    - pyyaml
+    - sphinx
+    - sphinx_rtd_theme
+    - sphinxcontrib-bibtex
+    - nbsphinx
+    - recommonmark
+    - sphinx-markdown-tables
+    - jupyterlab
+
+setup:
+  channels:
+    - defaults
+  dependencies:
+    - python
+    - setuptools
+    - numpy
+    - versioneer
+
+conda-build:
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - anaconda-client
+    - conda-build
+

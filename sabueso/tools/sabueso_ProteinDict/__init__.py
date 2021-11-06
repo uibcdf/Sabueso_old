@@ -1,0 +1,2 @@
+from .is_sabueso_ProteinDict import is_sabueso_ProteinDict
+
