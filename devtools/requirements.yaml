@@ -18,7 +18,6 @@ production:
     - mmtf-python
     - pandas
     - xmltodict
-    - json
 
 test:
   channels: &test_channels
