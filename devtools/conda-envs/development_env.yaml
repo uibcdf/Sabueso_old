@@ -9,7 +9,6 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
-- json
 - pytest
 - pip
 - pytest-cov

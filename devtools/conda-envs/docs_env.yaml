@@ -9,7 +9,6 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
-- json
 - sphinx
 - sphinx_rtd_theme
 - sphinxcontrib-bibtex

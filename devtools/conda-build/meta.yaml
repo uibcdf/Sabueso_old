@@ -16,7 +16,6 @@ requirements:
   - mmtf-python
   - pandas
   - xmltodict
-  - json
 about:
   home: https://uibcdf.org
   license: MIT License

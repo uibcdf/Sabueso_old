@@ -9,4 +9,3 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
-- json
