@@ -1,7 +1,7 @@
-.. test_uibcdf_library documentation master file
+.. sabueso documentation master file
 
-Test-UIBCDF-Library
-===================
+Sabueso
+=======
 
 XXXXX
 

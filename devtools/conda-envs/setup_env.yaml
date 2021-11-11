@@ -1,9 +1,6 @@
 channels:
-- conda-forge
 - defaults
 dependencies:
 - python
 - setuptools
 - numpy
-- anaconda-client
-- conda-build

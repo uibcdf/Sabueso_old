@@ -31,7 +31,7 @@ def format33(filename):
     HetsynRecord, FormulRecord, HelixRecord, SheetRecord, SsbondRecord, LinkRecord, CispepRecord,\
     SiteRecord, Cryst1Record, OrigxRecord, ScaleRecord, MtrixRecord, Model, AtomRecord,\
     HetatmRecord, MasterRecord
-    from sabueso.tools.file.pdb import download
+    from sabueso.tools.file_pdb import download
 
     pdb = PDBAtomicCoordinateEntry()
 

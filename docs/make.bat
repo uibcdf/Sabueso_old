@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=test_uibcdf_library
+set SPHINXPROJ=sabueso
 
 if "%1" == "" goto help
 
