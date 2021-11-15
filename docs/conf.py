@@ -20,7 +20,7 @@ import sys
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
-import molsysmt
+import sabueso
 
 # -- Project information -----------------------------------------------------
 
@@ -156,6 +156,7 @@ html_css_files = [
 #
 # html_sidebars = {}
 
+html_show_sourcelink = False
 
 # -- Options for HTMLHelp output ---------------------------------------------
 

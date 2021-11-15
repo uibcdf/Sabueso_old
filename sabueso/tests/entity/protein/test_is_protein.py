@@ -7,12 +7,12 @@ import sabueso as sab
 
 def test_is_protein_1():
 
-    is_uniprot = sab.entity.protein.is_protein('P12345')
-    assert is_uniprot==[True]
+    is_uniprot = sab.protein.is_protein('P12345')
+    assert is_uniprot==True
 
 def test_is_protein_2():
 
-    is_uniprot = sab.entity.protein.is_protein('uniprot_id:P12345')
-    assert is_uniprot==[True]
+    is_uniprot = sab.protein.is_protein('uniprot_id:P12345')
+    assert is_uniprot==True
 
 

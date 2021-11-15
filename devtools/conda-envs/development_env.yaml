@@ -9,6 +9,10 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
+- pytest
+- pip
+- pytest-cov
+- codecov
 - sphinx
 - sphinx_rtd_theme
 - sphinxcontrib-bibtex
