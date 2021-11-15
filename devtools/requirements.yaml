@@ -48,6 +48,7 @@ development:
     - *production_dependencies
     - *test_dependencies
     - *docs_dependencies
+    - jupyterlab
 
 conda-build:
   channels:
