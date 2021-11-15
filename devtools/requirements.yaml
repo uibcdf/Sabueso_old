@@ -51,8 +51,8 @@ development:
 
 conda-build:
   channels:
+    - *production_channels
     - conda-forge
-    - *setup_channels
   dependencies:
     - *setup_dependencies
     - anaconda-client
