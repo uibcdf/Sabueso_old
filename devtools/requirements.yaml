@@ -48,11 +48,11 @@ development:
     - *production_dependencies
     - *test_dependencies
     - *docs_dependencies
+    - jupyterlab
 
 conda-build:
   channels:
-    - conda-forge
-    - *setup_channels
+    - *production_channels
   dependencies:
     - *setup_dependencies
     - anaconda-client
