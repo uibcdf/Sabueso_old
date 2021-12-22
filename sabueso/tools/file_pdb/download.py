@@ -11,7 +11,7 @@ def download(pdb_id=None, output_filename=None, tempfile=False, wwPDB_Partner='R
 
     if wwPDB_Partner=='RCSB PDB':
 
-        filename = pdb_id.capitalize()+'.pdb'
+        filename = pdb_id+'.pdb'
         fullurl = 'https://files.rcsb.org/download/'+filename
 
         if output_filename is None:

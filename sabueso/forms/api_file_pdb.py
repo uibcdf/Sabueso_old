@@ -6,8 +6,7 @@ is_form = {
 
 def to_sabueso_PDBAtomicCoordinateEntry(filename):
 
-    from .guess_format_version import guess_format_version
-    from . import parsers
+    from sabueso.tools.file_pdb import guess_format_version, parsers
 
     version = guess_format_version(filename)
 
