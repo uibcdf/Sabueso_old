@@ -1,7 +1,7 @@
-import requests
-from sabueso.tools.database_UniProtKB import is_accessible as UniProtKB_is_accessible
-
 def to_string_fasta_text(item):
+
+    import requests
+    from sabueso.tools.database_UniProtKB import is_accessible as UniProtKB_is_accessible
 
     if item.startswith('uniprot:'):
         item=item[8:]

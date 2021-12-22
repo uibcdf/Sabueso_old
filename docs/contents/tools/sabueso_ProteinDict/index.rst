@@ -1,8 +1,8 @@
 
-.. tools string_pdb_id index
+.. tools sabueso_proteindict index
 
-sabueso.UniProtKB_XMLDict
-=========================
+sabueso.ProteinDict
+===================
 
 .. toctree::
    :maxdepth: 2
