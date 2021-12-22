@@ -598,33 +598,6 @@ class AtomRecord():
         self.resName = None
         self.chainId = None
         self.resSeq = None
-        self.resSeq = None
-        self.iCode = None
-        self.xyz = None
-        self.occupancy = None
-        self.tempFactor = None
-        self.element = None
-        self.charge = None
-        self.anisou11 = None
-        self.anisou22 = None
-        self.anisou33 = None
-        self.anisou12 = None
-        self.anisou13 = None
-        self.anisou23 = None
-
-
-class HetatmRecord():
-
-    def __init__(self):
-
-        self.recordName = None
-        self.serial = None
-        self.name = None
-        self.altLoc = None
-        self.resName = None
-        self.chainId = None
-        self.resSeq = None
-        self.resSeq = None
         self.iCode = None
         self.x = None
         self.y = None
@@ -639,6 +612,27 @@ class HetatmRecord():
         self.anisou12 = None
         self.anisou13 = None
         self.anisou23 = None
+
+    def to_string(self, output='short_string'):
+
+        if output=='short_string':
+
+            string = self.name+'-'+str(self.serial)
+
+        elif output=='long_string':
+
+            string = self.name+'-'+str(self.serial)+'/'+self.resName+'-'+self.resSeq+'/'+self.chainId
+
+        return string
+
+
+
+
+class HetatmRecord(AtomRecord):
+
+    def __init__(self):
+
+        super().__init__()
 
 
 class ConectRecord():
@@ -683,7 +677,7 @@ class PDBAtomicCoordinateEntry():
         self.connectivity = ConnectivitySection()
         self.bookkeeping = BookkeepingSection()
 
-    def has_atoms_with_alternate_locations(self):
+    def get_atoms_with_alternate_locations(self):
 
         output = {}
 

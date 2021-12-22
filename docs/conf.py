@@ -117,20 +117,20 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 # html_theme_options = {}
-#html_theme_options = {
-#    'canonical_url': '',
-#    'analytics_id': '',
-#    'logo_only': False,
-#    'display_version': True,
-#    'prev_next_buttons_location': 'bottom',
-#    'style_external_links': False,
-#    # Toc options
-#    'collapse_navigation': False,
-#    'sticky_navigation': True,
-#    'navigation_depth': 4,
-#    'includehidden': True,
-#    'titles_only': False
-#}
+html_theme_options = {
+    'canonical_url': '',
+    'analytics_id': '',
+    'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': False,
+    # Toc options
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': 3,
+    'includehidden': True,
+    'titles_only': False
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
