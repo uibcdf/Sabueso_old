@@ -1,12 +1,12 @@
 
 .. intro intro
 
-Installation and Quick Guide
-============================
+Introduction
+============
 
 .. toctree::
    :maxdepth: 1
 
-   Installation.md
-   Quickstart.ipynb
+   Whats_Sabueso.md
+   Databases.md
 
