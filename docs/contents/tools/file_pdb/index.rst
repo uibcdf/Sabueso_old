@@ -1,5 +1,5 @@
 
-.. tools file_pdb index
+.. _file pdb:
 
 file pdb
 ========

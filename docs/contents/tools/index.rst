@@ -1,5 +1,4 @@
-
-.. tools index
+.. _tools:
 
 Tools
 =====
