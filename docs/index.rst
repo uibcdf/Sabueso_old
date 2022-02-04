@@ -22,34 +22,42 @@ Have a look to the :ref:`showcase section<showcase>` and give it a try!
    :maxdepth: 2
 
    contents/about/what.md
+   contents/about/databases.md
 
 .. toctree::
    :name: installation_and_showcase
    :caption: Installation and showcase
    :maxdepth: 2
 
-   contents/installation/Installation.md
-   contents/showcase/index.rst
+   contents/show/installation/Installation.md
+   contents/show/showcase/index.rst
 
 .. toctree::
    :name: user_guide
    :caption: User Guide
    :maxdepth: 2
 
-   contents/installation_and_quick_guide/index.rst
-   contents/intro/index.rst
-   contents/cards/index.rst
-   contents/ion/index.rst
-   contents/water/index.rst
-   contents/cosolute/index.rst
-   contents/lipid/index.rst
-   contents/small_molecule/index.rst
-   contents/peptide/index.rst
-   contents/protein/index.rst
-   contents/rna/index.rst
-   contents/dna/index.rst
-   contents/native/index.rst
-   contents/tools/index.rst
+   contents/user/intro/index.rst
+   contents/user/cards/index.rst
+   contents/user/native/index.rst
+   contents/user/ion/index.rst
+   contents/user/water/index.rst
+   contents/user/cosolute/index.rst
+   contents/user/lipid/index.rst
+   contents/user/small_molecule/index.rst
+   contents/user/peptide/index.rst
+   contents/user/protein/index.rst
+   contents/user/rna/index.rst
+   contents/user/dna/index.rst
+   contents/user/tools/index.rst
+
+.. toctree::
+   :name: developer_guide
+   :caption: Developer Guide
+   :maxdepth: 2
+
+   contents/developer/intro/index.rst
+   contents/developer/documentation/index.rst
 
 .. toctree::
    :name: api_doc

@@ -18,6 +18,7 @@ production:
     - mmtf-python
     - pandas
     - xmltodict
+    - chembl_webresource_client
 
 test:
   channels: &test_channels
@@ -40,6 +41,7 @@ docs:
     - nbsphinx
     - recommonmark
     - sphinx-markdown-tables
+    - myst-parser
 
 development:
   channels:
@@ -49,6 +51,7 @@ development:
     - *test_dependencies
     - *docs_dependencies
     - jupyterlab
+    - myst-nb
 
 conda-build:
   channels:
