@@ -9,6 +9,7 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
+- chembl_webresource_client
 - pytest
 - pip
 - pytest-cov
@@ -16,7 +17,5 @@ dependencies:
 - sphinx
 - sphinx_rtd_theme
 - sphinxcontrib-bibtex
-- nbsphinx
-- recommonmark
-- sphinx-markdown-tables
+- myst-nb
 - jupyterlab

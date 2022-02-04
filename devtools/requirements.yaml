@@ -38,10 +38,7 @@ docs:
     - sphinx
     - sphinx_rtd_theme
     - sphinxcontrib-bibtex
-    - nbsphinx
-    - recommonmark
-    - sphinx-markdown-tables
-    - myst-parser
+    - myst-nb
 
 development:
   channels:
@@ -51,7 +48,6 @@ development:
     - *test_dependencies
     - *docs_dependencies
     - jupyterlab
-    - myst-nb
 
 conda-build:
   channels:

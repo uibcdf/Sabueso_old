@@ -9,6 +9,7 @@ dependencies:
 - mmtf-python
 - pandas
 - xmltodict
+- chembl_webresource_client
 - pytest
 - pip
 - pytest-cov

@@ -16,6 +16,7 @@ requirements:
   - mmtf-python
   - pandas
   - xmltodict
+  - chembl_webresource_client
 about:
   home: https://uibcdf.org
   license: MIT License
