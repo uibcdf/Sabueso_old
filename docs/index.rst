@@ -57,6 +57,7 @@ Have a look to the :ref:`showcase section<showcase>` and give it a try!
    :maxdepth: 2
 
    contents/developer/intro/index.rst
+   contents/developer/myst.ipynb
 
 .. toctree::
    :name: api_doc

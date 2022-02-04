@@ -41,6 +41,7 @@ docs:
     - nbsphinx
     - recommonmark
     - sphinx-markdown-tables
+    - myst-parser
 
 development:
   channels:
@@ -50,6 +51,7 @@ development:
     - *test_dependencies
     - *docs_dependencies
     - jupyterlab
+    - myst-nb
 
 conda-build:
   channels:

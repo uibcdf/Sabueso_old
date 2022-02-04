@@ -1,5 +1,5 @@
 
-.. _Introduction developer:
+.. _Introduction users:
 
 Introduction
 ============
@@ -8,3 +8,5 @@ Introduction
    :maxdepth: 2
 
    Introduction.md
+   databases/index.rst
+
