@@ -1,7 +1,20 @@
+class NotImplementedError(NotImplementedError):
+    def __init__(self, message=None):
+        if message is None:
+            message = 'This method has not been implemeted yet. Write a new issue in https://github.com/uibcdf/Sabueso/issues asking for it.'
+        super().__init__(message)
+
+class NotImplementedFormError(NotImplementedError):
+    def __init__(self, message=None):
+        if message is None:
+            message = 'Either the python library this form belongs to was not found, either this form has not been implemeted yet. \
+In this former case, write a new issue in https://github.com/uibcdf/Sabueso/issues asking for it.'
+        super().__init__(message)
+
 class BadCallError(ValueError):
     def __init__(self, message=None):
         if message is None:
-            message = 'Wrong way of invoking this method. Check the online documentation for more information: http://www.uibcdf.org/MolSysMT'
+            message = 'Wrong way of invoking this method. Check the online documentation for more information: http://www.uibcdf.org/Sabueso'
         super().__init__(message)
 
 class NotWithThisFormError(ValueError):
@@ -16,18 +29,6 @@ class NoMolecularSystemError(ValueError):
             message = 'A molecular system is needed.'
         super().__init__(message)
 
-class NotImplementedError(NotImplementedError):
-    def __init__(self, message=None):
-        if message is None:
-            message = 'It has not been implemeted yet. Write a new issue in https://github.com/uibcdf/MolSysMT/issues asking for it.'
-        super().__init__(message)
-
-class NotImplementedFormError(NotImplementedError):
-    def __init__(self, message=None):
-        if message is None:
-            message = 'Either the python library this form belongs to was not found, either this form has not been implemeted yet. \
-In this last case, Write a new issue in https://github.com/uibcdf/MolSysMT/issues asking for it.'
-        super().__init__(message)
 
 class LibraryNotFound(NotImplementedError):
     def __init__(self, library):

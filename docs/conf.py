@@ -25,7 +25,7 @@ import sabueso
 # -- Project information -----------------------------------------------------
 
 project = 'Sabueso'
-copyright = ('2021, UIBCDF Lab at the Mexico City Childrens Hospital Federico Gomez and authors.'
+copyright = ('2022, UIBCDF Lab at the Mexico City Childrens Hospital Federico Gomez and authors.'
         'Project structure based on the Computational Molecular Science Python Cookiecutter version 1.5')
 author = 'Liliana M. Moreno Vargas & Diego Prada Gracia'
 
