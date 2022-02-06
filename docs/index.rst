@@ -63,9 +63,10 @@ Have a look to the :ref:`showcase section<showcase>` and give it a try!
 .. toctree::
    :name: api_doc
    :caption: API Documentation
-   :maxdepth: 1
+   :maxdepth: 2
 
-   api.rst
+   api_user.rst
+   api_developer.rst
 
 Glossary, indices and tables
 ============================
