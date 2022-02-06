@@ -1,4 +1,4 @@
-from sabueso._private_tools.exceptions import ItemWithWrongForm
+from sabueso._private_tools.exceptions import WrongFormError
 import re
 
 ## https://www.uniprot.org/help/accession_numbers
@@ -28,7 +28,7 @@ def _checking_form(item, check=True):
 
     if check:
         if not is_string_uniprot_id(item):
-            raise ItemWithWrongForm('string:uniprot_id')
+            raise WrongFormError('string:uniprot_id')
 
     pass
 

@@ -1,5 +1,5 @@
 import requests
-from sabueso._private_tools.exceptions import DatabaseNotAccessible
+from sabueso._private_tools.exceptions import DatabaseNotAccessibleError
 
 def is_accessible():
 
@@ -10,7 +10,7 @@ def _checking_database(check=True):
 
     if check:
         if not is_accessible():
-            raise DatabaseNotAccessible('UniProtKB')
+            raise DatabaseNotAccessibleError('UniProtKB')
 
     pass
 
