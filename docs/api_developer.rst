@@ -4,11 +4,18 @@ Developers
 Exceptions
 ----------
 
+.. currentmodule:: sabueso._private_tools.exceptions
+
 .. autosummary::
    :toctree: autosummary
 
-   sabueso._private_tools.exceptions.NotImplementedMethodError
-   sabueso._private_tools.exceptions.NotImplementedClassError
-   sabueso._private_tools.exceptions.NotImplementedFormError
-
+   NotImplementedMethodError
+   NotImplementedClassError
+   NotImplementedFormError
+   NotWithThisFormError
+   WrongFormError
+   UnknownFormError
+   BadCallError
+   LibraryNotFoundError
+   DatabaseNotAccessibleError
 
