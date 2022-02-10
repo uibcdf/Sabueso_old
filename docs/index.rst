@@ -21,16 +21,10 @@ Have a look to the :ref:`showcase section<showcase>` and give it a try!
    :caption: About
    :maxdepth: 2
 
-   contents/about/what.md
-   contents/about/databases.md
-
-.. toctree::
-   :name: installation_and_showcase
-   :caption: Installation and showcase
-   :maxdepth: 2
-
-   contents/show/installation/Installation.md
-   contents/show/showcase/index.rst
+   contents/about/introduction/what.md
+   contents/about/introduction/databases.md
+   contents/about/installation/installation.md
+   contents/about/showcase/index.rst
 
 .. toctree::
    :name: user_guide
