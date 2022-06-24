@@ -8,7 +8,6 @@ setup:
 
 production:
   channels: &production_channels
-    - uibcdf/label/dev
     - uibcdf
     - conda-forge
     - *setup_channels
