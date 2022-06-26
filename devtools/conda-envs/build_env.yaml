@@ -1,10 +1,8 @@
 channels:
 - uibcdf
 - conda-forge
+- ambermd
 - defaults
 dependencies:
-- python
-- setuptools
-- numpy
 - anaconda-client
 - conda-build

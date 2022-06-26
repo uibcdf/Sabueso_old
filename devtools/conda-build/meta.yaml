@@ -11,6 +11,9 @@ requirements:
   - setuptools
   - numpy
   run:
+  - python
+  - setuptools
+  - numpy
   - evidence
   - pyunitwizard
   - mmtf-python

@@ -1,5 +1,5 @@
 """
-ProjectName
+Sabueso
 A short description of the project.
 """
 import sys
