@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+    **kwargs,
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/envs/test/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/share/miniconda/envs/test/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+to_string_chembl_id('P49892')
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+[0;32m/tmp/ipykernel_5045/9625007.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mto_string_chembl_id[0m[0;34m([0m[0;34m'P49892'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/work/Sabueso/Sabueso/sabueso/tools/string_uniprot_id/to_string_chembl_id.py[0m in [0;36mto_string_chembl_id[0;34m(item, engine, check_form, check_database)[0m
+[1;32m     40[0m     [0;32melif[0m [0mengine[0m[0;34m==[0m[0;34m'ChEMBL'[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     41[0m [0;34m[0m[0m
+[0;32m---> 42[0;31m         [0;32mfrom[0m [0msabueso[0m[0;34m.[0m[0mtools[0m[0;34m.[0m[0mdatabase_ChEMBL[0m [0;32mimport[0m [0m_checking_database[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     43[0m [0;34m[0m[0m
+[1;32m     44[0m         [0m_checking_database[0m[0;34m([0m[0mcheck[0m[0;34m=[0m[0mcheck_database[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/Sabueso/Sabueso/sabueso/tools/database_ChEMBL/__init__.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mfrom[0m [0;34m.[0m[0mis_accessible[0m [0;32mimport[0m [0mis_accessible[0m[0;34m,[0m [0m_checking_database[0m[0;34m,[0m [0m_checking_database[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;34m[0m[0m
+
+[0;32m~/work/Sabueso/Sabueso/sabueso/tools/database_ChEMBL/is_accessible.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mrequests[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mfrom[0m [0msabueso[0m[0;34m.[0m[0m_private_tools[0m[0;34m.[0m[0mexceptions[0m [0;32mimport[0m [0mDatabaseNotAccessible[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0;32mdef[0m [0mis_accessible[0m[0;34m([0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+
+[0;31mImportError[0m: cannot import name 'DatabaseNotAccessible' from 'sabueso._private_tools.exceptions' (/home/runner/work/Sabueso/Sabueso/sabueso/_private_tools/exceptions.py)
+ImportError: cannot import name 'DatabaseNotAccessible' from 'sabueso._private_tools.exceptions' (/home/runner/work/Sabueso/Sabueso/sabueso/_private_tools/exceptions.py)
+

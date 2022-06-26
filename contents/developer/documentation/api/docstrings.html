@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docstrings &mdash; Sabueso 0.1.1 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Web" href="../web/index.html" />
+    <link rel="prev" title="API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Sabueso
+          </a>
+              <div class="version">
+                0.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/introduction/what.html">What’s Sabueso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/introduction/databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/installation/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../about/installation/installation.html#last-stable-version">Last stable version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about/installation/installation.html#last-developing-version">Last developing version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../about/installation/installation.html#the-source-code">The source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/showcase/index.html">Showcase</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/intro/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/intro/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/intro/databases/index.html">Databases</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/cards/index.html">Sabueso’s cards</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/native/index.html">Native forms</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/ion/index.html">Ion</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/water/index.html">Water</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/cosolute/index.html">Cosolute</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/lipid/index.html">Lipid</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/small_molecule/index.html">Small molecule</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/peptide/index.html">Peptide</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/protein/index.html">Protein</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/protein/is_protein.html">Is protein</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/protein/get_function.html">Get function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/protein/forms.html">Protein forms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/protein/forms.html#uniprot-id">uniprot_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/protein/forms.html#proteindict">ProteinDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/protein/forms.html#entity-query">Entity query</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/rna/index.html">RNA</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/dna/index.html">DNA</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/tools/index.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/string_entity_name/index.html">string entity name</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_entity_name/is_protein.html">is protein</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_entity_name/to_string_uniprot_id.html">to string uniprot id</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/string_entity_query/index.html">string entity query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_entity_query/is_protein.html">is protein</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_entity_query/to_string_uniprot_id.html">to string uniprot id</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/string_pdb_id/index.html">string pdb_id</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_pdb_id/string_is_pdb_id.html">string is pdbid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/string_fasta_text/index.html">string fasta text</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_fasta_text/get_sequences.html">get sequences</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/string_uniprot_id/index.html">string uniprot_id</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_uniprot_id/get_canonical_sequence.html">get isoforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_uniprot_id/to_string_chembl_id.html">to string chembl_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_uniprot_id/to_string_fasta_text.html">to string fasta text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_uniprot_id/to_string_gff_text.html">to string gff text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/string_uniprot_id/to_sabueso_UniProtKB_XMLDict.html">to string fasta text</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/database_RCSB_PDB/index.html">database RCSB_PDB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/database_RCSB_PDB/is_accessible.html">Is accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/database_UniProtKB/index.html">database UniProtKB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/database_UniProtKB/is_accessible.html">Is accessible</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/database_UniProtKB/query.html">query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/database_UniProtKB/download.html">download</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/file_pdb/index.html">file pdb</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/file_pdb/download.html">Download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/file_pdb/guess_format_version.html">Guess format version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/file_pdb/get_atoms_with_alternate_locations.html">Get atoms with alternate locations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/file_pdb/parsers.html">Parsers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/sabueso_ProteinDict/index.html">sabueso.ProteinDict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_ProteinDict/is_sabueso_ProteinDict.html">Is sabueso_ProteinDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_ProteinDict/to_string_uniprot_id.html">to_string_uniprot_id</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/index.html">sabueso.UniProtKB_XMLDict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_name.html">get entity name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_alternative_names.html">get alternative names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_uniprot.html">get uniprot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_organism.html">get organism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_organism_common_name.html">get organism common name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_organism_scientific_name.html">get organism scientific name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_tissue_specificity.html">get tissue specificity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_location_in_cell.html">get location in cell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_function.html">get function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_metabolic_pathways.html">get metabolic pathways</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_diseases.html">get diseases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_canonical_sequence.html">get canonical sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_isoforms.html">get isoforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_sequence_conflicts.html">get artificial mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_natural_mutations.html">get natural mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_artificial_mutations.html">get artificial mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_modified_residues.html">get modified residues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_sequence_similarity.html">get sequence similarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_activity_regulation.html">get activity regulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_catalytic_activity.html">get catalytic activity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_chains.html">get chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_secondary_structure.html">get secondary structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_domains.html">get domains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_domain_comments.html">get domain comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_regions.html">get regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_nucleotide_binding_regions.html">get nucleotide binding regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_zinc_binding_regions.html">get zinc finger regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_dna_binding_regions.html">get nucleotide binding regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_ca_binding_regions.html">get ca binding regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_motifs.html">get motifs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_subunit_structure.html">get subunit structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_binding_sites.html">get binding sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_interactions.html">get interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_ec.html">get ec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_pdbs.html">get pdbs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_protein_card.html">get protein card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/get_protein_notebook.html">get protein notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user/tools/sabueso_UniProtKB_XMLDict/missing_info.html">missing info</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/databases/index.html">Databases</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#notimplementedmethoderror">NotImplementedMethodError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#notimplementedclasserror">NotImplementedClassError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#notimplementedformerror">NotImplementedFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#notwiththisformerror">NotWithThisFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#wrongformerror">WrongFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#unknownformerror">UnknownFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#badcallerror">BadCallError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#librarynotfounderror">LibraryNotFoundError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exceptions.html#databasenotaccessibleerror">DatabaseNotAccessibleError</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Docstrings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../web/index.html">Web</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../web/myst.html">MyST</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_user.html">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../autosummary/sabueso.get_form.html">sabueso.get_form</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_developer.html">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_developer.html#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.NotImplementedMethodError.html">sabueso._private_tools.exceptions.NotImplementedMethodError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.NotImplementedClassError.html">sabueso._private_tools.exceptions.NotImplementedClassError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.NotImplementedFormError.html">sabueso._private_tools.exceptions.NotImplementedFormError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.NotWithThisFormError.html">sabueso._private_tools.exceptions.NotWithThisFormError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.WrongFormError.html">sabueso._private_tools.exceptions.WrongFormError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.UnknownFormError.html">sabueso._private_tools.exceptions.UnknownFormError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.BadCallError.html">sabueso._private_tools.exceptions.BadCallError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.LibraryNotFoundError.html">sabueso._private_tools.exceptions.LibraryNotFoundError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../autosummary/sabueso._private_tools.exceptions.DatabaseNotAccessibleError.html">sabueso._private_tools.exceptions.DatabaseNotAccessibleError</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Sabueso</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Documentation</a> &raquo;</li>
+          <li><a href="index.html">API</a> &raquo;</li>
+      <li>Docstrings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+             
+  <section id="docstrings">
+<h1>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this heading"></a></h1>
+<p>A <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/#id4">docstring</a> is a string embedded in a piece of code for the purpose of documenting it.</p>
+<p>Docstrings in Sabueso are written in <span class="xref myst">NumPy style</span>. Why? Well, Sabueso’s main developers know there are other docstring styles, but the NumPy’s one is clear, easy to be read, and widely extended.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>When Sabueso’s web documentation is compiled, <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a> handles the docstrings with the assistance of <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">the Napoleon extension</a>. Have a look to the <span class="xref myst">sphinx section in this guide</span>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">It is suggested…</p>
+<p>Although you can find some guidelines to write Sabueso’s docstrings below, if you are not familiar with the docstrings and the NumPy style you may also check the following webs:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP 257 – Docstring Conventions</a></p></li>
+<li><p><a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc’s documentation</a></p></li>
+<li><p><a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/example.html">Example in numpydoc’s documentation</a></p></li>
+<li><p><a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html">Example in Napoleon’s documentation</a></p></li>
+</ul>
+</div>
+<section id="documenting-a-class">
+<h2>Documenting a class<a class="headerlink" href="#documenting-a-class" title="Permalink to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">ClassName</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;The summary line for a class docstring should fit on one line.</span>
+<span class="sd">    </span>
+<span class="sd">    If the class has public attributes, they may be documented here</span>
+<span class="sd">    in an ``Attributes`` section and follow the same formatting as a</span>
+<span class="sd">    function&#39;s ``Args`` section. Alternatively, attributes may be documented</span>
+<span class="sd">    inline with the attribute&#39;s declaration (see __init__ method below).</span>
+
+<span class="sd">    Properties created with the ``@property`` decorator should be documented</span>
+<span class="sd">    in the property&#39;s getter method.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    attr1 : str</span>
+<span class="sd">        Description of `attr1`.</span>
+<span class="sd">    attr2 : :obj:`int`, optional</span>
+<span class="sd">        Description of `attr2`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;Example of docstring on the __init__ method.</span>
+
+<span class="sd">        The __init__ method may be documented in either the class level</span>
+<span class="sd">        docstring, or as a docstring on the __init__ method itself.</span>
+
+<span class="sd">        Either form is acceptable, but the two should not be mixed. Choose one</span>
+<span class="sd">        convention to document the __init__ method and be consistent with it.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Do not include the `self` parameter in the ``Parameters`` section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : obj:`list` of :obj:`str`</span>
+<span class="sd">            Description of `A`. Multiple</span>
+<span class="sd">            lines are supported.</span>
+<span class="sd">        b : :obj:`int`, default=14</span>
+<span class="sd">            Description of `B`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+</pre></div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p>Before writting your own docstrings, have a look to <a class="reference external" href="https://github.com/uibcdf/Sabueso/tree/main/sabueso">Sabueso’s code</a> and the <a class="reference external" href="https://uibcdf.org/Sabueso/api.html">API documentation</a>. There you can find useful examples on how the docstrings are written and rendered, and what are the usual conventions adopted in Sabueso’s docstrings.</p>
+</div>
+</section>
+<section id="documenting-a-method">
+<h2>Documenting a method<a class="headerlink" href="#documenting-a-method" title="Permalink to this heading"></a></h2>
+<p>Some advices need to be followed to write a methods documentation. But first let’s see an example of the docstring to document a method in Sabueso’s code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span> <span class="nf">method_name</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A short one line description without variable names or the method name</span>
+
+<span class="sd">    Paragraph with detailed explanation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : int</span>
+<span class="sd">        Description of parameter `a`.</span>
+<span class="sd">    b : bool, default=True</span>
+<span class="sd">        Description of input argument `b` (the default is True, which implies ...).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Description of the output int value.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    First example comment.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; 2+2</span>
+<span class="sd">    4</span>
+
+<span class="sd">    Comment explaining the second example.</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; np.add([[1, 2], [3, 4]],</span>
+<span class="sd">    ...        [[5, 6], [7, 8]])</span>
+<span class="sd">    array([[ 6,  8],</span>
+<span class="sd">           [10, 12]])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    :func:`sabueso.get`, :func:`sabueso.select`</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    Section to include notes.</span>
+
+<span class="sd">    Todo</span>
+<span class="sd">    ----</span>
+
+<span class="sd">    Section to include a todo message.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    Section to include a warning message.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<section id="about-working-with-magnitudes">
+<h3>About working with magnitudes<a class="headerlink" href="#about-working-with-magnitudes" title="Permalink to this heading"></a></h3>
+<p>…</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p>Before writting your own docstrings, have a look to <a class="reference external" href="https://github.com/uibcdf/Sabueso/tree/main/sabueso">Sabueso’s code</a> and the <a class="reference external" href="https://uibcdf.org/Sabueso/api.html">API documentation</a>. There you can find useful examples on how the docstrings are written and rendered, and what are the usual conventions adopted in Sabueso’s docstrings.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+    <a href="https://github.com/uibcdf/sabueso">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../web/index.html" class="btn btn-neutral float-right" title="Web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, UIBCDF Lab at the Mexico City Childrens Hospital Federico Gomez and authors.Project structure based on the Computational Molecular Science Python Cookiecutter version 1.5.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
