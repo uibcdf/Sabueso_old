@@ -28,7 +28,7 @@ class StackOfCards():
 
     def add(self, cards):
 
-        from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
+        from sabueso._private.lists_and_tuples import is_list_or_tuple
 
         if not is_list_or_tuple(cards):
             cards=[cards]

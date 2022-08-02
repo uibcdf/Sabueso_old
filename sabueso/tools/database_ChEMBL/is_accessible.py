@@ -1,5 +1,5 @@
 import requests
-from sabueso._private_tools.exceptions import DatabaseNotAccessible
+from sabueso._private.exceptions import DatabaseNotAccessible
 
 def is_accessible():
 

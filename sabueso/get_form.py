@@ -1,5 +1,5 @@
 from sabueso.forms import dict_is_form, file_extensions_recognized, string_names_recognized
-from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
+from sabueso._private.lists_and_tuples import is_list_or_tuple
 from collections import OrderedDict
 
 def get_form(item):

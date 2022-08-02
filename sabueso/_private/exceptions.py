@@ -19,7 +19,7 @@ class NotImplementedMethodError(NotImplementedError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import NotImplementedMethodError
+    >>> from sabueso._private.exceptions import NotImplementedMethodError
     >>> def method_name(a, b=True):
     ...    raise NotImplementedMethodError
     ...    pass
@@ -71,7 +71,7 @@ class NotImplementedClassError(NotImplementedError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import NotImplementedClassError
+    >>> from sabueso._private.exceptions import NotImplementedClassError
     >>> class ClassName():
     ...    def __init__(self):
     ...       raise NotImplementedClassError
@@ -126,7 +126,7 @@ class NotImplementedFormError(NotImplementedError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import NotImplementedFormError
+    >>> from sabueso._private.exceptions import NotImplementedFormError
     >>> from sabueso import get_form
     >>> def method_name(item):
     ...    input_form = get_form(item)
@@ -183,7 +183,7 @@ class NotWithThisFormError(ValueError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import NotWithThisFormError
+    >>> from sabueso._private.exceptions import NotWithThisFormError
     >>> from sabueso import get_form
     >>> def method_name(item):
     ...    input_form = get_form(item)
@@ -238,7 +238,7 @@ class WrongFormError(ValueError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import WrongFormError
+    >>> from sabueso._private.exceptions import WrongFormError
     >>> from sabueso import get_form
     >>> input_form = get_form('1VII.pdb')
     ... if input_form != 'file:top':
@@ -289,7 +289,7 @@ class UnknownFormError(ValueError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import UnknownFormError
+    >>> from sabueso._private.exceptions import UnknownFormError
     >>> from sabueso import get_form
     >>> try:
     ...    _ = get_form(item)
@@ -342,7 +342,7 @@ class BadCallError(ValueError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import BadCallError
+    >>> from sabueso._private.exceptions import BadCallError
     >>> def method_name(item, a=True):
     ...    if type(a) not in [int, float]:
     ...       raise BadCallError('a')
@@ -398,7 +398,7 @@ class LibraryNotFoundError(NotImplementedError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import LibraryNotFoundError
+    >>> from sabueso._private.exceptions import LibraryNotFoundError
     >>> def method_name(item, engine='MolSysMT'):
     ...    if engine == 'OpenMM':
     ...       try:
@@ -453,7 +453,7 @@ class DatabaseNotAccessibleError(NotImplementedError):
 
     Examples
     --------
-    >>> from sabueso._private_tools.exceptions import DatabaseNotAccessibleError
+    >>> from sabueso._private.exceptions import DatabaseNotAccessibleError
     >>> import requests
     >>> r = requests.get('https://www.ebi.ac.uk/chembl/api/data', stream=True, timeout=5)
     >>> if not r.status_code == requests.codes.ok.

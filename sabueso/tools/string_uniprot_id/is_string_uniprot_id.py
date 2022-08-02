@@ -1,4 +1,4 @@
-from sabueso._private_tools.exceptions import WrongFormError
+from sabueso._private.exceptions import WrongFormError
 import re
 
 ## https://www.uniprot.org/help/accession_numbers

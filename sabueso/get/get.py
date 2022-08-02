@@ -1,7 +1,7 @@
 from sabueso.get_form import get_form
 from sabueso.forms import dict_get
 from .arguments import digest_argument
-from sabueso._private_tools._digestion import *
+from sabueso._private._digestion import *
 
 def get(molecular_system, selection='all', syntaxis='sabueso', **kwargs):
 

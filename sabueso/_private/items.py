@@ -1,6 +1,6 @@
 from sabueso.forms import forms
-from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
-from sabueso._private_tools.exceptions import *
+from sabueso._private.lists_and_tuples import is_list_or_tuple
+from sabueso._private.exceptions import *
 
 form_from_lowercase = {ii.lower():ii for ii in forms}
 

@@ -1,7 +1,7 @@
 from sabueso.forms import dict_convert
-from sabueso._private_tools.lists_and_tuples import is_list_or_tuple
-from sabueso._private_tools._digestion import *
-from sabueso._private_tools.exceptions import *
+from sabueso._private.lists_and_tuples import is_list_or_tuple
+from sabueso._private._digestion import *
+from sabueso._private.exceptions import *
 from sabueso.get_form import get_form
 
 def convert(item, to_form=None, indices='all'):

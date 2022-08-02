@@ -1,7 +1,7 @@
 
 def download(pdb_id=None, output_filename=None, tempfile=False, wwPDB_Partner='RCSB PDB'):
 
-    from sabueso._private_tools.files_and_directories import temp_filename
+    from sabueso._private.files_and_directories import temp_filename
     from urllib.request import urlretrieve
 
     output = None

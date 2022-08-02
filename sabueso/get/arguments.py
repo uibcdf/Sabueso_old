@@ -1,4 +1,4 @@
-from sabueso._private_tools.exceptions import BadCallError
+from sabueso._private.exceptions import BadCallError
 
 arguments = [
 
