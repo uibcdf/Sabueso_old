@@ -11,6 +11,7 @@ jobs:
     name: Conda deployment of package with Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false  # do not cancel all in-progress jobs if any job variation fails
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:

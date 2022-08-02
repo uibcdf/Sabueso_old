@@ -44,5 +44,5 @@ jobs:
            echo 'import sabueso; print(sabueso.__version__)' | python
 
       - name: Running the Sphinx to gh-pages Action
-        uses: uibcdf/action-sphinx-docs-to-gh-pages@v1.0.0
+        uses: uibcdf/action-sphinx-docs-to-gh-pages@v1.1.0-beta
 
