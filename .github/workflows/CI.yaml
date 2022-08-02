@@ -48,7 +48,7 @@ jobs:
     # More info on options: https://github.com/conda-incubator/setup-miniconda
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.cfg.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
         mamba-version: "*"
         use-mamba: true
